@@ -1,3 +1,5 @@
 GOOGLE FONTS API
 Oxygen - 2
 Prompt - 1
+
+linear gradient to right #8E2DE2 -> #4A00E0
