@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/LucasFonsecaDosSantos/Dacosys/master/graphic-project/original_small_color_bgwhite.png)
+![alt text](https://raw.githubusercontent.com/LucasFonsecaDosSantos/Dacosys/master/graphic-project/logo/original_small_color_bgwhite.png)
 # Dacosys
 [![star this repo](http://githubbadges.com/star.svg?user=LucasFonsecaDosSantos&repo=Dacosys&style=popout-square)](https://github.com/LucasFonsceaDosSantos/Dacosys)
 [![fork this repo](http://githubbadges.com/fork.svg?user=LucasFonsecaDosSantos&repo=Dacosys&style=popout-square)](https://github.com/LucasFonsecaDosSantos/Dacosys/fork)
