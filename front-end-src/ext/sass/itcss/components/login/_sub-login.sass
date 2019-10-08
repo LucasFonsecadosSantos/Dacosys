@@ -45,26 +45,18 @@
 // BRIEF: <file_brief>                                        //
 //                                                            //
 ////////////////////////////////////////////////////////////////
-doctype html
-html
-    head
-        //----------------------------[METAS]----------------------------//
-        include modules/settings/_mixins.pug
-        //PARAMS:
-        //title,description,author,copyright,themeColor,language
-        +headerSettings("Dacosys | Login","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
-        //---------------------------------------------------------------//
-        //---------------------------[IMPORTS]---------------------------//
-        include modules/settings/_link-imports.pug
-        //---------------------------------------------------------------//
-    body(page="login")
-        //header
-            include modules/components/_header.pug
-        main
-            .container-fluid
-                .row
-                    .subLogin
-                    .subLogin
-        //footer
-            include modules/components/_footer.pug
-    include modules/settings/_js-imports.pug
+
+
+
+
+//--------------------[ SUB LOGIN COMPONENT ]-----------------//
+.subLogin
+    @include responsive_system(6,6,6,6,6)
+    min-height: 100vh
+    height:     auto
+    &:first-child
+        background: $__COLOR__purple-1
+        background: -webkit-linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
+        background: linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
+
+//------------------------------------------------------------//
