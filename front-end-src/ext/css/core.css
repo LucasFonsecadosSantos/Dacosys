@@ -5,6 +5,7 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Prompt:200,300,400,500,600,700&display=swap");
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -9855,18 +9856,158 @@ button, input[type=button] {
   clear: both;
 }
 
+h1 {
+  font-family: "Prompt", sans-serif;
+}
+
+h2 {
+  font-family: "Prompt", sans-serif;
+}
+
+h3 {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-size: 2em;
+  text-transform: lowercase;
+}
+h3:first-letter {
+  text-transform: uppercase;
+}
+
+a {
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+  background: none;
+  border: none;
+  border-bottom: solid 1px #FFFFFF;
+  width: 100%;
+  color: #FFFFFF;
+  padding: 5% 0px 5% 0px;
+  font-family: "Prompt", sans-serif;
+  font-weight: 200;
+  font-size: 1em;
+}
+
+button {
+  border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  outline: none;
+  background: #00D3A0;
+  border: none;
+  width: 100%;
+  color: #FFFFFF;
+  padding: 1.6666666667% 5% 1.6666666667% 5%;
+  cursor: pointer;
+  width: auto;
+  font-family: "Oxygen", sans-serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  text-transform: lowercase;
+  transition: background 0.25s ease-in-out;
+  -o-transition: background 0.25s ease-in-out;
+  -mz-transition: background 0.25s ease-in-out;
+  -moz-transition: background 0.25s ease-in-out;
+  -webkit-transition: background 0.25s ease-in-out;
+}
+button:hover {
+  background: #00a079;
+}
+button:active {
+  background: #006d53;
+  outline: none;
+}
+button:first-letter {
+  text-transform: uppercase;
+}
+
+.box {
+  border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background: #392BB6;
+  padding: 5%;
+  overflow: hidden;
+  display: flexbox;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.box .box__title {
+  width: 100%;
+  background: transparent;
+  text-align: left;
+  margin-bottom: 5%;
+}
+.box .box__title h3 {
+  color: #FFFFFF;
+}
+
 .subLogin {
   min-height: 100vh;
-  height: auto;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .subLogin:first-child {
-  background: #8E2DE2;
-  background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
-  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+  background: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.subLogin:first-child img {
+  width: 70%;
+}
+.subLogin:last-child {
+  background: #2F21AA;
+}
+.subLogin:last-child .box {
+  width: 60%;
+  height: 60%;
+}
+.subLogin:last-child .box form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.subLogin:last-child .box form a {
+  color: #FFFFFF;
+  margin-top: 5%;
+}
+.subLogin:last-child .box form button {
+  align-self: stretch;
+  transform: translateY(150%);
 }
 
 .hidden {
   display: hidden !important;
+}
+
+.margin-top-default {
+  margin-top: 5% !important;
+}
+
+.hidden {
+  display: hidden !important;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
 /*# sourceMappingURL=core.css.map */

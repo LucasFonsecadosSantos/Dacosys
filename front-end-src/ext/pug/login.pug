@@ -46,7 +46,7 @@
 //                                                            //
 ////////////////////////////////////////////////////////////////
 doctype html
-html
+html.overflow-y-hidden
     head
         //----------------------------[METAS]----------------------------//
         include modules/settings/_mixins.pug
@@ -64,7 +64,21 @@ html
             .container-fluid
                 .row
                     .subLogin
+                        img(src="img/identity/logo.png")
                     .subLogin
+                        .box
+                            .box__title
+                                h3 login
+                            .box__body
+                                form()
+                                    input#email(type="email", name="email", placeholder="Email...", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
+                                    input#passwd(type="password", name="passwd", placeholder="Senha", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                    .row.margin-top-default
+                                        .col-7
+                                            a Esqueci minha senha
+                                        .col-5.text-right
+                                            a Criar nova conta
+                                    button(title="Clique para acessar sua conta.", alt="Botão para acessar a conta.") acessar
         //footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

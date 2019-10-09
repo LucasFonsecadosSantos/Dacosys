@@ -49,7 +49,34 @@
 
 
 
-//---------------------[ FONT FAMILIES ]----------------------//
-$__FONT__font-family-1: 'Prompt', sans-serif
-$__FONT__font-family-2: 'Oxygen', sans-serif
+//----------------[ BASE MODULE - BUTTON ]---------------------//
+button
+    @include border_radius($__SIZE__border-radius-default)
+    outline:        none
+    background:     $__COLOR__green-1
+    border:         none
+    width: 100%
+    color: $__COLOR__white-1
+    padding: $__SPACING__padding-default/3 $__SPACING__padding-default $__SPACING__padding-default/3 $__SPACING__padding-default
+    cursor: pointer
+    width: auto
+    font:
+        family: $__FONT__font-family-2
+        weight: 700
+        size: .9em
+    text:
+        transform: lowercase
+    transition: background $__TIME__duration $__ANIMATION__transition
+    -o-transition: background $__TIME__duration $__ANIMATION__transition
+    -mz-transition: background $__TIME__duration $__ANIMATION__transition
+    -moz-transition: background $__TIME__duration $__ANIMATION__transition
+    -webkit-transition: background $__TIME__duration $__ANIMATION__transition 
+    &:hover
+        background: darken($__COLOR__green-1,10)
+    &:active
+        background: darken($__COLOR__green-1,20)
+        outline: none
+    &:first-letter
+        text-transform: uppercase
+        
 //------------------------------------------------------------//
