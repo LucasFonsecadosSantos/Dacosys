@@ -591,7 +591,7 @@ pre code {
 }
 
 .col-xl,
-.col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .subLogin, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg,
+.col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .subParticipantLogin, .subLogin, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg,
 .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md,
 .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm,
 .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col,
@@ -639,7 +639,7 @@ pre code {
   max-width: 41.6666666667%;
 }
 
-.col-6, .subLogin {
+.col-6 {
   flex: 0 0 50%;
   max-width: 50%;
 }
@@ -669,7 +669,7 @@ pre code {
   max-width: 91.6666666667%;
 }
 
-.col-12 {
+.col-12, .subParticipantLogin, .subLogin {
   flex: 0 0 100%;
   max-width: 100%;
 }
@@ -816,7 +816,7 @@ pre code {
     max-width: 41.6666666667%;
   }
 
-  .col-sm-6, .subLogin {
+  .col-sm-6 {
     flex: 0 0 50%;
     max-width: 50%;
   }
@@ -846,7 +846,7 @@ pre code {
     max-width: 91.6666666667%;
   }
 
-  .col-sm-12 {
+  .col-sm-12, .subParticipantLogin, .subLogin {
     flex: 0 0 100%;
     max-width: 100%;
   }
@@ -997,7 +997,7 @@ pre code {
     max-width: 41.6666666667%;
   }
 
-  .col-md-6, .subLogin {
+  .col-md-6, .subParticipantLogin, .subLogin {
     flex: 0 0 50%;
     max-width: 50%;
   }
@@ -1178,7 +1178,7 @@ pre code {
     max-width: 41.6666666667%;
   }
 
-  .col-lg-6, .subLogin {
+  .col-lg-6, .subParticipantLogin, .subLogin {
     flex: 0 0 50%;
     max-width: 50%;
   }
@@ -1359,7 +1359,7 @@ pre code {
     max-width: 41.6666666667%;
   }
 
-  .col-xl-6, .subLogin {
+  .col-xl-6, .subParticipantLogin, .subLogin {
     flex: 0 0 50%;
     max-width: 50%;
   }
@@ -9858,6 +9858,8 @@ button, input[type=button] {
 
 h1 {
   font-family: "Prompt", sans-serif;
+  font-size: 5em;
+  font-weight: 700;
 }
 
 h2 {
@@ -9960,6 +9962,7 @@ button:first-letter {
   align-items: center;
 }
 .subLogin:first-child {
+  @extends .hidden-sm-down;
   background: #FFFFFF;
   display: flex;
   justify-content: center;
@@ -9982,12 +9985,61 @@ button:first-letter {
   flex-direction: column;
 }
 .subLogin:last-child .box form a {
-  color: #FFFFFF;
+  color: #00D3A0;
   margin-top: 5%;
 }
 .subLogin:last-child .box form button {
   align-self: stretch;
   transform: translateY(150%);
+}
+
+.subParticipantLogin {
+  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.subParticipantLogin:first-child {
+  background: #8E2DE2;
+  background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
+  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+  @extends .hidden-sm-down;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+.subParticipantLogin:first-child h1 {
+  color: #FFFFFF;
+}
+.subParticipantLogin:first-child img {
+  width: 20%;
+}
+.subParticipantLogin:first-child p {
+  color: #FFFFFF;
+  font-weight: 200;
+  font-size: 1.5em;
+}
+.subParticipantLogin:last-child {
+  background: #8E2DE2;
+}
+.subParticipantLogin:last-child .box {
+  width: 70%;
+  height: auto;
+}
+.subParticipantLogin:last-child .box form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.subParticipantLogin:last-child .box form a {
+  color: #00D3A0;
+  margin-top: 5%;
+}
+.subParticipantLogin:last-child .box form button {
+  align-self: stretch;
 }
 
 .hidden {

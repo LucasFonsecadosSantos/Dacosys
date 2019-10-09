@@ -1,4 +1,5 @@
-// DEVELOPED BY: Lucas Fonsceca dos Santos.
+
+    // DEVELOPED BY: Lucas Fonsceca dos Santos.
 // GPL - General Public License v3.0
 ////////////////////////////////////////////////////////////////
 // EASY ARCHITECTURE - A simple architecture script tool.
@@ -50,7 +51,7 @@
 
 
 //--------------------[ SUB LOGIN COMPONENT ]-----------------//
-.subLogin
+.subParticipantLogin
     @include responsive_system(12,12,6,6,6)
     min-height:         100vh
     max-height:         100vh
@@ -58,21 +59,29 @@
     justify-content:    center
     align-items:        center
     &:first-child
-        // background: $__COLOR__purple-1
-        // background: -webkit-linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
-        // background: linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
+        background: $__COLOR__purple-1
+        background: -webkit-linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
+        background: linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
         @extends .hidden-sm-down
-        background: $__COLOR__white-1
+        //background: $__COLOR__purple-4
         display: flex
         justify-content: center
         align-items: center
+        flex-flow: column
+        h1
+            color: $__COLOR__white-1
         img
-            width: 70%
+            width: 20%
+        p
+            color: $__COLOR__white-1
+            font:
+                weight: 200
+                size: 1.5em
     &:last-child
-        background: $__COLOR__purple-4
+        background: $__COLOR__purple-1
         .box
-            width: 60%
-            height: 60%
+            width: 70%
+            height: auto
             form
                 width: 100%
                 display: flex
@@ -83,7 +92,7 @@
                     margin-top: $__SPACING__margin-default
                 button
                     align-self: stretch
-                    transform: translateY(150%)
+                    //transform: translateY(150%)
                     //margin-top: 10em
 
 //------------------------------------------------------------//
