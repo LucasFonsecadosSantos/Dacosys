@@ -45,11 +45,26 @@
 // BRIEF: <file_brief>                                        //
 //                                                            //
 ////////////////////////////////////////////////////////////////
-
-
-
-
-//--------------------[ OBJECTS MODULE ]----------------------//
-@import "_box.sass"
-@import "_content-wrapper.sass"
-//------------------------------------------------------------//
+doctype html
+html.overflow-y-hidden
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Registrar Suas Informações","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="login-participant")
+        main
+            .container-fluid
+                .content-wrapper
+                    .box
+                        header
+                            include modules/components/_header.pug
+                        .box__body
+        //footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug
