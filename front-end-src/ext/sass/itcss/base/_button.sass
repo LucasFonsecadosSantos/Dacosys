@@ -70,7 +70,10 @@ button
     -o-transition: background $__TIME__duration $__ANIMATION__transition
     -mz-transition: background $__TIME__duration $__ANIMATION__transition
     -moz-transition: background $__TIME__duration $__ANIMATION__transition
-    -webkit-transition: background $__TIME__duration $__ANIMATION__transition 
+    -webkit-transition: background $__TIME__duration $__ANIMATION__transition
+    display: flex
+    justify-content: center
+    align-items: center
     &:hover
         background: darken($__COLOR__green-1,10)
     &:active
@@ -78,5 +81,10 @@ button
         outline: none
     &:first-letter
         text-transform: uppercase
+    i
+        margin: 0px .45em 0px 0px
+        padding: 0px
+        font:
+            size: 1.1em !important
         
 //------------------------------------------------------------//

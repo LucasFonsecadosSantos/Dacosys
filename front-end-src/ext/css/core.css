@@ -591,7 +591,7 @@ pre code {
 }
 
 .col-xl,
-.col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .subParticipantLogin, .subLogin, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg,
+.col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, header .subHeader:nth-child(2), .col-xl-7, .col-xl-6, .subParticipantLogin, .subLogin, .col-xl-5, .col-xl-4, .col-xl-3, header .subHeader:nth-child(1), .col-xl-2, .col-xl-1, header .subHeader:nth-child(3), .col-lg,
 .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md,
 .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm,
 .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col,
@@ -614,7 +614,7 @@ pre code {
   max-width: 100%;
 }
 
-.col-1 {
+.col-1, header .subHeader:nth-child(3) {
   flex: 0 0 8.3333333333%;
   max-width: 8.3333333333%;
 }
@@ -624,7 +624,7 @@ pre code {
   max-width: 16.6666666667%;
 }
 
-.col-3 {
+.col-3, header .subHeader:nth-child(1) {
   flex: 0 0 25%;
   max-width: 25%;
 }
@@ -649,7 +649,7 @@ pre code {
   max-width: 58.3333333333%;
 }
 
-.col-8 {
+.col-8, header .subHeader:nth-child(2) {
   flex: 0 0 66.6666666667%;
   max-width: 66.6666666667%;
 }
@@ -791,7 +791,7 @@ pre code {
     max-width: 100%;
   }
 
-  .col-sm-1 {
+  .col-sm-1, header .subHeader:nth-child(3) {
     flex: 0 0 8.3333333333%;
     max-width: 8.3333333333%;
   }
@@ -801,7 +801,7 @@ pre code {
     max-width: 16.6666666667%;
   }
 
-  .col-sm-3 {
+  .col-sm-3, header .subHeader:nth-child(1) {
     flex: 0 0 25%;
     max-width: 25%;
   }
@@ -826,7 +826,7 @@ pre code {
     max-width: 58.3333333333%;
   }
 
-  .col-sm-8 {
+  .col-sm-8, header .subHeader:nth-child(2) {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
@@ -972,7 +972,7 @@ pre code {
     max-width: 100%;
   }
 
-  .col-md-1 {
+  .col-md-1, header .subHeader:nth-child(3) {
     flex: 0 0 8.3333333333%;
     max-width: 8.3333333333%;
   }
@@ -982,7 +982,7 @@ pre code {
     max-width: 16.6666666667%;
   }
 
-  .col-md-3 {
+  .col-md-3, header .subHeader:nth-child(1) {
     flex: 0 0 25%;
     max-width: 25%;
   }
@@ -1007,7 +1007,7 @@ pre code {
     max-width: 58.3333333333%;
   }
 
-  .col-md-8 {
+  .col-md-8, header .subHeader:nth-child(2) {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
@@ -1153,7 +1153,7 @@ pre code {
     max-width: 100%;
   }
 
-  .col-lg-1 {
+  .col-lg-1, header .subHeader:nth-child(3) {
     flex: 0 0 8.3333333333%;
     max-width: 8.3333333333%;
   }
@@ -1163,7 +1163,7 @@ pre code {
     max-width: 16.6666666667%;
   }
 
-  .col-lg-3 {
+  .col-lg-3, header .subHeader:nth-child(1) {
     flex: 0 0 25%;
     max-width: 25%;
   }
@@ -1188,7 +1188,7 @@ pre code {
     max-width: 58.3333333333%;
   }
 
-  .col-lg-8 {
+  .col-lg-8, header .subHeader:nth-child(2) {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
@@ -1334,7 +1334,7 @@ pre code {
     max-width: 100%;
   }
 
-  .col-xl-1 {
+  .col-xl-1, header .subHeader:nth-child(3) {
     flex: 0 0 8.3333333333%;
     max-width: 8.3333333333%;
   }
@@ -1344,7 +1344,7 @@ pre code {
     max-width: 16.6666666667%;
   }
 
-  .col-xl-3 {
+  .col-xl-3, header .subHeader:nth-child(1) {
     flex: 0 0 25%;
     max-width: 25%;
   }
@@ -1369,7 +1369,7 @@ pre code {
     max-width: 58.3333333333%;
   }
 
-  .col-xl-8 {
+  .col-xl-8, header .subHeader:nth-child(2) {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
@@ -9856,6 +9856,52 @@ button, input[type=button] {
   clear: both;
 }
 
+header .subHeader:nth-child(2) {
+  display: flex;
+  flex-flow: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+header .subHeader:nth-child(2) .subHeader__dacosysLogo {
+  width: 30%;
+}
+header .subHeader:nth-child(2) .subHeader__alternativeBtn, header .subHeader:nth-child(2) .subHeader__alternativeBtn2 {
+  padding: 0.5% 1%;
+  margin-left: 2.5%;
+}
+header .subHeader:nth-child(2) .subHeader__alternativeBtn:hover, header .subHeader:nth-child(2) .subHeader__alternativeBtn2:hover {
+  color: #FFFFFF;
+}
+header .subHeader:nth-child(2) .subHeader__alternativeBtn:hover > i, header .subHeader:nth-child(2) .subHeader__alternativeBtn2:hover > i {
+  color: #FFFFFF;
+}
+header .subHeader:nth-child(2) .subHeader__alternativeBtn2 {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #00D3A0;
+  font-weight: 700;
+}
+header .subHeader:nth-child(2) .subHeader__alternativeBtn2:first-letter {
+  text-transform: uppercase;
+}
+header .subHeader:nth-child(2) .subHeader__alternativeBtn2 i {
+  color: #00D3A0;
+}
+header .subHeader:nth-child(3) {
+  display: flex;
+  justify-content: flex-end;
+}
+header .subHeader:nth-child(3) .subHeader__closeBtn {
+  width: 30%;
+  filter: invert(100%);
+  -o-filter: invert(100%);
+  -ms-filter: invert(100%);
+  -moz-filter: invert(100%);
+  -webkit-filter: invert(100%);
+  cursor: pointer;
+}
+
 body {
   background: #7669F6;
 }
@@ -9923,6 +9969,9 @@ button {
   -mz-transition: background 0.25s ease-in-out;
   -moz-transition: background 0.25s ease-in-out;
   -webkit-transition: background 0.25s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 button:hover {
   background: #00a079;
@@ -9933,6 +9982,11 @@ button:active {
 }
 button:first-letter {
   text-transform: uppercase;
+}
+button i {
+  margin: 0px 0.45em 0px 0px;
+  padding: 0px;
+  font-size: 1.1em !important;
 }
 
 .box {
@@ -9966,7 +10020,8 @@ button:first-letter {
   justify-content: center;
   align-items: center;
 }
-.content-wrapper .box {
+.content-wrapper .wrapper-box {
+  padding: 3%;
   width: calc((100vw/1.77777777778)*1.5);
   height: calc((100vh/1.77777777778)*1.5);
 }
