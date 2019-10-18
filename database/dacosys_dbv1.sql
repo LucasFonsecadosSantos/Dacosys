@@ -63,25 +63,25 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`telephone` (
 CREATE TABLE IF NOT EXISTS `dacosys`.`disease` (
     `participant_idPerson`  INT(2)  NOT NULL,
     `disease`               TEXT    NOT NULL,
-    PRIMARY KEY(`person_idPerson`)
+    PRIMARY KEY(`participant_idPerson`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`quiz` (
     `id_quiz`           INT(2) NOT NULL,
-    `creator_idPerson`  INT(2) NOT NULL
+    `creator_idPerson`  INT(2) NOT NULL,
     PRIMARY KEY(`id_quiz`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`reseacher_access_quiz` (
     `reseacher_idPerson`    INT(2)  NOT NULL,
     `quiz_idQuiz`           INT(2)  NOT NULL,
-    PRIMARY KEY(`researcher_idPerson`,`quiz_idQuiz`)
+    PRIMARY KEY(`reseacher_idPerson`,`quiz_idQuiz`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`item` (
     `id_item`           INT(2) NOT NULL,
     `has_description`   TINYINT NOT NULL,
-    `answer_type`       ENUM(`_DISCREET_`,`_CONTINUOUS_`)
+    `answer_type`       ENUM('_DISCREET_','_CONTINUOUS_'),
     PRIMARY KEY(`id_item`)
 )ENGINE = InnoDB;
 
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`item_has_picture` (
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`participant_answer_quiz` (
     `participant_idPerson`  INT(2) NOT NULL,
-    `quiz_idQuiz`           INT(2) NOT NULL
-    PRIMARY KEY(`person_idPerson`,`quiz_idQuiz`)
+    `quiz_idQuiz`           INT(2) NOT NULL,
+    PRIMARY KEY(`participant_idPerson`,`quiz_idQuiz`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`participant_answer_item` (
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`participant_answer_item` (
  * | CREATING THE UNIQUE KEYS                                       +
  * +----------------------------------------------------------------+
  */
-CREATE UNIQUE INDEX `uk_person_email` ON `dacosys`.`person` (`email` ASC)
+CREATE UNIQUE INDEX `uk_person_email` ON `dacosys`.`person` (`email` ASC);
 
 
 
