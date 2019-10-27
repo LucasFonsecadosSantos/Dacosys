@@ -50,7 +50,7 @@
 
 
 //----------------[ BASE MODULE - INPUT ]---------------------//
-input
+input, select, textarea
     outline: none
     background: none
     border: none
@@ -62,5 +62,14 @@ input
         family: $__FONT__font-family-1
         weight: 200
         size: 1em
+    transition: all .8s
+    &:hover, &:focus
+        border-bottom-color: $__COLOR__green-1
+    
+select
+    -moz-appearance: none
+    -webkit-appearance: none
+    appearance: none
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right transparent
         
 //------------------------------------------------------------//

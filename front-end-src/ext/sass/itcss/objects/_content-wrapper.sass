@@ -61,5 +61,33 @@
         padding: 3%
         width:  calc((100vw/1.77777777778)*1.5)
         height: calc((100vh/1.77777777778)*1.5)
+        .wrapper-box__title
+            color: $__COLOR__white-1
+            padding-top: 3%
+        .wrapper-content__body
+            display: flex
+            justify-content: center
+            align-items: center
+            overflow-y: hidden
+            height: 90%
+            padding: 0% .8% 0% 0%
+            &:scrollbar
+                width: 1px
+            &:scrollbar-thumb
+                background-color: #000000 !important
+            &:-moz-scrollbar-thumb
+                background-color: #000000 !important
+            &:-webkit-scrollbar-thumb
+                background-color: #000000 !important
+            &:-webkit-scrollbar-track
+                background: transparent
+            &:-moz-scrollbar-track
+                background: transparent
+            &:scrollbar-track
+                background: transparent
+            &[scroll="true"]
+                &:hover
+                    overflow-y: scroll
+                    padding: 0%
 
 //------------------------------------------------------------//

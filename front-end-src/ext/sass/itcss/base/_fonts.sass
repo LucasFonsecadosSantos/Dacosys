@@ -50,6 +50,11 @@
 
 
 //-----------------[ BASE MODULE - FONTS ]--------------------//
+p
+    font:
+        family: $__FONT__font-family-2
+        size: 1em
+        weight: 300
 h1
     font:
         family: $__FONT__font-family-1
@@ -70,6 +75,16 @@ h3
     &:first-letter
         text-transform: uppercase
 
+h4
+    font:
+        family: $__FONT__font-family-1
+        weight: 600
+        size:   1.2em
+    color: #FFF
+    text:
+        transform: lowercase
+    &:first-letter
+        text-transform: uppercase
 a
     font:
         family: inherit
@@ -77,4 +92,10 @@ a
     text:
         decoration: underline
     cursor: pointer
+label
+    font:
+        family: $__FONT__font-family-1
+        size: .9em
+    text-transform: lowercase
+    color: $__COLOR__white-1
 //------------------------------------------------------------//
