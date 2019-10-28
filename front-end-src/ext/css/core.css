@@ -9931,8 +9931,11 @@ header .subHeader:nth-child(3) .subHeader__closeBtn {
   cursor: pointer;
 }
 
-body {
+body[page=login], body[page=login-participant], body[page=participant-register] {
   background: #7669F6;
+}
+body[page=dashboard] {
+  background: #2F21AA;
 }
 
 p {
