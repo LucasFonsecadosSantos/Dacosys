@@ -59,27 +59,174 @@ html.overflow-y-hidden
         //---------------------------------------------------------------//
     body(page="dashboard")
         header
-            include modules/components/_header.pug
+            include modules/components/_header-dashboard.pug
         main
-            .container-fluid
-                .row
-                    .col-6.col-sm-6.col-md-6.col-lg-6.col-xl-6
-                        .box
-                            .box__title
-                                h3 questionários em andamento
-                            .box__body
-                                table.adm-data-table
-                                    tbody
-                                        tr
-                                            td
-                                                p Questionário 01
-                                            td
-                                                i.material-icons remove_red_eye
-                                            td
-                                                i.material-icons edit
-                                            td
-                                                i.material-icons delete_forever
-                    .col-6.col-sm-6.col-md-6.col-lg-6.col-xl-6
+            .content-wrapper
+                .container
+                    .row
+                        +gridSystem(12,12,12,12,12)
+                            .page-title
+                                h3 
+                                    | Seja bem vindo, 
+                                    strong fulano
+                                    | !
+                .container.content-wrapper__row
+                    .row
+                        +gridSystem(6,6,6,6,6)
+                            +box("questionários em andamento")
+                                .dashboard-data
+                                    table
+                                        tbody
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons(alt="Botão para visualizar status do questionário.", title="Clique para saber mais sobre este questionário.") remove_red_eye
+                                                    i.material-icons(alt="Botão para editar o questionário.", title="Clique para editar informações, adicionar, remover itens ou convidar novos participantes.") edit
+                                                    i.material-icons(alt="Botão para encerrar o questionário.", title="Clique para encerrar este questionário.") close
+                                                    i.material-icons(alt="Botão para deletar este questionário.", title="Clique para deletar permanentemente o questionário.") delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons remove_red_eye
+                                                    i.material-icons edit
+                                                    i.material-icons close
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons remove_red_eye
+                                                    i.material-icons edit
+                                                    i.material-icons close
+                                                    i.material-icons delete_forever
+                        +gridSystem(6,6,6,6,6)
+                            +box("questionários encerrados")
+                                .dashboard-data
+                                    table
+                                        tbody
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                                            tr
+                                                td
+                                                    p questionário #01
+                                                td
+                                                    i.material-icons local_printshop
+                                                    i.material-icons delete_forever
+                .container.content-wrapper__row
+                    .row
+                        +gridSystem(4,4,4,4,4)
+                            +box("pesquisadores cadastrados")
+                                .dashboard-data
+                                    table
+                                        tbody
+                                            tr
+                                                td
+                                                    p pesquisador fulano
+                                                td
+                                            tr
+                                                td
+                                                    p pesquisador fulano
+                                                td
+                                            tr
+                                                td
+                                                    p pesquisador fulano
+                                                td
+                                            tr
+                                                td
+                                                    p pesquisador fulano
+                                                td
+                                            tr
+                                                td
+                                                    p pesquisador fulano
+                                                td
+                        +gridSystem(8,8,8,8,8)
+                            +box("relação de submissões")
+                                .dashboard-data
+                                    
         //footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug
