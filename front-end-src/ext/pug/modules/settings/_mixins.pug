@@ -46,6 +46,88 @@
 //                                                            //
 ////////////////////////////////////////////////////////////////
 
+mixin box-discrete-question-without-description()
+    .box-discrete-question-without-description
+        .box-discrete-question-without-description__title
+            h5 selecione as opções e opine:
+        .box-discrete-question-without-description__body
+            .row
+                +gridSystem(6,6,6,6,6)
+                    .option-track
+                        ul
+                            li
+                                label(for="opt01") Opção 01
+                                input#opt01(name="opt01",type="radio", alt="Selecione esta opção para responder a pesquisa.", title="Clique para selecionar esta opção.")
+                            li
+                                label(for="opt01") Opção 01
+                                input#opt01(name="opt01",type="radio", alt="Selecione esta opção para responder a pesquisa.", title="Clique para selecionar esta opção.")
+                            li
+                                label(for="opt01") Opção 01
+                                input#opt01(name="opt01",type="radio", alt="Selecione esta opção para responder a pesquisa.", title="Clique para selecionar esta opção.")
+            .row
+                .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.child
+                    img(src="img/structure/default-img.png")
+                .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.child
+                    img(src="img/structure/default-img.png")
+                .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.child
+                    img(src="img/structure/default-img.png")
+                +gridSystem(1,1,1,1,1)
+                +gridSystem(10,10,10,10,10)
+                    input(type="range", min="33", max="99", value="0", step="33")
+                +gridSystem(1,1,1,1,1)
+            .row
+                .container-fluid.buttons-bar
+                    button().previus
+                        i.material-icons navigate_before
+                        | pergunta anterior
+                    button().next
+                        | próxima pergunta
+                        i.material-icons navigate_next
+
+
+mixin box-discrete-question-with-description(title)
+    .box-discrete-question-with-description
+        .box-discrete-question-with-description__title
+            h5= title
+        .box-discrete-question-with-description__body
+            .row
+                .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.child
+                    img(src="img/structure/default-img.png")
+                .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.child
+                    img(src="img/structure/default-img.png")
+                .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4.child
+                    img(src="img/structure/default-img.png")
+                +gridSystem(1,1,1,1,1)
+                +gridSystem(10,10,10,10,10)
+                    input(type="range", min="33", max="99", value="0", step="33")
+                +gridSystem(1,1,1,1,1)
+            .row
+                .container-fluid.buttons-bar
+                    button().previus
+                        i.material-icons navigate_before
+                        | pergunta anterior
+                    button().next
+                        | próxima pergunta
+                        i.material-icons navigate_next
+mixin box(title)
+    if type == "question"
+    else
+        if title
+            .box
+                .box__title
+                    h3= title
+                .box__body
+                    block
+        else
+            .box
+                .box__body
+                    block
+    
+
+mixin gridSystem(param,sm_param,md_param,lg_param,xl_param)
+    div(class="col-" + param + " col-sm-" + sm_param + " col-md-" + md_param + " col-lg-" + lg_param + " col-xl-" + xl_param)
+        block
+
 mixin headerSettings(title,description,author,copyright,themeColor,language)
     title= title
     meta(charset="utf-8")

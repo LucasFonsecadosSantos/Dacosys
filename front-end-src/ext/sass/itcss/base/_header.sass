@@ -1,34 +1,27 @@
 header
     .subHeader
-        max-height: 60px
+        max-height: 70px
         overflow: hidden
         background: transparent
         &:nth-child(1)
-            @include responsive_system(4,4,4,4,4)
+            @include responsive_system(3,3,3,3,3)
             display: flex
             justify-content: center
             align-items: center
-            .subHeader__logoContent
-                display: flex
-                justify-content: flex-start
-                align-items: center
-                height: 100%
-                h4
-                    color: #FFF
-                p
-                    //color: darken(#FFF,25)
-                    color: $__COLOR__green-1
-                    font:
-                        weight: 600
-                    &:first-letter
-                        text-transform: uppercase
-                    
-                &:nth-child(1)
-                    width: 25%
+            h4
+                color: #FFF
+                font-size: 2em
+            p
+                //color: darken(#FFF,25)
+                color: $__COLOR__green-1
+                font:
+                    weight: 600
+                &:first-letter
+                    text-transform: uppercase
             .subHeader__dacosysLogo
                 height: 100% !important
         &:nth-child(2)
-            @include responsive_system(7,7,7,7,7)
+            @include responsive_system(8,8,8,8,8)
             display:        flex
             flex-flow:      row
             align-items:    center
@@ -53,10 +46,12 @@ header
                     color: $__COLOR__green-1
         &:nth-child(3)
             @include responsive_system(1,1,1,1,1)
-            display: flex
-            justify-content: flex-end
+            .container-fluid
+                display: flex
+                justify-content: flex-end
             .subHeader__closeBtn
-                width:          30%
+                justify-self: flex-end
+                width:          50%
                 filter:         invert(100%)
                 -o-filter:      invert(100%)
                 -ms-filter:     invert(100%)

@@ -1,0 +1,150 @@
+// DEVELOPED BY: Lucas Fonsceca dos Santos.
+// GPL - General Public License v3.0
+////////////////////////////////////////////////////////////////
+// EASY ARCHITECTURE - A simple architecture script tool.
+// www.github.com/LucasFonsecaDosSantos/Easy-Architecture
+////////////////////////////////////////////////////////////////
+//                                                            //
+//                                                            //
+//  _____                                                     //
+// | ____|__ _ ___ _   _                                      //
+// |  _| / _` / __| | | |                                     //
+// | |__| (_| \__ \ |_| |                                     //
+// |_____\__,_|___/\__, |                                     //
+//     _           |___/   _ _            _                   //
+//    / \   _ __ ___| |__ (_) |_ ___  ___| |_ _   _ _ __ ___  //
+//   / _ \ | '__/ __| '_ \| | __/ _ \/ __| __| | | | '__/ _ \ //
+//  / ___ \| | | (__| | | | | ||  __/ (__| |_| |_| | | |  __/ //
+// /_/   \_\_|  \___|_| |_|_|\__\___|\___|\__|\__,_|_|  \___| //
+//                                              Version 2.0.0 //
+//                                                            //
+// SCRIPT WRITTEN BY Lucas Fonseca dos Santos.                //
+//                                                            //
+////////////////////////////////////////////////////////////////
+//                                                            //
+// [PROJECT]:                                                 //
+// Name:  <project_name>                                      //
+// URL:   <project_url>                                       //
+//                                                            //
+// +--------------------------------------------------------+ //
+//                                                            //
+// [DEVELOPMENT]:                                             //
+// Code Developer:  <project_name>                            //
+// Designer:        <project_name>                            //
+// Tester:          <project_name>                            //
+// Code Developer:  <project_name>                            //
+//                                                            //
+// +--------------------------------------------------------+ //
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//                    FILE INFORMATIONS:                      //
+// +--------------------------------------------------------+ //
+//                                                            //
+// NAME: <file_name>                                          //
+// BRIEF: <file_brief>                                        //
+//                                                            //
+////////////////////////////////////////////////////////////////
+doctype html
+html.overflow-y-hidden
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Registrar Suas Informações","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="participant-register")
+        main
+            .container-fluid
+                .content-wrapper
+                    .wrapper-box.box
+                        header
+                            include modules/components/_header.pug
+                        //- .wrapper-box__title
+                        //-         h4 nos conte um pouco sobre você...
+                        .wrapper-content__body(scroll="false")
+                            .container-fluid
+                                .row
+                                    +gridSystem(3,3,3,3,3)
+                                        .question-track
+                                            .container-fluid
+                                                table
+                                                    tbody
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #01
+                                                            td
+                                                                i.material-icons.green-color check_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #02
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #03
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #04
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #05
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #06
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #07
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #08
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #09
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #10
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                                        tr
+                                                            td
+                                                                p
+                                                                    strong Questão #11
+                                                            td
+                                                                i.material-icons.red-color remove_circle
+                                    +gridSystem(9,9,9,9,9)
+                                        //+box-discrete-question-with-description("Aqui vai aquela descriçãozinha da pergunta, então vai neste texto, por isso preciso preencher aqui desta forma com bastante coisa para poder simular uma boa descrição, e ai, voce gostou?")
+                                        +box-discrete-question-without-description()
+                                        
+
+        //footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

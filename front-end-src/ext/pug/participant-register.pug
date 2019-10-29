@@ -70,32 +70,32 @@ html.overflow-y-hidden
                             form(action="#",method="POST").container-fluid
                                 //first row
                                 .row
-                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                    +gridSystem(12,12,12,12,12)
                                         .form__inputBlock
                                             label token:
                                             h3(style="color:#00D3A0;text-transform: uppercase !important") F10E2821BBBEA527EA02200352313BC059445190
                                             //input#token_inp(type="text",readonly,name="token_inp",title="Número de token único para cada participante da pesquisa. Este é o seu.", alt="Campo para exibição do token unico do participante.")
                                 //Second row
                                 .row
-                                    .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4
+                                    +gridSystem(4,4,4,4,4)
                                         .form__inputBlock
                                             label seu número de telefone:
                                             input#telephone_inp(type="text",name="telephone_inp",placeholder="(XX) xxxxx - xxxx",title="Insira seu número de telefone aqui.",alt="Campo de texto para inserção do número de telefone.")
-                                    .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4
+                                    +gridSystem(4,4,4,4,4)
                                         .form__inputBlock
                                             label seu endereço de E-mail:
                                             input#email_inp(type="email",name="email_inp",placeholder="email@email.com.br",title="Insira seu endereço de E-mail.",alt="Campo de texto para inserção do endereço de E-mail.")
-                                    .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4
+                                    +gridSystem(4,4,4,4,4)
                                         .form__inputBlock
                                             label cep (informe cep da cidade de sua naturalidade):
                                             input#cep_inp(type="text",name="cep_inp",placeholder="xxxxx - xxx",title="Insira o número do CEP da cidade de sua naturalidade.",alt="Campo de texto para inserção do número de CEP.")
                                 //third row
                                 .row
-                                    .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4
+                                    +gridSystem(4,4,4,4,4)
                                         .form__inputBlock
                                             label data de nascimento:
                                             input#birth_inp(type="text",name="birth_inp",placeholder="dd/MM/yyyy",title="Insira sua data de nascimento.",alt="Campo de texto para inserção da data do nascimento.")
-                                    .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4
+                                    +gridSystem(4,4,4,4,4)
                                         .form__inputBlock
                                             label minha cor:
                                             select#color_inp(name="color_sel",title="Selecione sua cor.",alt="Campo para selecionar sua cor.")
@@ -104,7 +104,7 @@ html.overflow-y-hidden
                                                 option(value="_PARDO_") Pardo
                                                 option(value="_NEGRO_") Negro
                                                 option(value="_INDIGENA_") Indigena
-                                    .col-4.col-sm-4.col-md-4.col-lg-4.col-xl-4
+                                    +gridSystem(4,4,4,4,4)
                                         .form__inputBlock
                                             label meu sexo:
                                             select#sex_inp(name="sex_sel",title="Selecione uma opção para o sexo.",alt="Campo para selecionar seu sexo.")
@@ -113,7 +113,7 @@ html.overflow-y-hidden
                                                 option(value="_F_") Feminino
                                                 option(value="_O_") Outro
                                 .row
-                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                    +gridSystem(12,12,12,12,12)
                                         .form__inputBlock
                                             label possuo alguma necessidade especial ou problema de saúde? Se sim, por favor, listar os problemas separados pelo caracter ' ; '   :
                                             textarea#disease_ta(name="disease_ta",title="Liste aqui, separado por ';' todas as suas enfermidades ou necessidades especiais.", alt="Campo para descrição de possiveis enfermidades e necessidades especiais.")

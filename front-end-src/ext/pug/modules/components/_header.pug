@@ -49,12 +49,16 @@
 .container-fluid
     .row
         .subHeader
-            .subHeader__logoContent
-                img.subHeader__dacosysLogo(src="img/identity/icon-white.svg")
-            .subHeader__logoContent
+            .container-fluid
                 .row
-                    h4 nos conte um pouco sobre você...
-                    p Nome da pesquisa
+                    +gridSystem(3,3,3,3,3)
+                        img.subHeader__dacosysLogo(src="img/identity/icon-white.svg")
+                    +gridSystem(9,9,9,9,9)
+                        .subHeader__logoContent
+                            .row
+                                h4 DACOSYS
+                            .row
+                                p Nome da pesquisa
         .subHeader
             //- button.subHeader__alternativeBtn2
             //-     i.material-icons share
@@ -67,4 +71,5 @@
             //-     | atualizar
         .subHeader
             //img.subHeader__closeBtn(src="img/icons/close.svg")
-            img.subHeader__closeBtn(src="img/icons/full-screen.svg")
+            .container-fluid
+                img.subHeader__closeBtn(src="img/icons/full-screen.svg")
