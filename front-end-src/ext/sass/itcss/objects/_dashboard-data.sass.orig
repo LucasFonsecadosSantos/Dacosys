@@ -15,6 +15,11 @@
                 transition: all .8s
                 &:hover
                     background: $__COLOR__purple-1
+<<<<<<< HEAD
+=======
+                    i
+                        color: $__COLOR__white-1
+>>>>>>> 032f0ce2437b094ff1c5adc2722fa5c5427551a8
                 td
                     padding: 2% 0%
                     p
@@ -25,8 +30,11 @@
                         transition: all .8s
                         color: $__COLOR__green-1
                         cursor: pointer
+<<<<<<< HEAD
                         &:hover
                             color: $__COLOR__white-1
+=======
+>>>>>>> 032f0ce2437b094ff1c5adc2722fa5c5427551a8
                     &:first-child
                         width: auto
                     &:last-child
