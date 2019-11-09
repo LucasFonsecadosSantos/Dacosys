@@ -41,16 +41,16 @@ USE `dacosys` ;
 CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `id_person`                 INT(2)      NOT NULL AUTO_INCREMENT,
     `type`                      ENUM('_ADMINISTRATOR_','_RESEARCHER_','_PARTICIPANT_') NOT NULL,
-    `name`                      TEXT,
+    `name`                      VARCHAR(40),
     `email`                     VARCHAR(40) NOT NULL,
     `password`                  CHAR(72) NOT NULL,
     `sex`                       ENUM('_M_','_F_','_O_'),
     `hometown_cep`              CHAR(8),
-    `color`         ENUM('_BRANCO_','_PARDO_','_NEGRO_','_INDIGENA_'),
+    `color`         ENUM('_BRANCO_','_PARDO_','_PETRO_','_INDIGENA_','_SEM-DECLARACAO_'),
     `birth_day`                 DATE,
     `latest_access`             DATE,
     `latest_ip_access`          VARCHAR(12),
-    `supervisor_idPerson`       INT(2),
+    `supervisor_idPerson`       INT(2) NOT NULL,
     PRIMARY KEY(`id_person`)
 )ENGINE = InnoDB;
 
@@ -60,15 +60,17 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`telephone` (
     PRIMARY KEY(`person_idPerson`)
 )ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `dacosys`.`disease` (
+CREATE TABLE IF NOT EXISTS `dacosys`.`special_needs` (
     `participant_idPerson`  INT(2)  NOT NULL,
-    `disease`               TEXT    NOT NULL,
+    `need`                  TEXT    NOT NULL,
     PRIMARY KEY(`participant_idPerson`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`quiz` (
-    `id_quiz`           INT(2) NOT NULL,
-    `creator_idPerson`  INT(2) NOT NULL,
+    `id_quiz`           INT(2)   NOT NULL,
+    `start_date`        DATE     NOT NULL,
+    `end_date`          DATE    NOT NULL,
+    `status`            TINYINT NOT NULL,
     PRIMARY KEY(`id_quiz`)
 )ENGINE = InnoDB;
 
@@ -80,15 +82,17 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`reseacher_access_quiz` (
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`item` (
     `id_item`           INT(2) NOT NULL,
-    `has_description`   TINYINT NOT NULL,
-    `answer_type`       ENUM('_DISCREET_','_CONTINUOUS_'),
+    `enunciation`       VARCHAR(150),
+    `quiz_idQuiz`       INT(2) NOT NULL,
+    `answer_type`       ENUM('_DISCREET_','_CONTINUOUS_') NOT NULL,
+    `answer_discret_amount` INT(2),
     PRIMARY KEY(`id_item`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`item_picture` (
-    `id_picture`    INT(4)  NOT NULL,
+    `id_picture`    INT(4)      NOT NULL,
     `title`         VARCHAR(50),
-    `path`          TEXT    NOT NULL,
+    `path`          CHAR(30)    NOT NULL,
     PRIMARY KEY(`id_picture`)
 )ENGINE = InnoDB;
 
@@ -98,17 +102,13 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`item_has_picture` (
     PRIMARY KEY(`item_picture_idPicture`,`item_idItem`)
 )ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `dacosys`.`participant_answer_quiz` (
-    `participant_idPerson`  INT(2) NOT NULL,
-    `quiz_idQuiz`           INT(2) NOT NULL,
-    PRIMARY KEY(`participant_idPerson`,`quiz_idQuiz`)
-)ENGINE = InnoDB;
-
 CREATE TABLE IF NOT EXISTS `dacosys`.`participant_answer_item` (
-    `participant_idPerson`  INT(2)  NOT NULL,
-    `item_idItem`           INT(2)  NOT NULL,
-    `quiz_idQuiz`           INT(2)  NOT NULL,
-    PRIMARY KEY(`participant_idPerson`,`item_idItem`,`quiz_idQuiz`)
+    `participant_idPerson`  INT(2)      NOT NULL,
+    `item_idItem`           INT(2)      NOT NULL,
+    `description`           VARCHAR(80),
+    `answer`                FLOAT       NOT NULL,
+    `data_hour`             DATETIME    NOT NULL,
+    PRIMARY KEY(`participant_idPerson`,`item_idItem`)
 )ENGINE = InnoDB;
 
 
@@ -143,16 +143,9 @@ ALTER TABLE `telephone`
     ON DELETE CASCADE
     ON UPDATE CASCADE;
 
-ALTER TABLE `disease`
+ALTER TABLE `special_needs`
     ADD CONSTRAINT fk_person_participant
     FOREIGN KEY (`participant_idPerson`)
-    REFERENCES `person` (`id_person`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE;
-
-ALTER TABLE `quiz`
-    ADD CONSTRAINT fk_person_creator
-    FOREIGN KEY (`creator_idPerson`)
     REFERENCES `person` (`id_person`)
     ON DELETE CASCADE
     ON UPDATE CASCADE;
@@ -175,5 +168,12 @@ ALTER TABLE `item_has_picture`
     ADD CONSTRAINT fk_picture_picture
     FOREIGN KEY (`item_picture_idPicture`)
     REFERENCES `item_picture` (`id_picture`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE `item`
+    ADD CONSTRAINT fk_quiz_idQuiz
+    FOREIGN KEY (`quiz_idQuiz`)
+    REFERENCES `quiz` (`id_quiz`)
     ON DELETE CASCADE
     ON UPDATE CASCADE;

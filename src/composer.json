@@ -1,0 +1,20 @@
+{
+    "name": "Dacosys",
+    "Description": "Coming soon",
+    "license":  "GNU-GPLv3",
+    "type":     "project",
+    "authors": [
+        {"name": "Lucas Fonseca dos Santos", "email": "lucas@lcfcompany.com.br"},
+        {"name": "Lucas Fiorini Braga", "email": "lucasfiorini@msg.com"},
+        {"name": "Marco Aurelio Ferreira de Sousa", "email": "maureliocfh@gmail.com"}
+    ],
+    "autoload": {
+        "psr4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "require": {
+        "php":  ">=5.4"
+    }
+}
