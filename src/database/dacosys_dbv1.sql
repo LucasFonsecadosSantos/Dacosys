@@ -27,7 +27,7 @@ USE `dacosys` ;
  * | CREATING ALL DATABASE TABLES                                   +
  * +----------------------------------------------------------------+
  *
- * - Person
+ * - aPerson
  * - Person Telephone
  * - Person Disease
  * - Quiz
