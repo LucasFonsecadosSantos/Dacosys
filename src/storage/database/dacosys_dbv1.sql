@@ -46,24 +46,24 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `password`                  CHAR(72) NOT NULL,
     `sex`                       ENUM('_M_','_F_','_O_'),
     `hometown_cep`              CHAR(8),
-    `color`         ENUM('_BRANCO_','_PARDO_','_PETRO_','_INDIGENA_','_SEM-DECLARACAO_'),
+    `color`                     ENUM('_BRANCA_','_PARDA_','_PRETA_', '_AMARELA_', '_INDIGENA_'),
     `birth_day`                 DATE,
     `latest_access`             DATE,
     `latest_ip_access`          VARCHAR(12),
-    `supervisor_idPerson`       INT(2) NOT NULL,
+    `supervisor_idPerson`       INT(2),
     PRIMARY KEY(`id_person`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`telephone` (
     `person_idPerson`   INT(2)      NOT NULL,
     `telephone`         VARCHAR(13) NOT NULL,
-    PRIMARY KEY(`person_idPerson`)
+    PRIMARY KEY(`person_idPerson`, `telephone`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`special_needs` (
     `participant_idPerson`  INT(2)  NOT NULL,
-    `need`                  TEXT    NOT NULL,
-    PRIMARY KEY(`participant_idPerson`)
+    `need`                  VARCHAR(200)    NOT NULL,
+    PRIMARY KEY(`participant_idPerson`, `need`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`quiz` (
