@@ -1,6 +1,6 @@
 {
-    "name": "dacosys/src",
-    "Description": "Coming soon",
+    "name": "dacosys/microframework",
+    "description": "Coming soon",
     "license":  "GNU-GPLv3",
     "type":     "project",
     "authors": [
@@ -9,7 +9,7 @@
         {"name": "Marco Aurelio Ferreira de Sousa", "email": "maureliocfh@gmail.com"}
     ],
     "autoload": {
-        "psr4": {
+        "psr-4": {
             "App\\": "app/",
             "Core\\": "core/"
         }
