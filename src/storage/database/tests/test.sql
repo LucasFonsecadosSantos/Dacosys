@@ -12,7 +12,9 @@ INSERT INTO person (
     birth_day,
     latest_access,
     latest_ip_access,
-    supervisor_idPerson
+    supervisor_idPerson,
+    access_key,
+    participated
 ) VALUES (
     1,
     '_ADMINISTRATOR_',
@@ -25,7 +27,9 @@ INSERT INTO person (
     '1996-01-20',
     '2019-06-08',
     '192168200123',
-    NULL
+    NULL,
+    '202CB962AC59075B964B07152D234B70',
+    0
 );
 INSERT INTO person (
     id_person,
@@ -39,7 +43,9 @@ INSERT INTO person (
     birth_day,
     latest_access,
     latest_ip_access,
-    supervisor_idPerson
+    supervisor_idPerson,
+    access_key,
+    participated
 ) VALUES (
     2,
     '_RESEARCHER_',
@@ -52,7 +58,9 @@ INSERT INTO person (
     '1993-12-05',
     '2018-09-12',
     '192168200111',
-    NULL
+    NULL,
+    '250CF8B51C773F3F8DC8B4BE867A9A02',
+    0
 );
 INSERT INTO person (
     id_person,
@@ -66,7 +74,9 @@ INSERT INTO person (
     birth_day,
     latest_access,
     latest_ip_access,
-    supervisor_idPerson
+    supervisor_idPerson,
+    access_key,
+    participated
 ) VALUES (
     3,
     '_PARTICIPANT_',
@@ -79,7 +89,9 @@ INSERT INTO person (
     '1986-01-07',
     '2017-10-05',
     '192168145200',
-    NULL
+    NULL,
+    '68053AF2923E00204C3CA7C6A3150CF7',
+    0
 );
 
 /*------------------------telefone-------------------------*/
@@ -138,13 +150,15 @@ INSERT INTO item (
     enunciation,
     quiz_idQuiz,
     answer_type,
-    answer_discret_amount
+    answer_discret_amount,
+    answer
 ) VALUES (
     1,
     'descricao vai aqui',
     1,
     '_DISCREET_',
-    4
+    4,
+    1.2
 );
 
 INSERT INTO item (
@@ -152,13 +166,15 @@ INSERT INTO item (
     enunciation,
     quiz_idQuiz,
     answer_type,
-    answer_discret_amount
+    answer_discret_amount,
+    answer
 ) VALUES (
     2,
     'descricao2 vai aqui',
     1,
     '_CONTINUOUS_',
-    NULL
+    NULL,
+    2
 );    
 
 /*--------------------item_picture-----------------------*/
