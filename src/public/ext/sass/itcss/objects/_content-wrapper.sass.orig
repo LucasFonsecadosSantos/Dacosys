@@ -1,0 +1,24 @@
+.content-wrapper
+    width: 100%
+    padding-top: 120px
+    &__row
+<<<<<<< HEAD
+        margin-top: $__SPACING__padding-default/3
+    .wrapper-box
+            @include border_radius($__SIZE__border-radius-default)
+            background: $__COLOR__purple-4
+            padding:    $__SPACING__padding-default
+            overflow: hidden
+            display: flexbox
+            flex-direction: column
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+            .box__title
+                width: 100%
+                background: transparent
+                text-align: left
+                margin-bottom: $__SPACING__margin-default
+                h3
+                    color: $__COLOR__white-1
+=======
+        margin-top: $__SPACING__padding-default/3
+>>>>>>> 032f0ce2437b094ff1c5adc2722fa5c5427551a8

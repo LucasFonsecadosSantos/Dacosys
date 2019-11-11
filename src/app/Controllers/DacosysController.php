@@ -2,10 +2,17 @@
 
 namespace App\Controllers;
 
-class DacosysController 
+use Core\Controller;
+
+class DacosysController extends Controller 
 {
+
+    public function __construct() {
+        $this->view = new \stdClass;
+    }
+
     public function index()
     {
-        echo "hello world";
+        $this->loadView("home/index");
     }
 }

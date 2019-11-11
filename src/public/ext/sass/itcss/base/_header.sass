@@ -1,0 +1,60 @@
+header
+    .subHeader
+        max-height: 70px
+        overflow: hidden
+        background: transparent
+        &:nth-child(1)
+            @include responsive_system(3,3,3,3,3)
+            display: flex
+            justify-content: center
+            align-items: center
+            h4
+                color: #FFF
+                font-size: 2em
+            p
+                //color: darken(#FFF,25)
+                color: $__COLOR__green-1
+                font:
+                    weight: 600
+                &:first-letter
+                    text-transform: uppercase
+            .subHeader__dacosysLogo
+                height: 100% !important
+        &:nth-child(2)
+            @include responsive_system(8,8,8,8,8)
+            display:        flex
+            flex-flow:      row
+            align-items:    center
+            justify-content: flex-end
+            .subHeader__alternativeBtn, .subHeader__alternativeBtn2
+                padding: .5% 1%
+                margin-left: $__SPACING__margin-default/2 
+                &:hover
+                    color: $__COLOR__white-1
+                    & > i
+                        color: $__COLOR__white-1
+            .subHeader__alternativeBtn2
+                background: none
+                border:     none
+                box-shadow: none
+                color: $__COLOR__green-1
+                font:
+                    weight: 700
+                &:first-letter
+                    text-transform: uppercase
+                i
+                    color: $__COLOR__green-1
+        &:nth-child(3)
+            @include responsive_system(1,1,1,1,1)
+            .container-fluid
+                display: flex
+                justify-content: flex-end
+            .subHeader__closeBtn
+                justify-self: flex-end
+                width:          100%
+                filter:         invert(100%)
+                -o-filter:      invert(100%)
+                -ms-filter:     invert(100%)
+                -moz-filter:    invert(100%)
+                -webkit-filter: invert(100%)
+                cursor: pointer
