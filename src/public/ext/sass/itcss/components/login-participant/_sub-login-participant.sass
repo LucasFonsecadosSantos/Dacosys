@@ -1,0 +1,98 @@
+
+    // DEVELOPED BY: Lucas Fonsceca dos Santos.
+// GPL - General Public License v3.0
+////////////////////////////////////////////////////////////////
+// EASY ARCHITECTURE - A simple architecture script tool.
+// www.github.com/LucasFonsecaDosSantos/Easy-Architecture
+////////////////////////////////////////////////////////////////
+//                                                            //
+//                                                            //
+//  _____                                                     //
+// | ____|__ _ ___ _   _                                      //
+// |  _| / _` / __| | | |                                     //
+// | |__| (_| \__ \ |_| |                                     //
+// |_____\__,_|___/\__, |                                     //
+//     _           |___/   _ _            _                   //
+//    / \   _ __ ___| |__ (_) |_ ___  ___| |_ _   _ _ __ ___  //
+//   / _ \ | '__/ __| '_ \| | __/ _ \/ __| __| | | | '__/ _ \ //
+//  / ___ \| | | (__| | | | | ||  __/ (__| |_| |_| | | |  __/ //
+// /_/   \_\_|  \___|_| |_|_|\__\___|\___|\__|\__,_|_|  \___| //
+//                                              Version 2.0.0 //
+//                                                            //
+// SCRIPT WRITTEN BY Lucas Fonseca dos Santos.                //
+//                                                            //
+////////////////////////////////////////////////////////////////
+//                                                            //
+// [PROJECT]:                                                 //
+// Name:  <project_name>                                      //
+// URL:   <project_url>                                       //
+//                                                            //
+// +--------------------------------------------------------+ //
+//                                                            //
+// [DEVELOPMENT]:                                             //
+// Code Developer:  <project_name>                            //
+// Designer:        <project_name>                            //
+// Tester:          <project_name>                            //
+// Code Developer:  <project_name>                            //
+//                                                            //
+// +--------------------------------------------------------+ //
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//                    FILE INFORMATIONS:                      //
+// +--------------------------------------------------------+ //
+//                                                            //
+// NAME: <file_name>                                          //
+// BRIEF: <file_brief>                                        //
+//                                                            //
+////////////////////////////////////////////////////////////////
+
+
+
+
+//--------------------[ SUB LOGIN COMPONENT ]-----------------//
+.subParticipantLogin
+    @include responsive_system(12,12,6,6,6)
+    min-height:         100vh
+    max-height:         100vh
+    display:            flex
+    justify-content:    center
+    align-items:        center
+    &:first-child
+        background: $__COLOR__purple-1
+        background: -webkit-linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
+        background: linear-gradient(to right, $__COLOR__purple-2, $__COLOR__purple-1)
+        @extends .hidden-sm-down
+        //background: $__COLOR__purple-4
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-flow: column
+        h1
+            color: $__COLOR__white-1
+        img
+            width: 20%
+        p
+            color: $__COLOR__white-1
+            font:
+                weight: 200
+                size: 1.5em
+    &:last-child
+        background: $__COLOR__purple-1
+        .box
+            width: 70%
+            height: auto
+            form
+                width: 100%
+                display: flex
+                flex-wrap: wrap
+                flex-direction: column
+                a
+                    color: $__COLOR__green-1
+                    margin-top: $__SPACING__margin-default
+                button
+                    align-self: stretch
+                    //transform: translateY(150%)
+                    //margin-top: 10em
+
+//------------------------------------------------------------//

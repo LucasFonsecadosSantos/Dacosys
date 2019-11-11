@@ -1,0 +1,92 @@
+// DEVELOPED BY: Lucas Fonsceca dos Santos.
+// GPL - General Public License v3.0
+////////////////////////////////////////////////////////////////
+// EASY ARCHITECTURE - A simple architecture script tool.
+// www.github.com/LucasFonsecaDosSantos/Easy-Architecture
+////////////////////////////////////////////////////////////////
+//                                                            //
+//                                                            //
+//  _____                                                     //
+// | ____|__ _ ___ _   _                                      //
+// |  _| / _` / __| | | |                                     //
+// | |__| (_| \__ \ |_| |                                     //
+// |_____\__,_|___/\__, |                                     //
+//     _           |___/   _ _            _                   //
+//    / \   _ __ ___| |__ (_) |_ ___  ___| |_ _   _ _ __ ___  //
+//   / _ \ | '__/ __| '_ \| | __/ _ \/ __| __| | | | '__/ _ \ //
+//  / ___ \| | | (__| | | | | ||  __/ (__| |_| |_| | | |  __/ //
+// /_/   \_\_|  \___|_| |_|_|\__\___|\___|\__|\__,_|_|  \___| //
+//                                              Version 2.0.0 //
+//                                                            //
+// SCRIPT WRITTEN BY Lucas Fonseca dos Santos.                //
+//                                                            //
+////////////////////////////////////////////////////////////////
+//                                                            //
+// [PROJECT]:                                                 //
+// Name:  <project_name>                                      //
+// URL:   <project_url>                                       //
+//                                                            //
+// +--------------------------------------------------------+ //
+//                                                            //
+// [DEVELOPMENT]:                                             //
+// Code Developer:  <project_name>                            //
+// Designer:        <project_name>                            //
+// Tester:          <project_name>                            //
+// Code Developer:  <project_name>                            //
+//                                                            //
+// +--------------------------------------------------------+ //
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//                    FILE INFORMATIONS:                      //
+// +--------------------------------------------------------+ //
+//                                                            //
+// NAME: <file_name>                                          //
+// BRIEF: <file_brief>                                        //
+//                                                            //
+////////////////////////////////////////////////////////////////
+
+
+
+
+//----------------[ BASE MODULE - BUTTON ]---------------------//
+button
+    @include border_radius($__SIZE__border-radius-default)
+    outline:        none
+    background:     $__COLOR__green-1
+    border:         none
+    width: 100%
+    color: $__COLOR__white-1
+    //padding: $__SPACING__padding-default/3 $__SPACING__padding-default $__SPACING__padding-default/3 $__SPACING__padding-default
+    padding: .5em 1em
+    cursor: pointer
+    width: auto
+    font:
+        family: $__FONT__font-family-2
+        weight: 700
+        size: .9em
+    text:
+        transform: lowercase
+    transition: background $__TIME__duration $__ANIMATION__transition
+    -o-transition: background $__TIME__duration $__ANIMATION__transition
+    -mz-transition: background $__TIME__duration $__ANIMATION__transition
+    -moz-transition: background $__TIME__duration $__ANIMATION__transition
+    -webkit-transition: background $__TIME__duration $__ANIMATION__transition
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover
+        background: darken($__COLOR__green-1,10)
+    &:active
+        background: darken($__COLOR__green-1,20)
+        outline: none
+    &:first-letter
+        text-transform: uppercase
+    i
+        //margin: 0px .45em 0px 0px
+        margin: 0px
+        padding: 0px
+        font:
+            size: 1.1em !important
+        
+//------------------------------------------------------------//

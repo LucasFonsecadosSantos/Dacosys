@@ -12,6 +12,10 @@ class Container
 
     public static function Exception404()
     {
-        echo "404";
+        if (file_exists(__DIR__ . "/../app/Viwes/exceptions/404.phtml")) {
+            return require_once __DIR__ . "/../app/Viwes/exceptions/404.phtml";
+        } else {
+            echo "Error 404.";
+        }
     }
 }

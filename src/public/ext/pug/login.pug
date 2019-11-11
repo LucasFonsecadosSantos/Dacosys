@@ -1,0 +1,84 @@
+// DEVELOPED BY: Lucas Fonsceca dos Santos.
+// GPL - General Public License v3.0
+////////////////////////////////////////////////////////////////
+// EASY ARCHITECTURE - A simple architecture script tool.
+// www.github.com/LucasFonsecaDosSantos/Easy-Architecture
+////////////////////////////////////////////////////////////////
+//                                                            //
+//                                                            //
+//  _____                                                     //
+// | ____|__ _ ___ _   _                                      //
+// |  _| / _` / __| | | |                                     //
+// | |__| (_| \__ \ |_| |                                     //
+// |_____\__,_|___/\__, |                                     //
+//     _           |___/   _ _            _                   //
+//    / \   _ __ ___| |__ (_) |_ ___  ___| |_ _   _ _ __ ___  //
+//   / _ \ | '__/ __| '_ \| | __/ _ \/ __| __| | | | '__/ _ \ //
+//  / ___ \| | | (__| | | | | ||  __/ (__| |_| |_| | | |  __/ //
+// /_/   \_\_|  \___|_| |_|_|\__\___|\___|\__|\__,_|_|  \___| //
+//                                              Version 2.0.0 //
+//                                                            //
+// SCRIPT WRITTEN BY Lucas Fonseca dos Santos.                //
+//                                                            //
+////////////////////////////////////////////////////////////////
+//                                                            //
+// [PROJECT]:                                                 //
+// Name:  <project_name>                                      //
+// URL:   <project_url>                                       //
+//                                                            //
+// +--------------------------------------------------------+ //
+//                                                            //
+// [DEVELOPMENT]:                                             //
+// Code Developer:  <project_name>                            //
+// Designer:        <project_name>                            //
+// Tester:          <project_name>                            //
+// Code Developer:  <project_name>                            //
+//                                                            //
+// +--------------------------------------------------------+ //
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//                    FILE INFORMATIONS:                      //
+// +--------------------------------------------------------+ //
+//                                                            //
+// NAME: <file_name>                                          //
+// BRIEF: <file_brief>                                        //
+//                                                            //
+////////////////////////////////////////////////////////////////
+doctype html
+html.overflow-y-hidden
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Login","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="login")
+        //header
+            include modules/components/_header.pug
+        main
+            .container-fluid
+                .row
+                    .subLogin
+                        img(src="img/identity/logo.png")
+                    .subLogin
+                        .box
+                            .box__title
+                                h3 login
+                            .box__body
+                                form()
+                                    input#email(type="email", name="email", placeholder="Email...", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
+                                    input#passwd(type="password", name="passwd", placeholder="Senha", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                    .row.margin-top-default
+                                        .col-7
+                                            a Esqueci minha senha
+                                        .col-5.text-right
+                                            a Criar nova conta
+                                    button(title="Clique para acessar sua conta.", alt="Botão para acessar a conta.") acessar
+        //footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

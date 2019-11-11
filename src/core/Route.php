@@ -28,17 +28,17 @@ class Route
 
     private function getRequest()
     {
-        $obj = new \stdClass;
+        $requestObject = new \stdClass;
 
         foreach ($_GET as $key => $value){
-            @$obj->get->$key = $value;
+            @$requestObject->get->$key = $value;
         }
 
         foreach ($_POST as $key => $value){
-            @$obj->post->$key = $value;
+            @$requestObject->post->$key = $value;
         }
 
-        return $obj;
+        return $requestObject;
     }
 
     private function getUrl()
