@@ -2,12 +2,20 @@
 
 namespace Core;
 
+use Core\DataBase;
+
 class Container 
 {
     public static function getControllerInstance($controller)
     {
         $controller = "App\\Controllers\\" . $controller;
         return new $controller;
+    }
+
+    public static function getModelInstance($modelName)
+    {
+        $model = "App\\Models\\" . $modelName;
+        return new $model(DataBase::getInstance());
     }
 
     public static function Exception404()
