@@ -2,12 +2,15 @@
 
 namespace Core;
 
+use Util\Logger;
+
 class Route
 {
     private $routes;
 
     public function __construct(array $routes)
     {
+        Logger::log_message(Logger::LOG_INFORMATION, "Routes instantiated.");
         $this->setRoutes($routes);
         $this->run();
     }
@@ -29,13 +32,15 @@ class Route
     private function getRequest()
     {
         $requestObject = new \stdClass;
-
+        Logger::log_message(Logger::LOG_INFORMATION, "Getting request...");
         foreach ($_GET as $key => $value){
             @$requestObject->get->$key = $value;
+            Logger::log_message(Logger::LOG_INFORMATION, "REQUEST (GET): $key => $value");
         }
 
         foreach ($_POST as $key => $value){
             @$requestObject->post->$key = $value;
+            Logger::log_message(Logger::LOG_INFORMATION, "REQUEST (POST): $key => $value");
         }
 
         return $requestObject;
@@ -43,6 +48,7 @@ class Route
 
     private function getUrl()
     {
+        Logger::log_message(Logger::LOG_INFORMATION, "Getting URL " . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
 
@@ -66,6 +72,8 @@ class Route
                 $found = true;
                 $controller = $route[1];
                 $action = $route[2];
+                Logger::log_message(Logger::LOG_SUCCESS, "Controller found: $controller");
+                Logger::log_message(Logger::LOG_SUCCESS, "Action found: $action");
                 //$auth = new Auth;
                 //if(isset($route[3]) && $route[3] == 'auth' && !$auth->check()){
                   //  $action = 'forbiden';
@@ -91,6 +99,7 @@ class Route
                     break;
             }
         }else{
+            Logger::log_message(Logger::LOG_ERROR, "Invalid route. Returning 404 exception.");
             Container::Exception404();
         }
     }
