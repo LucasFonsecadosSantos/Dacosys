@@ -3,6 +3,10 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use App\Models\PersonModel;
+use Core\Container;
+use Core\DataBase;
+use PDO;
 
 class DacosysController extends Controller 
 {
