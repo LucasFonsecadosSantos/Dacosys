@@ -11,6 +11,7 @@ class ResearcherController extends Controller
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher instantiated.");
+        parent::__construct('ResearcherModel');
         $this->view = new \stdClass;
     }
 
@@ -32,8 +33,7 @@ class ResearcherController extends Controller
     {
         //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
-        $model = Container::getModelInstance("ResearcherModel");
-        $researcherArray = $model->getAll('_RESEARCHER_');
+        $researcherArray = $this->model->getAll('_RESEARCHER_');
         print_r($researcherArray);
     }
 
@@ -62,8 +62,7 @@ class ResearcherController extends Controller
     {
         //TODO Researcher show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
-        $model = Container::getModelInstance("ResearcherModel");
-        $researcher = $model->getByID($id, '_RESEARCHER_');
+        $researcher = $this->model->getByID($id, '_RESEARCHER_');
         print_r($researcher);
     }
 }

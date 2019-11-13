@@ -12,6 +12,7 @@ class ItemPictureController extends Controller
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController instantiated.");
+        parent::__construct('ItemPictureModel');
         $this->view = new \stdClass;
     }
 
@@ -23,8 +24,7 @@ class ItemPictureController extends Controller
 
     public function listation()
     {
-        $model = Container::getModelInstance('ItemPictureModel');
-        $itemPictureArray = $model->getAll();
+        $itemPictureArray = $this->model->getAll();
         print_r($itemPictureArray);
     }
 
@@ -32,8 +32,7 @@ class ItemPictureController extends Controller
     {
         //TODO ItemPictureController show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemPictureController, action show.");
-        $model = Container::getModelInstance('ItemPictureModel');
-        $itemPicture = $model->getByID($id);
+        $itemPicture = $this->model->getByID($id);
         print_r($itemPicture);
     }
 

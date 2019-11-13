@@ -12,14 +12,14 @@ class ParticipantController extends Controller
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController instantiated.");
+        parent::__construct('ParticipantModel');
         $this->view = new \stdClass;
     }
 
     public function listation()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action listation.");
-        $model = Container::getModelInstance('ParticipantModel');
-        $participantArray = $model->getAll('_PARTICIPANT_');
+        $participantArray = $this->model->getAll('_PARTICIPANT_');
         print_r($participantArray);
     }
 
@@ -50,8 +50,7 @@ class ParticipantController extends Controller
     public function show($id)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action show.");
-        $model = Container::getModelInstance('ParticipantModel');
-        $participant = $model->getByID($id,'_PARTICIPANT_');
+        $participant = $this->model->getByID($id,'_PARTICIPANT_');
         print_r($participant);
     }
 

@@ -6,12 +6,16 @@ use Util\Logger;
 
 abstract class Controller
 {
+    protected   $model;
     protected   $view;
     private     $viewPath;
 
-    public function __construct()
+    public function __construct($modelName = null)
     {
         $this->view = new \stdClass;
+        if ($modelName != null) {
+            $this->model = Container::getModelInstance($modelName);
+        }
     }
 
     protected function loadView($path)

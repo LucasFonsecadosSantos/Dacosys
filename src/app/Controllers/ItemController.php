@@ -12,6 +12,7 @@ class ItemController extends Controller
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController instantiated.");
+        parent::__construct('ItemModel');
         $this->view = new \stdClass;
     }
 
@@ -26,8 +27,7 @@ class ItemController extends Controller
     {
         //TODO ItemController key generation store method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action listation.");
-        $model = Container::getModelInstance('ItemModel');
-        $itemArray = $model->getAll();
+        $itemArray = $this->model->getAll();
         print_r($itemArray);
     }
 
@@ -41,8 +41,7 @@ class ItemController extends Controller
     {
         //TODO ItemController show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action show.");
-        $model = Container::getModelInstance('ItemModel');
-        $item = $model->getByID($id);
+        $item = $this->model->getByID($id);
         print_r($item);
     }
 
