@@ -33,7 +33,7 @@ class ResearcherController extends Controller
         //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
         $model = Container::getModelInstance("ResearcherModel");
-        $researcherArray = $model->getResearchers();
+        $researcherArray = $model->getAll('_RESEARCHER_');
         print_r($researcherArray);
     }
 
@@ -63,7 +63,7 @@ class ResearcherController extends Controller
         //TODO Researcher show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
         $model = Container::getModelInstance("ResearcherModel");
-        $researcher = $model->getResearcherByID($id);
+        $researcher = $model->getByID($id, '_RESEARCHER_');
         print_r($researcher);
     }
 }

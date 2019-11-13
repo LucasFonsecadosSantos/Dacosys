@@ -15,24 +15,46 @@ abstract class Model
         $this->pdo = $pdo;
     }
 
-    public function getAll()
+    public function getAll($type = null)
     {
-        $query = "SELECT * FROM {$this->table}";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        $stmt->closeCursor();
-        return $result;
+        if ($type == null) {
+            $query = "SELECT * FROM {$this->table}";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $stmt->closeCursor();
+            return $result;
+        } else {
+            $query = "SELECT * FROM {$this->table} WHERE type = :type";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':type', $type);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $stmt->closeCursor();
+            return $result;
+        }
     }
 
-    public function getByID($id)
+    public function getByID($id, $type = null)
     {
-        $query = "SELECT * FROM {$this->table} WHERE `id_{$this->table}` = :id";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(":id", $id);
-        $stmt->execute();
-        $result = $stmt->fetch();
-        $stmt->closeCursor();
-        return $result;
+        if ($type == null) {
+            $query = "SELECT * FROM {$this->table} WHERE `id_{$this->table}` = :id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(":id", $id);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $stmt->closeCursor();
+            return $result;
+        } else {
+            $query = "SELECT * FROM {$this->table} WHERE `id_{$this->table}` = :id AND `type` = :type";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(":id", $id);
+            $stmt->bindValue(":type", $type);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $stmt->closeCursor();
+            return $result;
+        }
     }
+
 }

@@ -15,6 +15,14 @@ class ParticipantController extends Controller
         $this->view = new \stdClass;
     }
 
+    public function listation()
+    {
+        Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action listation.");
+        $model = Container::getModelInstance('ParticipantModel');
+        $participantArray = $model->getAll('_PARTICIPANT_');
+        print_r($participantArray);
+    }
+
     public function register()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action register.");
@@ -39,10 +47,12 @@ class ParticipantController extends Controller
         // $this->loadView("home/index");
     }
 
-    public function show()
+    public function show($id)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action show.");
-        // $this->loadView("home/index");
+        $model = Container::getModelInstance('ParticipantModel');
+        $participant = $model->getByID($id,'_PARTICIPANT_');
+        print_r($participant);
     }
 
     public function edit()
