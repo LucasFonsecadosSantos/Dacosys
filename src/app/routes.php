@@ -1,34 +1,35 @@
 <?php
 
 //System
-$route[] = ['/',                    'DacosysController@index'];
-$route[] = ['/logout',              'DacosysController@logout'];
-$route[] = ['/sobre',               'DacosysController@about'];
-$route[] = ['/reportar-problema',   'DacosysController@bugReport'];
+$route[] = ['/',                            'DacosysController@index'];
+$route[] = ['/logout',                      'DacosysController@logout'];
+$route[] = ['/sobre',                       'DacosysController@about'];
+$route[] = ['/reportar-problema',           'DacosysController@bugReport'];
+$route[] = ['/gerar-chave-participante',    'DacosysController@keyGeneration'];
 
 //Researcher and Admin
 $route[] = ['/login',                       'ResearcherController@login'];
-$route[] = ['/pesquisadores',               'ResearcherController@researcherList'];
-$route[] = ['/pesquisador/registrar',       'ResearcherController@researcherRegister'];
-$route[] = ['/pesquisador/salvar',          'ResearcherController@researcherStore'];
-$route[] = ['/pesquisador/{id}/remover',    'ResearcherController@researcherDelete'];
-$route[] = ['/pesquisador/{id}/editar',     'ResearcherController@researcherEdit'];
-$route[] = ['/pesquisador/atualizar',       'ResearcherController@researcherUpdate'];
-$route[] = ['/pesquisador/{id}/visualizar', 'ResearcherController@researcherShow'];
+$route[] = ['/pesquisadores',               'ResearcherController@listation'];
+$route[] = ['/pesquisador/registrar',       'ResearcherController@register'];
+$route[] = ['/pesquisador/salvar',          'ResearcherController@store'];
+$route[] = ['/pesquisador/{id}/remover',    'ResearcherController@delete'];
+$route[] = ['/pesquisador/{id}/editar',     'ResearcherController@edit'];
+$route[] = ['/pesquisador/atualizar',       'ResearcherController@update'];
+$route[] = ['/pesquisador/{id}/visualizar', 'ResearcherController@show'];
 
 //Participant entity
-$route[] = ['/participar',                      'ParticipantController@participantLogin'];
-$route[] = ['/participantes',                   'ParticipantController@participantList'];
-$route[] = ['/participante/registrar',          'ParticipantController@participantRegister'];
-$route[] = ['/participante/salvar',             'ParticipantController@participantStore'];
-$route[] = ['/participante/{id}/remover',       'ParticipantController@participantDelete'];
-$route[] = ['/participante/{id}/visualizar',    'ParticipantController@participantShow'];
-$route[] = ['/participante/{id}/editar',        'ParticipantController@participantEdit'];
-$route[] = ['/participante/atualizar',          'ParticipantController@participantUpdate'];
+$route[] = ['/participar',                      'ParticipantController@login'];
+$route[] = ['/participantes',                   'ParticipantController@listation'];
+$route[] = ['/participante/registrar',          'ParticipantController@register'];
+$route[] = ['/participante/salvar',             'ParticipantController@store'];
+$route[] = ['/participante/{id}/remover',       'ParticipantController@delete'];
+$route[] = ['/participante/{id}/visualizar',    'ParticipantController@show'];
+$route[] = ['/participante/{id}/editar',        'ParticipantController@edit'];
+$route[] = ['/participante/atualizar',          'ParticipantController@update'];
 
 
 //Quiz
-$route[] = ['/questionarios',                   'QuizController@list'];
+$route[] = ['/questionarios',                   'QuizController@listation'];
 $route[] = ['/questionario/registrar',          'QuizController@register'];
 $route[] = ['/questionario/salvar',             'QuizController@store'];
 $route[] = ['/questionario/{id}/visualizar',    'QuizController@show'];
@@ -40,6 +41,7 @@ $route[] = ['/questionario/{id}/estatisticas',  'QuizController@metrics'];
 
 //Item
 return $route;
+$route[] = ['/perguntas',                   'ItemController@listation'];
 $route[] = ['/pergunta/cadastrar',          'ItemController@register'];
 $route[] = ['/pergunta/salvar',             'ItemController@store'];
 $route[] = ['/pergunta/{id}/visualizar',    'ItemController@show'];
@@ -50,7 +52,7 @@ $route[] = ['/pergunta/{id}/deletar',       'ItemController@remove'];
 $route[] = ['/pergunta/remover',            'ItemController@delete'];
 
 //Image
-$route[] = ['/imagens',                 'ItemPictureController@list'];
+$route[] = ['/imagens',                 'ItemPictureController@listation'];
 $route[] = ['/imagens/upload',          'ItemPictureController@upload'];
 $route[] = ['/imagens/{id}/registrar',  'ItemPictureController@register'];
 $route[] = ['/imagens/salvar',          'ItemPictureController@store'];

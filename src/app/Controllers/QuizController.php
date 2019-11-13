@@ -17,7 +17,59 @@ class QuizController extends Controller
 
     public function register()
     {
-        Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action index.");
+        //TODO QuizController register action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action register.");
+        // $this->loadView("home/index");
+    }
+
+    public function listation()
+    {
+        //TODO QuizController listation action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action listation.");
+        $model = Container::getModelInstance("QuizModel");
+        $quizArray = $model->getAll();
+        print_r($quizArray);
+    }
+
+    public function store()
+    {
+        //TODO QuizController store action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
+        // $this->loadView("home/index");
+    }
+
+    public function show()
+    {
+        //TODO QuizController show action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action show.");
+        // $this->loadView("home/index");
+    }
+
+    public function edit()
+    {
+        //TODO QuizController edit action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action edit.");
+        // $this->loadView("home/index");
+    }
+
+    public function update()
+    {
+        //TODO QuizController update action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action update.");
+        // $this->loadView("home/index");
+    }
+
+    public function delete()
+    {
+        //TODO QuizController delete action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action delete.");
+        // $this->loadView("home/index");
+    }
+
+    public function metrics()
+    {
+        //TODO QuizController metrics action method.
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action metrics.");
         // $this->loadView("home/index");
     }
 }

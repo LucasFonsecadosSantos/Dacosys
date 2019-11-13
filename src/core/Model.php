@@ -24,4 +24,14 @@ abstract class Model
         $stmt->closeCursor();
         return $result;
     }
+
+    public function getByID($id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE id_{$this->table}";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
 }
