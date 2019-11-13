@@ -59,6 +59,11 @@ class ResearcherController extends Controller
                 'supervisor_idPerson' => null
             ]
         );
+        Redirect::route("/pesquisadores",
+            [
+                'sucess' => ['Pesquisador registrado com sucesso!']
+            ]
+        );
     }
 
     public function delete()
