@@ -91,4 +91,13 @@ abstract class Model
         return [$strKeys, $strBinds, $binds];
     }
 
+    public function delete($id)
+    {
+        $query = 'DELETE FROM {$this->table} WHERE id_{$this->table} = :id';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id",$id);
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
+    }
 }

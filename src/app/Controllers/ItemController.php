@@ -77,9 +77,14 @@ class ItemController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action remove.");
     }
 
-    public function delete()
+    public function delete($id)
     {
         //TODO ItemController answer delete method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action delete.");
+        if ($this->model->delete($id)) {
+            Redirect::route('/perguntas');
+        } else {
+            echo 'Erro ao concluir!';
+        }
     }
 }
