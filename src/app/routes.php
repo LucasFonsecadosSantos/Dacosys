@@ -40,7 +40,6 @@ $route[] = ['/questionario/{id}/estatisticas',  'QuizController@metrics'];
 
 
 //Item
-return $route;
 $route[] = ['/perguntas',                   'ItemController@listation'];
 $route[] = ['/pergunta/cadastrar',          'ItemController@register'];
 $route[] = ['/pergunta/salvar',             'ItemController@store'];
@@ -59,3 +58,5 @@ $route[] = ['/imagens/salvar',          'ItemPictureController@store'];
 $route[] = ['/imagens/{id}/deletar',    'ItemPictureController@remove'];
 $route[] = ['/imagens/remover',         'ItemPictureController@delete'];
 $route[] = ['/imagens/{id}/visualizar', 'ItemPictureController@show'];
+
+return $route;

@@ -26,6 +26,9 @@ class ItemController extends Controller
     {
         //TODO ItemController key generation store method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action listation.");
+        $model = Container::getModelInstance('ItemModel');
+        $itemArray = $model->getAll();
+        print_r($itemArray);
     }
 
     public function store()
@@ -34,10 +37,13 @@ class ItemController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action store.");
     }
 
-    public function show()
+    public function show($id)
     {
         //TODO ItemController show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action show.");
+        $model = Container::getModelInstance('ItemModel');
+        $item = $model->getByID($id);
+        print_r($item);
     }
 
     public function answer()
