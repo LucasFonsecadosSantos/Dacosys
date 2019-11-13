@@ -21,10 +21,20 @@ class ItemPictureController extends Controller
         // $this->loadView("home/index");
     }
 
-    public function show()
+    public function listation()
+    {
+        $model = Container::getModelInstance('ItemPictureModel');
+        $itemPictureArray = $model->getAll();
+        print_r($itemPictureArray);
+    }
+
+    public function show($id)
     {
         //TODO ItemPictureController show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemPictureController, action show.");
+        $model = Container::getModelInstance('ItemPictureModel');
+        $itemPicture = $model->getByID($id);
+        print_r($itemPicture);
     }
 
     public function upload()

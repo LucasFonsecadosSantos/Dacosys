@@ -175,7 +175,7 @@ INSERT INTO item (
 
 /*--------------------item_picture-----------------------*/
 INSERT INTO item_picture (
-    id_picture,
+    id_item_picture,
     title,
     path
 ) VALUES (

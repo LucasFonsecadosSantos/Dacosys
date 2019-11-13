@@ -92,10 +92,10 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`item` (
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`item_picture` (
-    `id_picture`    INT(4)      NOT NULL,
+    `id_item_picture`    INT(4)      NOT NULL,
     `title`         VARCHAR(50),
     `path`          CHAR(30)    NOT NULL,
-    PRIMARY KEY(`id_picture`)
+    PRIMARY KEY(`id_item_picture`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`item_has_picture` (
@@ -169,7 +169,7 @@ ALTER TABLE `item_has_picture`
 ALTER TABLE `item_has_picture`
     ADD CONSTRAINT fk_picture_picture
     FOREIGN KEY (`item_picture_idPicture`)
-    REFERENCES `item_picture` (`id_picture`)
+    REFERENCES `item_picture` (`id_item_picture`)
     ON DELETE CASCADE
     ON UPDATE CASCADE;
 
