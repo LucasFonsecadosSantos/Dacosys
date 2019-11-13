@@ -19,7 +19,7 @@ class ResearcherController extends Controller
     {
         //TODO Researcher register action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action register.");
-        // $this->loadView("home/index");
+        // $this->loadView("researcher/register");
     }
 
     public function login()
@@ -41,7 +41,24 @@ class ResearcherController extends Controller
     {
         //TODO Researcher store action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
-        // $this->loadView("home/index");
+        $this->model->create(
+            [
+                //'id_person' => identificator.generateID;
+                'type' => '_RESEARCHER_',
+                'name' => $request->post->name,
+                'email' => $request->post->email,
+                'password' => $request->post->password,
+                'access_key' => null,
+                'participated' => null,
+                'sex' => $request->post->sex,
+                'hometown_cep' => $request->post->hometown_cep,
+                'color' => $request->post->color,
+                'birth_day' => $request->post->birth_day,
+                //'latest_access' => date get day
+                'latest_ip_access' => $_SERVER['REMOTE_ADDR'],
+                'supervisor_idPerson' => null
+            ]
+        );
     }
 
     public function delete()

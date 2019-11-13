@@ -35,14 +35,15 @@ class QuizController extends Controller
     {
         //TODO QuizController store action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
-        $data = [
-            //'id_quiz' => indentificator.generateID();
-            'start_date' => $request->post->start_date,
-            'end_date' => $request->post->end_date,
-            'start_date' => $request->post->start_date
-            //'status' => verificar data de abertura
-        ];
-        $this->model->create($data);
+        $this->model->create(
+            [
+                //'id_quiz' => indentificator.generateID();
+                'start_date' => $request->post->start_date,
+                'end_date' => $request->post->end_date,
+                'start_date' => $request->post->start_date
+                //'status' => verificar data de abertura
+            ]
+        );
     }
 
     public function show($id)
