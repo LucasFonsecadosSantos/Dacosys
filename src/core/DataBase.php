@@ -8,7 +8,7 @@ use PDOException;
 
 class DataBase
 {
-    public function getInstance()
+    public static function getInstance()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Getting database driver informations...");
         $settings = include_once __DIR__ . "/../app/database_driver.php";

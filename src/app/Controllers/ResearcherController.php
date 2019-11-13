@@ -3,11 +3,10 @@
 namespace App\Controllers;
 
 use Core\Controller;
-use App\Models\ResearchModel;
 use Core\Container;
 use Util\Logger;
 
-class ResearchController extends Controller 
+class ResearcherController extends Controller 
 {
 
     public function __construct() {
@@ -33,7 +32,9 @@ class ResearchController extends Controller
     {
         //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
-        // $this->loadView("home/index");
+        $model = Container::getModelInstance("ResearcherModel");
+        $researcherArray = $model->getResearchers();
+        print_r($researcherArray);
     }
 
     public function store()
@@ -57,10 +58,12 @@ class ResearchController extends Controller
         // $this->loadView("home/index");
     }
 
-    public function show()
+    public function show($id)
     {
         //TODO Researcher show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
-        // $this->loadView("home/index");
+        $model = Container::getModelInstance("ResearcherModel");
+        $researcher = $model->getResearcherByID($id);
+        print_r($researcher);
     }
 }

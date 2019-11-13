@@ -94,120 +94,120 @@ INSERT INTO person (
     0
 );
 
-/*------------------------telefone-------------------------*/
-INSERT INTO telephone (
-    person_idPerson,
-    telephone
-) VALUES (
-    1,
-    '99999999999'
-);
+-- /*------------------------telefone-------------------------*/
+-- INSERT INTO telephone (
+--     person_idPerson,
+--     telephone
+-- ) VALUES (
+--     1,
+--     '99999999999'
+-- );
 
-INSERT INTO telephone (
-    person_idPerson,
-    telephone
-) VALUES (
-    1,
-    '88888888888'
-);
+-- INSERT INTO telephone (
+--     person_idPerson,
+--     telephone
+-- ) VALUES (
+--     1,
+--     '88888888888'
+-- );
 
-/*------------------necessidade especial-----------------*/
+-- /*------------------necessidade especial-----------------*/
 
-INSERT INTO special_needs (
-    participant_idPerson,
-    need
-) VALUES (
-    1,
-    'cego'
-);
+-- INSERT INTO special_needs (
+--     participant_idPerson,
+--     need
+-- ) VALUES (
+--     1,
+--     'cego'
+-- );
 
 
-/*---------------------------quiz------------------------*/
-INSERT INTO quiz (
-    id_quiz,
-    start_date,
-    end_date,
-    status
-) VALUES (
-    1,
-    '20190101',
-    '20190102',
-    1
-);
+-- /*---------------------------quiz------------------------*/
+-- INSERT INTO quiz (
+--     id_quiz,
+--     start_date,
+--     end_date,
+--     status
+-- ) VALUES (
+--     1,
+--     '20190101',
+--     '20190102',
+--     1
+-- );
 
-/*---------------reseacher_access_quiz------------------*/
-INSERT INTO reseacher_access_quiz (
-    reseacher_idPerson,
-    quiz_idQuiz
-) VALUES (
-    2,
-    1
-);
+-- /*---------------reseacher_access_quiz------------------*/
+-- INSERT INTO reseacher_access_quiz (
+--     reseacher_idPerson,
+--     quiz_idQuiz
+-- ) VALUES (
+--     2,
+--     1
+-- );
 
-/*----------------------------item----------------------*/
-INSERT INTO item (
-    id_item,
-    enunciation,
-    quiz_idQuiz,
-    answer_type,
-    answer_discret_amount,
-    answer
-) VALUES (
-    1,
-    'descricao vai aqui',
-    1,
-    '_DISCREET_',
-    4,
-    1.2
-);
+-- /*----------------------------item----------------------*/
+-- INSERT INTO item (
+--     id_item,
+--     enunciation,
+--     quiz_idQuiz,
+--     answer_type,
+--     answer_discret_amount,
+--     answer
+-- ) VALUES (
+--     1,
+--     'descricao vai aqui',
+--     1,
+--     '_DISCREET_',
+--     4,
+--     1.2
+-- );
 
-INSERT INTO item (
-    id_item,
-    enunciation,
-    quiz_idQuiz,
-    answer_type,
-    answer_discret_amount,
-    answer
-) VALUES (
-    2,
-    'descricao2 vai aqui',
-    1,
-    '_CONTINUOUS_',
-    NULL,
-    2
-);    
+-- INSERT INTO item (
+--     id_item,
+--     enunciation,
+--     quiz_idQuiz,
+--     answer_type,
+--     answer_discret_amount,
+--     answer
+-- ) VALUES (
+--     2,
+--     'descricao2 vai aqui',
+--     1,
+--     '_CONTINUOUS_',
+--     NULL,
+--     2
+-- );    
 
-/*--------------------item_picture-----------------------*/
-INSERT INTO item_picture (
-    id_picture,
-    title,
-    path
-) VALUES (
-    1,
-    'imagem1',
-    'imagem1.png'
-);
+-- /*--------------------item_picture-----------------------*/
+-- INSERT INTO item_picture (
+--     id_picture,
+--     title,
+--     path
+-- ) VALUES (
+--     1,
+--     'imagem1',
+--     'imagem1.png'
+-- );
 
-/*-------------------item_has_picture---------------------*/
-INSERT INTO item_has_picture (
-    item_picture_idPicture,
-    item_idItem
-) VALUES (
-    1,
-    2
-);
+-- /*-------------------item_has_picture---------------------*/
+-- INSERT INTO item_has_picture (
+--     item_picture_idPicture,
+--     item_idItem
+-- ) VALUES (
+--     1,
+--     2
+-- );
 
-/*-------------------participant_answer_item--------------*/
-INSERT INTO participant_answer_item (
-    participant_idPerson,
-    item_idItem,
-    description,
-    answer,
-    data_hour
-) VALUES (
-    3,
-    2,
-    'descriacao vai aqui',
-    2.5,
-    '2019-11-05 14:29:36'
-);
+-- /*-------------------participant_answer_item--------------*/
+-- INSERT INTO participant_answer_item (
+--     participant_idPerson,
+--     item_idItem,
+--     description,
+--     answer,
+--     data_hour
+-- ) VALUES (
+--     3,
+--     2,
+--     'descriacao vai aqui',
+--     2.5,
+--     '2019-11-05 14:29:36'
+-- );

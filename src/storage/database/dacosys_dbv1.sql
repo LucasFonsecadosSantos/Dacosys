@@ -44,6 +44,8 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `name`                      VARCHAR(40),
     `email`                     VARCHAR(40) NOT NULL,
     `password`                  CHAR(72) NOT NULL,
+    `access_key`                CHAR(72),
+    `participated`              TINYINT,
     `sex`                       ENUM('_M_','_F_','_O_'),
     `hometown_cep`              CHAR(8),
     `color`                     ENUM('_BRANCA_','_PARDA_','_PRETA_', '_AMARELA_', '_INDIGENA_'),
