@@ -20,7 +20,7 @@ class ItemController extends Controller
     {
         //TODO ItemController register action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action register.");
-        // $this->loadView("home/index");
+        // $this->loadView("item/register");
     }
 
     public function listation()
@@ -35,6 +35,14 @@ class ItemController extends Controller
     {
         //TODO ItemController key generation store method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action store.");
+        $this->model->create(
+            [
+                //'id_item' => identificator generate id,
+                'quiz_idQuiz'           => $request->post->quiz_idQuiz,
+                'answer_type'           => $request->post->answer_type,
+                'answer_discret_amount' => $request->post->answer_discret_amount,
+            ]
+        );
     }
 
     public function show($id)
