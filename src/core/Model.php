@@ -27,10 +27,11 @@ abstract class Model
 
     public function getByID($id)
     {
-        $query = "SELECT * FROM {$this->table} WHERE id_{$this->table}";
+        $query = "SELECT * FROM {$this->table} WHERE `id_{$this->table}` = :id";
         $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
         $stmt->execute();
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetch();
         $stmt->closeCursor();
         return $result;
     }

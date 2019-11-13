@@ -38,11 +38,13 @@ class QuizController extends Controller
         // $this->loadView("home/index");
     }
 
-    public function show()
+    public function show($id)
     {
         //TODO QuizController show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action show.");
-        // $this->loadView("home/index");
+        $model  = Container::getModelInstance("QuizModel");
+        $quiz   = $model->getByID($id);
+        print_r($quiz);
     }
 
     public function edit()
