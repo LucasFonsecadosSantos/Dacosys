@@ -33,6 +33,22 @@ class ResearcherController extends Controller
     {
         //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
+        // $this->loadView("home/index");
+        if (Session::get('success')) {
+            $this->view->success = Session::get('success');
+            Session::destroy('success');
+        }
+
+        if (Session::get('error')) {
+            $this->view->error = Session::get('error');
+            Session::destroy('error');
+        }
+
+        if (Session::get('information')) {
+            $this->view->information = Session::get('information');
+            Session::destroy('information');
+        }
+
         $researcherArray = $this->model->getAll('_RESEARCHER_');
         print_r($researcherArray);
     }
@@ -59,7 +75,7 @@ class ResearcherController extends Controller
                 'supervisor_idPerson' => null
             ]
         );
-        Redirect::route("/pesquisadores",
+        return Redirect::route("/pesquisadores",
             [
                 'sucess' => ['Pesquisador registrado com sucesso!']
             ]
