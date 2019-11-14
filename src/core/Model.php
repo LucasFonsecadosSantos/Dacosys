@@ -72,24 +72,6 @@ abstract class Model
         return $result;
     }
 
-    private function prepareDataToInsert(array $data)
-    {
-        $strKeys    = "";
-        $strBinds   = "";
-        $binds  = [];
-        $values = [];
-
-        foreach ($data as $key => $value) {
-            $strKeys = "{$strKeys},{$key}";
-            $strBinds = "{$strBinds},:{$key}";
-            $binds[] = ":{$key}";
-            $values[] = $value;
-        }
-        $strKeys = substr($strKeys,1);
-        $strBinds = substr($strBinds,1);
-
-        return [$strKeys, $strBinds, $binds];
-    }
 
     public function delete($id)
     {
@@ -99,5 +81,36 @@ abstract class Model
         $result = $stmt->execute();
         $stmt->closeCursor();
         return $result;
+    }
+
+    public function update(array $data, $id)
+    {
+        $data = $this->prepareDataToUpdate($data);
+        $query = 'UPDATE {$this->table} SET {$data[0]} WHERE id=:id';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $limit = count($data[1]);
+        for ($i = 0; $i < limit; ++$i) {
+            $stmt->bindValue("{$data[1][$i]}", $data[2][$i]);
+        }
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    private function prepareDataToUpdate(array $data)
+    {
+        $strKeysBinds   = "";
+        $binds          = [];
+        $values         = [];
+
+        foreach ($data as $key => $value) {
+            $strKeysBinds = "{$strKeysBinds},{$key}=:{$key}";
+            $binds[] = ":{$key}";
+            $values[] = $value;
+        }
+        $strKeysBinds = substr($strKeysBinds,1);
+
+        return [$strKeysBinds, $binds, $values];
     }
 }

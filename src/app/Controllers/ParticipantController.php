@@ -5,6 +5,8 @@ namespace App\Controllers;
 use Core\Controller;
 use App\Models\ParticipantModel;
 use Core\Container;
+use Util\DateHandle;
+use Util\Identificator;
 use Util\Logger;
 
 class ParticipantController extends Controller 
@@ -38,24 +40,26 @@ class ParticipantController extends Controller
     public function store()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action store.");
+        $token = Identificator::generateID('participant');
         $this->model->create(
             [
-                //'id_person' => identificator.generateID;
+                'id_person'             => $token,
                 'type'                  => '_PARTICIPANT_',
-                'name'                  => $request->post->name,
-                'email'                 => $request->post->email,
-                'password'              => $request->post->password,
-                'access_key'            => $request->post->access_key,
+                'name'                  => null,
+                'email'                 => null,
+                'password'              => null,
                 'participated'          => false,
-                'sex'                   => $request->post->sex,
-                'hometown_cep'          => $request->post->hometown_cep,
-                'color'                 => $request->post->color,
-                'birth_day'             => $request->post->birth_day,
-                //'latest_access'       => date get day
+                'sex'                   => null,
+                'hometown_cep'          => null,
+                'color'                 => null,
+                'birth_day'             => null,
+                'latest_access'         => null,
                 'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
                 'supervisor_idPerson'   => null
             ]
         );
+        // $this->loadView("participante/gerar-token");
+        // $this->view->token = $token;
     }
 
     public function delete()
@@ -77,9 +81,29 @@ class ParticipantController extends Controller
         // $this->loadView("home/index");
     }
 
-    public function update()
+    public function update($id, $request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action update.");
-        // $this->loadView("home/index");
+        if ($this->model->update(
+            [
+                'id_person'             => $request->post->access_token,
+                'type'                  => '_PARTICIPANT_',
+                'name'                  => $request->post->name,
+                'email'                 => $request->post->email,
+                'password'              => null,
+                'participated'          => false,
+                'sex'                   => $request->post->sex,
+                'hometown_cep'          => $request->post->hometown_cep,
+                'color'                 => $request->post->color,
+                'birth_day'             => $request->post->birth_day,
+                'latest_access'         => $request->post->latest_access,
+                'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+                'supervisor_idPerson'   => null
+            ], $request->post->access_token
+        )) {
+            Redirect::route('/participantes');
+        } else {
+            echo 'Erro ao inserir no banco.';
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\Controller;
 use Core\Container;
 use Util\Logger;
+use Util\Identificator;
 
 class ResearcherController extends Controller 
 {
@@ -19,60 +20,44 @@ class ResearcherController extends Controller
     {
         //TODO Researcher register action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action register.");
-        // $this->loadView("researcher/register");
+        $this->loadView("researcher/register");
     }
 
     public function login()
     {
         //TODO Researcher login action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action login.");
-        // $this->loadView("home/index");
+        $this->loadView("home/login");
     }
 
     public function listation()
     {
         //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
-        // $this->loadView("home/index");
-        if (Session::get('success')) {
-            $this->view->success = Session::get('success');
-            Session::destroy('success');
-        }
-
-        if (Session::get('error')) {
-            $this->view->error = Session::get('error');
-            Session::destroy('error');
-        }
-
-        if (Session::get('information')) {
-            $this->view->information = Session::get('information');
-            Session::destroy('information');
-        }
-
+        $this->loadView("researcher/list");
         $researcherArray = $this->model->getAll('_RESEARCHER_');
         print_r($researcherArray);
     }
 
-    public function store()
+    public function store($request)
     {
-        //TODO Researcher store action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
         $this->model->create(
             [
-                //'id_person' => identificator.generateID;
-                'type' => '_RESEARCHER_',
-                'name' => $request->post->name,
-                'email' => $request->post->email,
-                'password' => $request->post->password,
-                'access_key' => null,
-                'participated' => null,
-                'sex' => $request->post->sex,
-                'hometown_cep' => $request->post->hometown_cep,
-                'color' => $request->post->color,
-                'birth_day' => $request->post->birth_day,
-                //'latest_access' => date get day
-                'latest_ip_access' => $_SERVER['REMOTE_ADDR'],
-                'supervisor_idPerson' => null
+                'id_person'             => Indentificator::generateID('person'),
+                'type'                  => '_RESEARCHER_',
+                'name'                  => $request->post->name,
+                'email'                 => $request->post->email,
+                'password'              => $request->post->password,
+                'access_key'            => null,
+                'participated'          => null,
+                'sex'                   => $request->post->sex,
+                'hometown_cep'          => $request->post->hometown_cep,
+                'color'                 => $request->post->color,
+                'birth_day'             => $request->post->birth_day,
+                'latest_access'         => DateHandle::getDateTime(),
+                'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+                'supervisor_idPerson'   => null
             ]
         );
         return Redirect::route("/pesquisadores",

@@ -8,6 +8,9 @@ abstract class Controller
 {
     protected   $model;
     protected   $view;
+    protected   $success;
+    protected   $error;
+    protected   $information;
     private     $viewPath;
 
     public function __construct($modelName = null)
@@ -15,6 +18,20 @@ abstract class Controller
         $this->view = new \stdClass;
         if ($modelName != null) {
             $this->model = Container::getModelInstance($modelName);
+        }
+        if (Session::get('success')) {
+            $this->success = Session::get('success');
+            Session::destroy('success');
+        }
+
+        if (Session::get('error')) {
+            $this->error = Session::get('error');
+            Session::destroy('error');
+        }
+
+        if (Session::get('information')) {
+            $this->information = Session::get('information');
+            Session::destroy('information');
         }
     }
 
