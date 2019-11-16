@@ -1,0 +1,17 @@
+input
+    @include border_radius(4px)
+    background: transparent
+    padding: $__SPACING__padding-default
+    width: 100%
+    outline: none
+    border: solid 2px $__COLOR__green-1
+    font:
+        family: $__FONT__font-family-1
+        weight: 300
+    color: $__COLOR__green-1
+    transition: $__TIME__duration $__ANIMATION__transition
+    &:focus, &:hover
+        border-color: $__COLOR__purple-5
+        color: $__COLOR__purple-5
+    &:invalid
+        border: solid 3px $__COLOR__red-1
