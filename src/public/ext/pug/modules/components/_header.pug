@@ -46,30 +46,21 @@
 //                                                            //
 ////////////////////////////////////////////////////////////////
 
-.container
-    .row
-        .subHeader
-            .container-fluid
-                .row
-                    +gridSystem(3,3,3,3,3)
-                        img.subHeader__dacosysLogo(src="img/identity/icon-white.svg")
-                    +gridSystem(9,9,9,9,9)
-                        .subHeader__logoContent
-                            .row
-                                h4 DACOSYS
-                            .row
-                                p Nome da pesquisa
-        .subHeader
-            //- button.subHeader__alternativeBtn2
-            //-     i.material-icons share
-            //-     | compartilhar
-            //- button.subHeader__alternativeBtn2
-            //-     i.material-icons pie_chart
-            //-     | resultados
-            //- button.subHeader__alternativeBtn
-            //-     i.material-icons system_update_alt
-            //-     | atualizar
-        .subHeader
-            //img.subHeader__closeBtn(src="img/icons/close.svg")
-            .container-fluid
-                img.subHeader__closeBtn(src="img/icons/full-screen.svg")
+nav.navbar.navbar-light.bg-light.navbar-expand-lg.menu
+    .container
+        a.navbar-brand(href="#")
+            img.d-inline-block.align-top(src="img/identity/icon-dark.svg", width="30",height="30", alt="asd")
+            |  Dacosys
+        .collapse.navbar-collapse#navbarNavDropdown
+            ul.navbar-nav
+                li.nav-item
+                    a.nav-link(href="/inicio") ínicio
+                li.nav-item
+                    a.nav-link(href="/pesquisadores") pesquisadores
+                li.nav-item
+                    a.nav-link(href="/pesquisadores") questionários
+                li.nav-item
+                    a.nav-link(href="/pesquisadores") resultados compilados
+        a.nav-link Lucas Fonseca dos Santos
+        img.avatar(src="img/structure/default-img.png")
+        //button.btn-purple-alternative gerar token para participante

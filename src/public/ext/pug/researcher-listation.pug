@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Lista de Pesquisadores","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="dashboard")
+        header
+            include modules/components/_header.pug
+        main
+            .container
+                +title_page("Pesquisadores", "Home > Pesquisadores")
+                .row
+                    .dashboard__subDashboard_1
+                        +box("lista de pesquisadores registrados", false, "/questionarios/registrar", "/questionarios")
+                            table.data-table
+                                tbody
+                                    |   <?php
+                                    |       foreach ($this->view->researcherArray as $researcher) {
+                                    |           echo    '<tr>';
+                                    |           echo        '<td>';
+                                    |           echo            '<p>' . $researcher->name . '</p>';
+                                    |           echo        '</td>';
+                                    |           echo        '<td>';
+                                    |           echo            '<a href="/pesquisador/' . $researcher->id_person . '/editar"><i class="material-icons"> edit </i></a>';
+                                    |           echo            '<a href="/pesquisador/' . $researcher->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |           echo            '<a href="/pesquisador/' . $researcher->id_person . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |           echo        '</td>';
+                                    |           echo    '</tr>';
+                                    |       }
+                                    |   ?>
+                                    
+                                    
+                                    
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

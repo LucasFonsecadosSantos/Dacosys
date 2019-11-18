@@ -1,0 +1,78 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Pessoa","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="dashboard")
+        header
+            include modules/components/_header.pug
+        main
+            .container
+                +title_page("<?php echo ($person->type == '_RESEARCHER_' || $person->type == '_ADMINISTRATOR_') ? 'Pesquisador' : 'Participante'; ?>", "Home > Questionários > Questionário #01")
+                .row
+                    .dashboard__subDashboard_2
+                        +box("dados informados", false, "/questionarios/registrar", "/questionarios")
+                            |   <?php
+                            |       switch ($person->type) {
+                            |           case '_ADMINISTRATOR_':
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">Administrador</label></p>';
+                            |               break;
+                            |           case '_RESEARCHER_':
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">pesquisador</label></p>';
+                            |               break;
+                            |           case '_PARTICIPANT_':
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">participante</label></p>';
+                            |               echo '<p><strong>Chave de Acesso: </strong>$person->idPerson</p>';
+                            |               echo '<p><strong>Já submeteu resposta? </strong>$person->participated</p>';
+                            |               break;
+                            |       }
+                            |       echo '<p><strong>Nome:</strong> ' . $person->name . '</p>';
+                            |       echo '<p><strong>Data de Nascimento:</strong> ' . $person->birth_date . '</p>';
+                            |       echo '<p><strong>E-mail:</strong> ' . $person->email . '</p>';
+                            |       echo '<p><strong>Sex:</strong> ' . $person->sex . '</p>';
+                            |       echo '<p><strong>Hometown Cep:</strong> ' . $person->hometown_cep . '</p>';
+                            |       echo '<p><strong>Color:</strong> ' . $person->color . '</p>';
+                            |       echo '<p><strong>Ultimo Acesso:</strong> ' . $person->lattest_access . '</p>';
+                            |       echo '<p><strong>Ultimo IP de Acesso:</strong> ' . $person->lattest_ip_access . '</p>';
+                            |   ?>
+                    .dashboard__subDashboard_2
+                        +box("dados informados", false, "/questionarios/registrar", "/questionarios")
+                            |   <?php
+                            |       switch ($person->type) {
+                            |           case '_ADMINISTRATOR_':
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">Administrador</label></p>';
+                            |               break;
+                            |           case '_RESEARCHER_':
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">pesquisador</label></p>';
+                            |               break;
+                            |           case '_PARTICIPANT_':
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">participante</label></p>';
+                            |               echo '<p><strong>Chave de Acesso: </strong>$person->idPerson</p>';
+                            |               echo '<p><strong>Já submeteu resposta? </strong>$person->participated</p>';
+                            |               break;
+                            |       }
+                            |       echo '<p><strong>Nome:</strong> ' . $person->name . '</p>';
+                            |       echo '<p><strong>Data de Nascimento:</strong> ' . $person->birth_date . '</p>';
+                            |       echo '<p><strong>E-mail:</strong> ' . $person->email . '</p>';
+                            |       echo '<p><strong>Sex:</strong> ' . $person->sex . '</p>';
+                            |       echo '<p><strong>Hometown Cep:</strong> ' . $person->hometown_cep . '</p>';
+                            |       echo '<p><strong>Color:</strong> ' . $person->color . '</p>';
+                            |       echo '<p><strong>Ultimo Acesso:</strong> ' . $person->lattest_access . '</p>';
+                            |       echo '<p><strong>Ultimo IP de Acesso:</strong> ' . $person->lattest_ip_access . '</p>';
+                            |   ?>
+                .row
+                    .dashboard__subDashboard_1
+                        +box("relatório", false, "/questionarios/registrar", "/questionarios")
+                            
+                                    
+                                    
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

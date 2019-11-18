@@ -1,0 +1,159 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Lista de Questionários","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="dashboard")
+        header
+            include modules/components/_header.pug
+        main
+            .container
+                +title_page("Questionários", "Home > Questionários")
+                .row
+                    .dashboard__subDashboard_1
+                        +box("lista de questionários em aberto", false, "/questionarios/registrar", "/questionarios")
+                            table.data-table(column-amount="3")
+                                tbody
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-green-1 aberto
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                .row
+                    .dashboard__subDashboard_1
+                        +box("lista de questionários encerrados", false, "/questionarios/registrar", "/questionarios")
+                            table.data-table(column-amount="3")
+                                tbody
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    tr
+                                        td
+                                            .label.bg-red-1 fechado
+                                        td 
+                                            p Questionário 1
+                                        td
+                                            i.material-icons edit
+                                            i.material-icons remove_red_eye
+                                            i.material-icons delete_forever
+                                    
+                                    
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

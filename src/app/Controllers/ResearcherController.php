@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use Core\DataBase;
 use Core\Container;
 use Util\Logger;
 use Util\Identificator;
@@ -13,6 +14,9 @@ class ResearcherController extends Controller
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher instantiated.");
         parent::__construct('ResearcherModel');
+        $connection = DataBase::getInstance();
+        $this->personModel = Container::getModelInstance('ResearcherModel', $connection);
+        //$this->telephoneModel = Container::getModelInstance('TelephoneModel', $connection);
         $this->view = new \stdClass;
     }
 
@@ -34,15 +38,14 @@ class ResearcherController extends Controller
     {
         //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
+        $this->view->researcherArray = $this->personModel->getAll('_RESEARCHER_');
         $this->loadView("researcher/list");
-        $researcherArray = $this->model->getAll('_RESEARCHER_');
-        print_r($researcherArray);
     }
 
     public function store($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
-        $this->model->create(
+        $this->personModel->create(
             [
                 'id_person'             => Indentificator::generateID('person'),
                 'type'                  => '_RESEARCHER_',
@@ -67,11 +70,11 @@ class ResearcherController extends Controller
         );
     }
 
-    public function delete()
+    public function delete($id)
     {
         //TODO Researcher delete action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action delete.");
-        // $this->loadView("home/index");
+        $this->personModel->delete($id);
     }
 
     public function update()
@@ -85,7 +88,8 @@ class ResearcherController extends Controller
     {
         //TODO Researcher show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
-        $researcher = $this->model->getByID($id, '_RESEARCHER_');
-        print_r($researcher);
+        $this->view->person = $this->personModel->getByID($id, '_RESEARCHER_');
+        // foreach ($this-)
+        $this->loadView('researcher/show');
     }
 }

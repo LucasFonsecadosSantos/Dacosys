@@ -15,6 +15,17 @@ abstract class Model
         $this->pdo = $pdo;
     }
 
+    public function getFilteredByColumn($column, $value)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE {$column} = :value";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':value', $value);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+
     public function getAll($type = null)
     {
         if ($type == null) {
@@ -96,6 +107,23 @@ abstract class Model
         $result = $stmt->execute();
         $stmt->closeCursor();
         return $result;
+    }
+
+    private function prepareDataInsert(array $data)
+    {
+        $strKeys = "";
+        $strBinds = "";
+        $binds = [];
+        $values = [];
+        foreach ($data as $key => $value){
+            $strKeys = "{$strKeys},{$key}";
+            $strBinds = "{$strBinds},:{$key}";
+            $binds[] = ":{$key}";
+            $values[] = $value;
+        }
+        $strKeys = substr($strKeys, 1);
+        $strBinds = substr($strBinds, 1);
+        return [$strKeys, $strBinds, $binds, $values];
     }
 
     private function prepareDataToUpdate(array $data)

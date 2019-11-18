@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `name`                      VARCHAR(40),
     `email`                     VARCHAR(40),
     `password`                  CHAR(72),
+    `access_key`                CHAR(72),
     `participated`              TINYINT,
     `sex`                       ENUM('_M_','_F_','_O_'),
     `hometown_cep`              CHAR(8),
@@ -68,8 +69,9 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`special_needs` (
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`quiz` (
-    `id_quiz`           INT(2)   NOT NULL,
-    `start_date`        DATE     NOT NULL,
+    `id_quiz`           INT(2)  NOT NULL,
+    `name`              TEXT    NOT NULL,
+    `start_date`        DATE    NOT NULL,
     `end_date`          DATE    NOT NULL,
     `status`            TINYINT NOT NULL,
     PRIMARY KEY(`id_quiz`)

@@ -125,11 +125,13 @@ INSERT INTO special_needs (
 /*---------------------------quiz------------------------*/
 INSERT INTO quiz (
     id_quiz,
+    name,
     start_date,
     end_date,
     status
 ) VALUES (
     1,
+    'Questionario teste 01',
     '20190101',
     '20190102',
     1

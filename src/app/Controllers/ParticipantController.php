@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\ParticipantAnswerItemModel;
 use Core\Controller;
 use App\Models\ParticipantModel;
 use Core\Container;
+use Core\DataBase;
 use Util\DateHandle;
 use Util\Identificator;
 use Util\Logger;
@@ -12,17 +14,26 @@ use Util\Logger;
 class ParticipantController extends Controller 
 {
 
+    private $answerModel;
+    private $participantModel;
+
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController instantiated.");
         parent::__construct('ParticipantModel');
+        $connection             = DataBase::getInstance();
+        $this->answerModel      = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
+        $this->participantModel = Container::getModelInstance('ParticipantModel', $connection);
         $this->view = new \stdClass;
     }
 
     public function listation()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action listation.");
-        $participantArray = $this->model->getAll('_PARTICIPANT_');
-        print_r($participantArray);
+        $this->view->$participantArray = $this->participantModel->getAll('_PARTICIPANT_');
+        foreach ($this->view->$participantArray as $participant) {
+            $participant->answer = $this->answerModel->getFilteredByColumn('participant_idPerson',$participant->id_person);
+        }
+        $this->loadView("participant/list");
     }
 
     public function register()

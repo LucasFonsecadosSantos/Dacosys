@@ -46,6 +46,40 @@
 //                                                            //
 ////////////////////////////////////////////////////////////////
 
+mixin box(title, fixedHeight, addRoute, listRoute)
+    .row
+    if fixedHeight
+        .box.mb-4
+            .box__header.mb-3
+                h4= title
+            .box__body_fixedHeight
+                block
+            .box__footer
+                if addRoute
+                    button.btn-purple-alternative(type="button", href= addRoute)
+                        | Novo
+                        i.material-icons add
+                if listRoute
+                    button.btn-purple-alternative(type="button", href= listRoute) 
+                        | Mais
+                        i.material-icons list
+    else
+        .box.mb-4
+            .box__header.mb-3
+                h4= title
+            .box__body
+                block
+            .box__footer= footerContent
+
+mixin title_page(title, location)
+    .row
+        .container.mt-5.pb-5
+            .body__title
+                h3.m-0.p-0= title
+                a
+                    p= location
+
+
 mixin headerSettings(title,description,author,copyright,themeColor,language)
     title= title
     meta(charset="utf-8")
