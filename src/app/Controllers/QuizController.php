@@ -18,7 +18,7 @@ class QuizController extends Controller
         $connection                         = DataBase::getInstance();
         $this->quizModel                    = Container::getModelInstance('QuizModel', $connection);
         $this->itemModel                    = Container::getModelInstance('ItemModel', $connection);
-        $this->participantAnswerItemModel   = Container::getModelInstance('ParticipantAnswerItem', $connection);
+        $this->participantAnswerItemModel   = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
         $this->view = new \stdClass;
     }
 
