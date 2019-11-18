@@ -6,9 +6,9 @@ $route[] = ['/logout',                      'DacosysController@logout'];
 $route[] = ['/sobre',                       'DacosysController@about'];
 $route[] = ['/reportar-problema',           'DacosysController@bugReport'];
 $route[] = ['/gerar-chave-participante',    'DacosysController@keyGeneration'];
+$route[] = ['/login',                       'DacosysController@login'];
 
 //Researcher and Admin
-$route[] = ['/login',                       'ResearcherController@login'];
 $route[] = ['/pesquisadores',               'ResearcherController@listation'];
 $route[] = ['/pesquisador/registrar',       'ResearcherController@register'];
 $route[] = ['/pesquisador/salvar',          'ResearcherController@store'];
@@ -29,14 +29,15 @@ $route[] = ['/participante/atualizar',          'ParticipantController@update'];
 
 
 //Quiz
-$route[] = ['/questionarios',                   'QuizController@listation'];
-$route[] = ['/questionario/registrar',          'QuizController@register'];
-$route[] = ['/questionario/salvar',             'QuizController@store'];
-$route[] = ['/questionario/{id}/visualizar',    'QuizController@show'];
-$route[] = ['/questionario/{id}/editar',        'QuizController@edit'];
-$route[] = ['/questionario/atualizar',          'QuizController@update'];
-$route[] = ['/questionario/{id}/remover',       'QuizController@delete'];
-$route[] = ['/questionario/{id}/estatisticas',  'QuizController@metrics'];
+$route[] = ['/questionarios',                           'QuizController@listation'];
+$route[] = ['/questionario/registrar',                  'QuizController@register'];
+$route[] = ['/questionario/salvar',                     'QuizController@store'];
+$route[] = ['/questionario/{id}/visualizar',            'QuizController@show'];
+$route[] = ['/questionario/{id}/editar',                'QuizController@edit'];
+$route[] = ['/questionario/{id}/registrar-pergunta',    'QuizController@itemStore'];
+$route[] = ['/questionario/atualizar',                  'QuizController@update'];
+$route[] = ['/questionario/{id}/remover',               'QuizController@delete'];
+$route[] = ['/questionario/{id}/estatisticas',          'QuizController@metrics'];
 
 
 //Item

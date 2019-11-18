@@ -3,9 +3,10 @@
 namespace App\Controllers;
 
 use Core\Controller;
-use App\Models\QuizModel;
+use Core\Redirect;
 use Core\Container;
 use Core\DataBase;
+use App\Models\QuizModel;
 use Util\Logger;
 
 class QuizController extends Controller 
@@ -14,22 +15,21 @@ class QuizController extends Controller
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController instantiated.");
         parent::__construct("QuizModel");
-        $connection         = DataBase::getInstance();
-        $this->quizModel    = Container::getModelInstance('QuizModel', $connection);
-        $this->itemModel    = Container::getModelInstance('ItemModel', $connection);
+        $connection                         = DataBase::getInstance();
+        $this->quizModel                    = Container::getModelInstance('QuizModel', $connection);
+        $this->itemModel                    = Container::getModelInstance('ItemModel', $connection);
+        $this->participantAnswerItemModel   = Container::getModelInstance('ParticipantAnswerItem', $connection);
         $this->view = new \stdClass;
     }
 
     public function register()
     {
-        //TODO QuizController register action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action register.");
-        // $this->loadView("quiz/register");
+        $this->loadView("quiz/register");
     }
 
     public function listation()
     {
-        //TODO QuizController listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action listation.");
         $this->view->quizArray = $this->quizModel->getAll();
         $this->loadView("quiz/list");
@@ -37,25 +37,53 @@ class QuizController extends Controller
 
     public function store($request)
     {
-        //TODO QuizController store action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
         $this->quizModel->create(
             [
-                //'id_quiz' => indentificator.generateID();
-                'start_date' => $request->post->start_date,
-                'end_date' => $request->post->end_date,
-                'start_date' => $request->post->start_date
-                //'status' => verificar data de abertura
+                'id_quiz'       => Indentificator::generateID('quiz_'),
+                'start_date'    => $request->post->start_date,
+                'end_date'      => $request->post->end_date,
+                'start_date'    => $request->post->start_date,
+                'status'        => true
+            ]
+        );
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
+        return Redirect::route("/questionarios",
+            [
+                "success" => ["Questionário registrado com sucesso."]
+            ]
+        );
+    }
+
+    public function itemStore($request)
+    {
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
+        $this->quizModel->create(
+            [
+                'id_item'               => Indentificator::generateID('item_'),
+                'enunciation'           => $request->post->enunciation,
+                'quiz_idQuiz'           => $request->post->quiz_idQuiz,
+                'answer_type'           => $request->post->answer_type,
+                'answer_discret_amount' => $request->post->answer_discret_amount
+            ]
+        );
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
+        return Redirect::route("/questionario/" . $request->post->quiz_idQuiz . "/visualizar",
+            [
+                "success" => ["Questionário registrado com sucesso."]
             ]
         );
     }
 
     public function show($id)
     {
-        //TODO QuizController show action method.
+        
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action show.");
+
         $this->view->quiz   = $this->quizModel->getByID($id);
         $this->view->itemArray = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
+        $this->view->answeredItems = $this->participantAnswerItemModel->getFilteredByColumn('quiz_idQuiz',$id);
+        
         $this->loadView("quiz/show");
     }
 
@@ -73,11 +101,16 @@ class QuizController extends Controller
         // $this->loadView("home/index");
     }
 
-    public function delete()
+    public function delete($id)
     {
         //TODO QuizController delete action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action delete.");
-        // $this->loadView("home/index");
+        $this->quizModel->delete($id);
+        return Redirect::route('/questionarios',
+            [
+                'success' => ['Questionário removido.']
+            ]
+        );
     }
 
     public function metrics()

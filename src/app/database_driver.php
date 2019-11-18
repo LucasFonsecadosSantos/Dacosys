@@ -6,10 +6,10 @@ return [
         "host" => "database.db",
     ],
     "mysql" => [
-        "host" => "127.0.0.1",
+        "host" => "localhost",
         "database" => "dacosys",
         "user" => "root",
-        "pass" => "123456",
+        "pass" => "lucasnitro",
         "charset" => "utf8",
         "collation" => "utf8_unicode_ci"
     ]
