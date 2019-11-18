@@ -32,6 +32,10 @@ class QuizController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action listation.");
         $this->view->quizArray = $this->quizModel->getAll();
+        $this->view->navigationRoute = [
+            'Home', '/',
+            'Questionários', '/questionarios'
+        ];
         $this->loadView("quiz/list");
     }
 
@@ -82,8 +86,17 @@ class QuizController extends Controller
 
         $this->view->quiz   = $this->quizModel->getByID($id);
         $this->view->itemArray = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
-        $this->view->answeredItems = $this->participantAnswerItemModel->getFilteredByColumn('quiz_idQuiz',$id);
-        
+        $answeredItems = $this->participantAnswerItemModel->getAll();
+        $this->view->answeredItemArray = [];
+
+        foreach ($this->view->itemArray as $item) {
+            foreach ($answeredItems as $answeredItem)  {
+                if ($item->id_item == $answeredItem->item_idItem) {
+                    array_push($this->view->answeredItemArray, $answeredItem);
+                }
+            }
+        }
+        //print_r($this->view->answeredItemArray);
         $this->loadView("quiz/show");
     }
 

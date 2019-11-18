@@ -11,6 +11,7 @@ abstract class Controller
     protected   $success;
     protected   $error;
     protected   $information;
+    protected   $navigationRoute;
     private     $viewPath;
 
     public function __construct($modelName = null)
