@@ -21,204 +21,72 @@ html
                         +box("questionários em andamento", true, "/questionarios/registrar", "/questionarios")
                             table.data-table
                                 tbody
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
+                                    |   <?php
+                                    |       foreach ($this->view->quizArray as $quiz) {
+                                    |           if ($quiz->status) {
+                                    |               echo    '<tr>';
+                                    |               echo        '<td title="Clique para acessar o registro do questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\',\'_self\')">';
+                                    |               echo            '<p>' . $quiz->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<i class="material-icons">more_vert</i>';
+                                    |               echo        '</td>';
+                                    |               echo    '</tr>';
+                                    |           }
+                                    |       }
+                                    |   ?>
                     .dashboard__subDashboard_2
                         +box("questionários encerrados", true, "/questionarios/registrar", "/questionarios")
                             table.data-table
                                 tbody
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Nome do Questionário
-                                        td
-                                            i.material-icons more_vert
+                                    |   <?php
+                                    |       foreach ($this->view->quizArray as $quiz) {
+                                    |           if (!$quiz->status) {
+                                    |               echo    '<tr>';
+                                    |               echo        '<td title="Clique para acessar o registro do questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\',\'_self\')">';
+                                    |               echo            '<p>' . $quiz->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<i class="material-icons">more_vert</i>';
+                                    |               echo        '</td>';
+                                    |               echo    '</tr>';
+                                    |           }
+                                    |       }
+                                    |   ?>
                 .row
                     .dashboard__subDashboard_2
-                        +box("pesquisadores subordinados", true, "/questionarios/registrar", "/questionarios")
+                        +box("pesquisadores subordinados", true, "/pesquisadores/registrar", "/pesquisadores")
                             table.data-table
                                 tbody
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p Fulano Ciclano
-                                        td
-                                            i.material-icons more_vert
+                                    |   <?php
+                                    |       foreach ($this->view->researcherArray as $researcher) {
+                                    |           echo    '<tr>';
+                                    |           echo        '<td title="Clique para acessar o perfil do pesquisador ' . $researcher->name . '." alt="Registro do pesquisador ' . $researcher->name . '." onclick="window.open(\'/pesquisadore/' . $researcher->id_person . '/visualizar\',\'_self\')">';
+                                    |           echo            '<p>' . $researcher->name . '</p>';
+                                    |           echo        '</td>';
+                                    |           echo        '<td>';
+                                    |           echo            '<i class="material-icons">more_vert</i>';
+                                    |           echo        '</td>';
+                                    |           echo    '</tr>';
+                                    |       }
+                                    |   ?>
                     .dashboard__subDashboard_2
-                        +box("ultimos tokens gerados", true, "/questionarios/registrar", "/questionarios")
+                        +box("ultimos tokens gerados", true, "/participantes/registrar", "/participantes")
                             table.data-table
                                 tbody
-                                    tr
-                                        td 
-                                            p 93842ud2891
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p 93842ud2891
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p 93842ud2891
-                                        td
-                                            i.material-icons more_vert
-                                    tr
-                                        td 
-                                            p 93842ud2891
-                                        td
-                                            i.material-icons more_vert
+                                    |   <?php
+                                    |       foreach ($this->view->participantArray as $participant) {
+                                    |           echo    '<tr>';
+                                    |           echo        '<td title="Clique para acessar o perfil do participante ' . $participant->name . '." alt="Registro do participante ' . $participant->name . '." onclick="window.open(\'/participante/' . $participant->id_person . '/visualizar\',\'_self\')">';
+                                    |           echo            '<p>' . $participant->access_key . '</p>';
+                                    |           echo        '</td>';
+                                    |           echo        '<td>';
+                                    |           echo            '<i class="material-icons">more_vert</i>';
+                                    |           echo        '</td>';
+                                    |           echo    '</tr>';
+                                    |       }
+                                    |   ?>
+                                        
                 .row
                     .dashboard__subDashboard_1
                         +box("estatísticas de submissões", false)

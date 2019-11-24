@@ -17,9 +17,15 @@ abstract class Controller
     public function __construct($modelName = null)
     {
         $this->view = new \stdClass;
+        $this->view->navigationRoute = [];
         // if ($modelName != null) {
         //     $this->model = Container::getModelInstance($modelName);
         // }
+        $this->checkMessages();
+    }
+
+    private function checkMessages()
+    {
         if (Session::get('success')) {
             $this->success = Session::get('success');
             Session::destroy('success');

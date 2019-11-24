@@ -15,91 +15,70 @@ html
             include modules/components/_header.pug
         main
             .container
-                +title_page("Participantes", "Home > Questionários > Questionário #01")
                 .row
-                    .dashboard__subDashboard_2
-                        +box("lista de pessoas participantes", false, "/questionarios/registrar", "/questionarios")
-                                table.data-table(column-amount="3")
-                                    tbody
-                                        tr
-                                            td 
-                                                p Fulano da Silva Ciclano
-                                            td 
-                                                p Questionario #01
-                                            td
-                                                i.material-icons edit
-                                                i.material-icons remove_red_eye
-                                                i.material-icons delete_forever
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">' . $this->view->quiz->name . '</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
+                .row
+                    .dashboard__subDashboard_1
+                        +box("lista de perguntas", false, "/questionarios/registrar", "/questionarios")
+                            table.data-table(column-amount="3")
+                                tbody
+                                    |   <?php
+                                    |       foreach ($this->view->itemArray as $item) {
+                                    |           echo    '<tr title="Clique para acessar visualizar a pergunta ' . $item->enunciation . '." alt="Registro da pergunta ' . $item->enunciation . '." onclick="window.open(\'/item/' . $item->id_item . '/visualizar\')">';
+                                    |           echo        '<td>';
+                                    |           echo            '<p>' . $item->enunciation . '</p>';
+                                    |           echo        '</td>';
+                                    |           echo        '<td>';
+                                    |           echo            '<a alt="Botão para editar o cadastro do participante ' . $participant->name . '." title="Clique para editar o cadastro do item ' . $item->enunciation . '." href="/item/' . $item->id_item . '/editar"><i class="material-icons"> edit </i></a>';
+                                    |           echo            '<a alt="Botão para visualizar o cadastro do participante ' . $participant->name . '." title="Clique para visualizar ' . $item->enunciation . '." href="/item/' . $item->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |           echo            '<a alt="Botão para remover o cadastro do participante' . $participant->name . '." title="Clique para deletar o cadastro do item ' . $item->enunciation . '." href="/item/' . $item->id_item . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |           echo        '</td>';
+                                    |           echo    '</tr>';
+                                    |       }
+                                    |   ?>
                 .row
                     .dashboard__subDashboard_1
                         +box("lista de pessoas participantes", false, "/questionarios/registrar", "/questionarios")
-                            table.data-table(column-amount="3")
-                                tbody
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td 
-                                            p Questionario #01
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
+                                table.data-table(column-amount="3")
+                                    tbody
+                                        |   <?php
+                                        |       foreach ($this->view->participantArray as $participant) {
+                                        |           echo    '<tr title="Clique para acessar visualizar o participante ' . $participant->name . '." alt="Registro do participante ' . $participant->name . '." onclick="window.open(\'/participante/' . $participant->id_person . '/visualizar\')">';
+                                        |           echo        '<td>';
+                                        |           if (!$participant->participated) {
+                                        |               echo        '<p>Aguardando o participante responder.</p>';   
+                                        |           } else {
+                                        |               echo        '<p>' . $participant->name . '</p>';
+                                        |           }
+                                        |           echo        '</td>';
+                                        |           echo        '<td>';
+                                        |           echo            '<p>' . $participant->access_key . '</p>';
+                                        |           echo        '</td>';
+                                        |           echo        '<td>';
+                                        |           echo            '<a alt="Botão para editar o cadastro do participante ' . $participant->name . '." title="Clique para editar o cadastro do participante ' . $participant->name . '." href="/participante/' . $participant->id_person . '/editar"><i class="material-icons"> edit </i></a>';
+                                        |           echo            '<a alt="Botão para visualizar o cadastro do participante ' . $participant->name . '." title="Clique para visualizar ' . $participant->name . '." href="/participante/' . $participant->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                        |           echo            '<a alt="Botão para remover o cadastro do participante' . $participant->name . '." title="Clique para deletar o cadastro do participante ' . $participant->name . '." href="/participante/' . $participant->id_person . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                        |           echo        '</td>';
+                                        |           echo    '</tr>';
+                                        |       }
+                                        |   ?>
+                
+                .row
+                    .dashboard__subDashboard_1
+                        +box("relatório", false, "/questionarios/registrar", "/questionarios")
+                            
                                     
                                     
         footer

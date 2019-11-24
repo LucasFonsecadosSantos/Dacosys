@@ -15,32 +15,46 @@ html
             include modules/components/_header.pug
         main
             .container
-                +title_page("<?php echo ($person->type == '_RESEARCHER_' || $person->type == '_ADMINISTRATOR_') ? 'Pesquisador' : 'Participante'; ?>", "Home > Questionários > Questionário #01")
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">' . $this->view->person->name . '</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
                 .row
                     .dashboard__subDashboard_2
                         +box("dados informados", false, "/questionarios/registrar", "/questionarios")
                             |   <?php
+                            |       $person = $this->view->person;
                             |       switch ($person->type) {
                             |           case '_ADMINISTRATOR_':
-                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">Administrador</label></p>';
+                            |               echo '<div style="display: inline;"><p><strong>Tipo:</strong></p> <div class="label bg-red-1">Administrador</div></div>';
                             |               break;
                             |           case '_RESEARCHER_':
-                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">pesquisador</label></p>';
+                            |               echo '<div style="display: flex;"><p><strong>Tipo:</strong></p> <div class="label bg-purple-2">Pesquisador</div></div>';
                             |               break;
                             |           case '_PARTICIPANT_':
-                            |               echo '<p><strong>Tipo:</strong> <label class="bg-red-1">participante</label></p>';
+                            |               echo '<p><strong>Tipo:</strong> <label class="bg-purple-1">Participante</label></p>';
                             |               echo '<p><strong>Chave de Acesso: </strong>$person->idPerson</p>';
                             |               echo '<p><strong>Já submeteu resposta? </strong>$person->participated</p>';
                             |               break;
                             |       }
-                            |       echo '<p><strong>Nome:</strong> ' . $person->name . '</p>';
-                            |       echo '<p><strong>Data de Nascimento:</strong> ' . $person->birth_date . '</p>';
-                            |       echo '<p><strong>E-mail:</strong> ' . $person->email . '</p>';
-                            |       echo '<p><strong>Sex:</strong> ' . $person->sex . '</p>';
-                            |       echo '<p><strong>Hometown Cep:</strong> ' . $person->hometown_cep . '</p>';
-                            |       echo '<p><strong>Color:</strong> ' . $person->color . '</p>';
-                            |       echo '<p><strong>Ultimo Acesso:</strong> ' . $person->lattest_access . '</p>';
-                            |       echo '<p><strong>Ultimo IP de Acesso:</strong> ' . $person->lattest_ip_access . '</p>';
+                            |       echo '<p><strong>Nome:</strong> '               . $person->name .               '</p>';
+                            |       echo '<p><strong>Data de Nascimento:</strong> ' . $person->birth_date .         '</p>';
+                            |       echo '<p><strong>E-mail:</strong> '             . $person->email .              '</p>';
+                            |       echo '<p><strong>Sex:</strong> '                . $person->sex .                '</p>';
+                            |       echo '<p><strong>Hometown Cep:</strong> '       . $person->hometown_cep.        '</p>';
+                            |       echo '<p><strong>Color:</strong> '              . $person->color .              '</p>';
+                            |       echo '<p><strong>Ultimo Acesso:</strong> '      . $person->lattest_access .     '</p>';
+                            |       echo '<p><strong>Ultimo IP de Acesso:</strong> '. $person->lattest_ip_access .  '</p>';
                             |   ?>
                     .dashboard__subDashboard_2
                         +box("dados informados", false, "/questionarios/registrar", "/questionarios")

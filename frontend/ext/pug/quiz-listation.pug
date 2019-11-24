@@ -15,7 +15,20 @@ html
             include modules/components/_header.pug
         main
             .container
-                +title_page("Questionários", "Home > Questionários")
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Questionários</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
                 .row
                     .dashboard__subDashboard_1
                         +box("lista de questionários em aberto", false, "/questionarios/registrar", "/questionarios")
@@ -24,11 +37,11 @@ html
                                     |   <?php
                                     |       foreach ($this->view->quizArray as $quiz) {
                                     |           if ($quiz->status) {
-                                    |               echo    '<tr title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';
-                                    |               echo        '<td>';
+                                    |               echo    '<tr>';
+                                    |               echo        '<td title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';
                                     |               echo            '<div class="label bg-green-1">aberto</div>';
                                     |               echo        '</td>';
-                                    |               echo        '<td>';
+                                    |               echo        '<td title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';
                                     |               echo            '<p>' . $quiz->name . '</p>';
                                     |               echo        '</td>';
                                     |               echo        '<td>';

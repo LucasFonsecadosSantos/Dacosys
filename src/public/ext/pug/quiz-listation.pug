@@ -21,139 +21,49 @@ html
                         +box("lista de questionários em aberto", false, "/questionarios/registrar", "/questionarios")
                             table.data-table(column-amount="3")
                                 tbody
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-green-1 aberto
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
+                                    |   <?php
+                                    |       foreach ($this->view->quizArray as $quiz) {
+                                    |           if ($quiz->status) {
+                                    |               echo    '<tr title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';
+                                    |               echo        '<td>';
+                                    |               echo            '<div class="label bg-green-1">aberto</div>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<p>' . $quiz->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<a alt="Botão para editar o cadastro do questionário ' . $quiz->name . '." title="Clique para editar o cadastro do quistionário ' . $quiz->name . '." href="/questionario/' . $quiz->id_quiz . '/editar"><i class="material-icons"> edit </i></a>';
+                                    |               echo            '<a alt="Botão para visualizar o cadastro do questionário ' . $quiz->name . '." title="Clique para visualizar ' . $quiz->name . '." href="/questionario/' . $quiz->id_quiz . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |               echo            '<a alt="Botão para remover o cadastro do questionário ' . $quiz->name . '." title="Clique para deletar o cadastro do questionário ' . $quiz->name . '." href="/questionario/' . $quiz->id_quiz . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |               echo        '</td>';
+                                    |               echo    '</tr>';
+                                    |           }
+                                    |       }
+                                    |   ?>
                 .row
                     .dashboard__subDashboard_1
                         +box("lista de questionários encerrados", false, "/questionarios/registrar", "/questionarios")
                             table.data-table(column-amount="3")
                                 tbody
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td
-                                            .label.bg-red-1 fechado
-                                        td 
-                                            p Questionário 1
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    
-                                    
+                                    |   <?php
+                                    |       foreach ($this->view->quizArray as $quiz) {
+                                    |           if (!$quiz->status) {
+                                    |               echo    '<tr title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';
+                                    |               echo        '<td>';
+                                    |               echo            '<div class="label bg-red-1">fechado</div>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<p>' . $quiz->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<a alt="Botão para editar o cadastro do questionário ' . $quiz->name . '." title="Clique para editar o cadastro do quistionário ' . $quiz->name . '." href="/questionario/' . $quiz->id_quiz . '/editar"><i class="material-icons"> edit </i></a>';
+                                    |               echo            '<a alt="Botão para visualizar o cadastro do questionário ' . $quiz->name . '." title="Clique para visualizar ' . $quiz->name . '." href="/questionario/' . $quiz->id_quiz . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |               echo            '<a alt="Botão para remover o cadastro do questionário ' . $quiz->name . '." title="Clique para deletar o cadastro do questionário ' . $quiz->name . '." href="/questionario/' . $quiz->id_quiz . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |               echo        '</td>';
+                                    |               echo    '</tr>';
+                                    |           }
+                                    |       }
+                                    |   ?>                                
         footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

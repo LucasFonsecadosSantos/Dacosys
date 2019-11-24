@@ -32,10 +32,12 @@ class QuizController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action listation.");
         $this->view->quizArray = $this->quizModel->getAll();
+        
         $this->view->navigationRoute = [
-            'Home', '/',
-            'Questionários', '/questionarios'
+            'Home' => '/',
+            'Questionários' => '/questionarios'
         ];
+        
         $this->loadView("quiz/list");
     }
 
@@ -84,10 +86,10 @@ class QuizController extends Controller
         
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action show.");
 
-        $this->view->quiz   = $this->quizModel->getByID($id);
-        $this->view->itemArray = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
-        $answeredItems = $this->participantAnswerItemModel->getAll();
-        $this->view->answeredItemArray = [];
+        $this->view->quiz               = $this->quizModel->getByID($id);
+        $this->view->itemArray          = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
+        $answeredItems                  = $this->participantAnswerItemModel->getAll();
+        $this->view->answeredItemArray  = [];
 
         foreach ($this->view->itemArray as $item) {
             foreach ($answeredItems as $answeredItem)  {
@@ -96,7 +98,13 @@ class QuizController extends Controller
                 }
             }
         }
-        //print_r($this->view->answeredItemArray);
+        
+        $this->view->navigationRoute = [
+            'Home'          => '/',
+            'Questionários' => '/questionarios',
+            $this->view->quiz->name => '/questionarios/' . $this->view->quiz->id_quiz . '/visualizar' 
+        ];
+        
         $this->loadView("quiz/show");
     }
 
@@ -116,7 +124,6 @@ class QuizController extends Controller
 
     public function delete($id)
     {
-        //TODO QuizController delete action method.
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action delete.");
         $this->quizModel->delete($id);
         return Redirect::route('/questionarios',

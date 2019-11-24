@@ -21,73 +21,24 @@ html
                         +box("lista de pessoas participantes", false, "/questionarios/registrar", "/questionarios")
                             table.data-table(column-amount="3")
                                 tbody
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td 
-                                            p Questionario #01
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    tr
-                                        td 
-                                            p Fulano da Silva Ciclano
-                                        td
-                                            i.material-icons edit
-                                            i.material-icons remove_red_eye
-                                            i.material-icons delete_forever
-                                    
-                                    
+                                    |   <?php
+                                    |       foreach ($this->view->participantArray as $participant) {
+                                    |           if ($participant->participated) {
+                                    |               echo    '<tr>';
+                                    |               echo        '<td title="Clique para acessar o perfil de ' . $participant->name . '." alt="Registro do participante ' . $participant->name . '." onclick="window.open(\'/participante/' . $participant->id_person . '/visualizar\',\'_self\')">';
+                                    |               echo            '<p>' . $participant->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td title="Clique para acessar as respostas de ' . $participant->name . '." alt="Registro do participante ' . $participant->name . '." onclick="window.open(\'/questionarios/' . $participant->quiz->id_quiz . '/visualizar\',\'_self\')">';
+                                    |               echo            '<p>Resposta: ' . $quiz->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<a alt="Botão para visualizar o cadastro do participante ' . $participant->name . '." title="Clique para visualizar ' . $participant->name . '." href="/participante/' . $participant->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |               echo            '<a alt="Botão para remover o cadastro do participante ' . $participant->name . '." title="Clique para deletar o cadastro do participante ' . $participant->name . '." href="/participante/' . $participant->id_person . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |               echo        '</td>';
+                                    |               echo    '</tr>';
+                                    |           }
+                                    |       }
+                                    |   ?>
         footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

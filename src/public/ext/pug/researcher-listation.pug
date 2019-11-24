@@ -24,13 +24,13 @@ html
                                     |   <?php
                                     |       foreach ($this->view->researcherArray as $researcher) {
                                     |           echo    '<tr>';
-                                    |           echo        '<td>';
+                                    |           echo        '<td title="Clique para acessar o perfil de ' . $researcher->name . '." alt="Registro do pesquisador ' . $researcher->name . '." onclick="window.open(\'/pesquisador/' . $researcher->id_person . '/visualizar\')">';
                                     |           echo            '<p>' . $researcher->name . '</p>';
                                     |           echo        '</td>';
                                     |           echo        '<td>';
-                                    |           echo            '<a href="/pesquisador/' . $researcher->id_person . '/editar"><i class="material-icons"> edit </i></a>';
-                                    |           echo            '<a href="/pesquisador/' . $researcher->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
-                                    |           echo            '<a href="/pesquisador/' . $researcher->id_person . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |           echo            '<a alt="Botão para editar o cadastro do pesquisador ' . $researcher->name . '." title="Clique para editar o cadastro do pesquisador ' . $researcher->name . '." href="/pesquisador/' . $researcher->id_person . '/editar"><i class="material-icons"> edit </i></a>';
+                                    |           echo            '<a alt="Botão para visualizar o cadastro do pesquisador ' . $researcher->name . '." title="Clique para visualizar ' . $researcher->name . '." href="/pesquisador/' . $researcher->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |           echo            '<a alt="Botão para remover o cadastro do pesquisador ' . $researcher->name . '." title="Clique para deletar o cadastro do pesquisador ' . $researcher->name . '." href="/pesquisador/' . $researcher->id_person . '/remover"><i class="material-icons"> delete_forever </i></a>';
                                     |           echo        '</td>';
                                     |           echo    '</tr>';
                                     |       }

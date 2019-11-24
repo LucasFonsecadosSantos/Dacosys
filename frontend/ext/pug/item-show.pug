@@ -5,7 +5,7 @@ html
         include modules/settings/_mixins.pug
         //PARAMS:
         //title,description,author,copyright,themeColor,language
-        +headerSettings("Dacosys | Questionário","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        +headerSettings("Dacosys | Pergunta","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
         //---------------------------------------------------------------//
         //---------------------------[IMPORTS]---------------------------//
         include modules/settings/_link-imports.pug
@@ -19,7 +19,7 @@ html
                     .container.mt-5.pb-5
                         .body__title
                             |   <?php
-                            |       echo '<h3 class="m-0 p-0">' . $this->view->quiz->name . '</h3>';
+                            |       echo '<h3 class="m-0 p-0">' . Pergunta $this->view->item->number . '</h3>';
                             |   ?>
                             .body__titleNavigation
                                 |   <?php
@@ -31,26 +31,13 @@ html
                                 |   ?>
                 .row
                     .dashboard__subDashboard_1
-                        +box("lista de perguntas", false, "/questionarios/registrar", "/questionarios")
-                            table.data-table(column-amount="3")
-                                tbody
-                                    |   <?php
-                                    |       foreach ($this->view->itemArray as $item) {
-                                    |           echo    '<tr title="Clique para acessar visualizar a pergunta ' . $item->enunciation . '." alt="Registro da pergunta ' . $item->enunciation . '." onclick="window.open(\'/item/' . $item->id_item . '/visualizar\')">';
-                                    |           echo        '<td>';
-                                    |           echo            '<p>' . $item->enunciation . '</p>';
-                                    |           echo        '</td>';
-                                    |           echo        '<td>';
-                                    |           echo            '<a alt="Botão para editar o cadastro do participante ' . $participant->name . '." title="Clique para editar o cadastro do item ' . $item->enunciation . '." href="/item/' . $item->id_item . '/editar"><i class="material-icons"> edit </i></a>';
-                                    |           echo            '<a alt="Botão para visualizar o cadastro do participante ' . $participant->name . '." title="Clique para visualizar ' . $item->enunciation . '." href="/item/' . $item->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
-                                    |           echo            '<a alt="Botão para remover o cadastro do participante' . $participant->name . '." title="Clique para deletar o cadastro do item ' . $item->enunciation . '." href="/item/' . $item->id_item . '/remover"><i class="material-icons"> delete_forever </i></a>';
-                                    |           echo        '</td>';
-                                    |           echo    '</tr>';
-                                    |       }
-                                    |   ?>
+                        +box("questão", false, "/questionarios/registrar", "/questionarios")
+                            |   <?php
+                            |   
+                            |   ?>
                 .row
                     .dashboard__subDashboard_1
-                        +box("lista de pessoas participantes", false, "/questionarios/registrar", "/questionarios")
+                        +box("respostas submetidas", false, "/questionarios/registrar", "/questionarios")
                                 table.data-table(column-amount="3")
                                     tbody
                                         |   <?php
@@ -78,9 +65,6 @@ html
                 .row
                     .dashboard__subDashboard_1
                         +box("relatório", false, "/questionarios/registrar", "/questionarios")
-                            
-                                    
-                                    
         footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

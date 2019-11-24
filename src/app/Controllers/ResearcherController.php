@@ -36,9 +36,14 @@ class ResearcherController extends Controller
 
     public function listation()
     {
-        //TODO Researcher listation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
         $this->view->researcherArray = $this->personModel->getAll('_RESEARCHER_');
+        
+        $this->view->navigationRoute = [
+            'Home' => '/',
+            'Pesquisadores' => '/pesquisadores'
+        ];
+        
         $this->loadView("researcher/list");
     }
 
@@ -88,8 +93,65 @@ class ResearcherController extends Controller
     {
         //TODO Researcher show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
-        $this->view->person = $this->personModel->getByID($id, '_RESEARCHER_');
         // foreach ($this-)
+
+        $this->view->person = $this->prepareToView($this->personModel->getByID($id, '_RESEARCHER_'));
+
+        $this->view->navigationRoute = [
+            'Home'          => '/',
+            'Pesquisadores' => '/pesquisadores',
+            $this->view->person->name => '/pesquisadores/' . $this->view->person->id_person . '/visualizar' 
+        ];
+
+
         $this->loadView('researcher/show');
+    }
+
+    private function prepareToView($person)
+    {
+        switch ($person->color) {
+            case '_PRETA_':
+                $person->color = 'Preta';
+                break;
+            case '_BRANCA_':
+                $person->color = 'Branca';
+                break;
+            case '_INDIGENA_':
+                $person->color = 'Indigena';
+                break;
+            case '_PARDA_':
+                $person->color = 'Parda';
+                break;
+            case '_AMARELA_':
+                $person->color = 'Amarela';
+                break;
+
+        }
+
+        switch ($person->sex) {
+            case '_M_':
+                $person->sex = 'Masculino';
+                break;
+            case '_F_':
+                $person->sex = 'Feminino';
+                break;
+            case '_O_':
+                $person->sex = 'Outro ou Não Informado';
+                break;
+        }
+
+        switch ($person->type) {
+            case '_RESEARCHER_':
+                $person->function = 'Pesquisador';
+                break;
+            case '_PARTICIPANT_':
+                $person->function = 'Participante';
+                break;
+            case '_ADMINISTRATOR_':
+                $person->function = 'Administrador';
+                break;
+        }
+
+        return $person;
     }
 }
