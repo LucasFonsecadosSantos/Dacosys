@@ -22,7 +22,6 @@ class ResearcherController extends Controller
 
     public function register()
     {
-        //TODO Researcher register action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action register.");
         $this->loadView("researcher/register");
     }
@@ -50,9 +49,12 @@ class ResearcherController extends Controller
     public function store($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
+        $isAdmin = ($request->post->id_person != null) ? false : true;
+        $idPerson = ($request->post->id_person != null) ? $request->post->id_person : Identificator::generateID('person_');
+        
         $this->personModel->create(
             [
-                'id_person'             => Indentificator::generateID('person'),
+                'id_person'             => $idPerson,
                 'type'                  => '_RESEARCHER_',
                 'name'                  => $request->post->name,
                 'email'                 => $request->post->email,
@@ -65,6 +67,7 @@ class ResearcherController extends Controller
                 'birth_day'             => $request->post->birth_day,
                 'latest_access'         => DateHandle::getDateTime(),
                 'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+                'is_administrator'      => $isAdmin,
                 'supervisor_idPerson'   => null
             ]
         );

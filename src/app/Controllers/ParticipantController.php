@@ -7,6 +7,7 @@ use Core\Controller;
 use App\Models\ParticipantModel;
 use Core\Container;
 use Core\DataBase;
+use Core\Redirect;
 use Util\DateHandle;
 use Util\Identificator;
 use Util\Logger;
@@ -36,16 +37,33 @@ class ParticipantController extends Controller
         $this->loadView("participant/list");
     }
 
-    public function register()
+    public function register($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action register.");
-        // $this->loadView("participant/register");
+        
+
+        if ($this->view->participant = $this->isParticipant($request->post->access_key)) {
+            $this->loadView("participant/register");
+        } else {
+            return Redirect::route('/participar',
+                [
+                    'error' => ['Sua chave de acesso não é válida. Para participar, por favor, solicite uma nova chave ao pesquisador.']
+                ]
+            );
+        }
+
+    }
+
+    private function isParticipant($key) 
+    {
+        $participant = $this->participantModel->getByID('person_' . $key,'_PARTICIPANT_');
+        return (isset($participant) && (!$participant->participated)) ? $participant : false;
     }
 
     public function login()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action login.");
-        // $this->loadView("home/index");
+        $this->loadView("participant/login");
     }
 
     public function store()

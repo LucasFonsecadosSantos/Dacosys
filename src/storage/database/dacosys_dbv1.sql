@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `type`                      ENUM('_ADMINISTRATOR_','_RESEARCHER_','_PARTICIPANT_') NOT NULL,
     `name`                      VARCHAR(40),
     `email`                     VARCHAR(40),
-    `password`                  CHAR(72),
+    `password`                  CHAR(60),
     `participated`              TINYINT,
     `sex`                       ENUM('_M_','_F_','_O_'),
     `hometown_cep`              CHAR(8),
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `birth_day`                 DATE,
     `latest_access`             DATE,
     `latest_ip_access`          VARCHAR(12),
+    `is_administrator`          TINYINT NOT NULL,
     `supervisor_idPerson`       CHAR(20),
     PRIMARY KEY(`id_person`)
 )ENGINE = InnoDB;
