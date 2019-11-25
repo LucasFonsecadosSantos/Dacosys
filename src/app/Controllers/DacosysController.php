@@ -27,35 +27,44 @@ class DacosysController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action index.");
         
-        $this->view->user               = $this->personModel->getAll('_ADMINISTRATOR_');
-        $this->view->researcherArray    = $this->personModel->getAll('_RESEARCHER_');
-        $this->view->participantArray   = $this->personModel->getAll('_PARTICIPANT_');
-        $this->view->quizArray          = $this->quizModel->getAll();
-        
-        $this->loadView("home/index");
+        try {
+            $this->view->user               = $this->personModel->getAll('_ADMINISTRATOR_');
+            $this->view->researcherArray    = $this->personModel->getAll('_RESEARCHER_');
+            $this->view->participantArray   = $this->personModel->getAll('_PARTICIPANT_');
+            $this->view->quizArray          = $this->quizModel->getAll();
+            
+            $this->loadView("home/index");
+        } catch (\Exception $e) {
+            
+        }
     }
 
     public function keyGeneration($request)
     {
-        //TODO DacosysController key generation action method.
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action key generation.");
-        $this->personModel->create(
-            [
-                'id_person'             => Indentificator::generateID("person_"),
-                'type'                  => '_PARTICIPANT_',
-                'name'                  => null,
-                'email'                 => null,
-                'password'              => null,
-                'sex'                   => null,
-                'hometown_cep'          => null,
-                'color'                 => null,
-                'birth_day'             => null,
-                'latest_access'         => null,
-                'latest_ip_access'      => null,
-                'supervisor_idPerson'   => null,
-            ]
-        );
-        $this->loadView("home/accesskey");
+        try {
+            $this->personModel->create(
+                [
+                    'id_person'             => Indentificator::generateID("person_"),
+                    'type'                  => '_PARTICIPANT_',
+                    'name'                  => null,
+                    'email'                 => null,
+                    'password'              => null,
+                    'sex'                   => null,
+                    'hometown_cep'          => null,
+                    'color'                 => null,
+                    'birth_day'             => null,
+                    'latest_access'         => null,
+                    'latest_ip_access'      => null,
+                    'supervisor_idPerson'   => null,
+                ]
+            );
+            $this->loadView("home/accesskey");
+        } catch (\Exception $e) {
+            return Redirect::route('/',[
+                'errors' => ['Erro ao cadastrar novo participante no banco de dados. (' . $e->getMessage() . ')']
+            ]);
+        }
     }
 
     public function bugReport()
