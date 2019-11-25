@@ -1,4 +1,4 @@
-export class ResearcherRegisterController {
+export class ParticipantRegisterController {
     constructor() {
         this._fields = new Array();
         this._setElements();
@@ -76,4 +76,4 @@ export class ResearcherRegisterController {
         });
     }
 }
-//# sourceMappingURL=ResearcherRegisterController.js.map
+//# sourceMappingURL=ParticipantRegisterController.js.map

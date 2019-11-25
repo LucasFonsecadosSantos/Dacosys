@@ -1,5 +1,5 @@
 cp -avr ./../frontend/ext/css/* ./../src/public/ext/css
-cp -avr ./../frontend/ext/js/* ./../src/public/ext/js/
+cp -avr ./../frontend/ext/js/* ./../src/public/ext/js
 
 # SYSTEM
 cp -avr ./../frontend/about.html ./../src/app/Views/home/about.phtml

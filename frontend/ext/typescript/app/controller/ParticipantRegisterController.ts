@@ -1,4 +1,4 @@
-export class ResearcherRegisterController {
+export class ParticipantRegisterController {
 
     private _addTelephoneButton:    HTMLButtonElement;
     private _telephoneTable:        HTMLTableElement;
