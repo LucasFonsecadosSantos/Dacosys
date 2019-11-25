@@ -1,3 +1,6 @@
+cp -avr ./../frontend/ext/css/* ./../src/public/ext/css
+cp -avr ./../frontend/ext/js/* ./../src/public/ext/js/
+
 # SYSTEM
 cp -avr ./../frontend/about.html ./../src/app/Views/home/about.phtml
 cp -avr ./../frontend/accesskey.html ./../src/app/Views/home/accesskey.phtml
@@ -23,6 +26,3 @@ cp -avr ./../frontend/quiz-register.html ./../src/app/Views/quiz/register.phtml
 # RESEARCHER
 cp -avr ./../frontend/researcher-listation.html ./../src/app/Views/researcher/listation.phtml
 cp -avr ./../frontend/researcher-register.html ./../src/app/Views/researcher/register.phtml
-
-
-cp -avr ./../frontend/ext/* ./../src/public/

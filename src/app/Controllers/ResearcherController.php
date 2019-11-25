@@ -26,10 +26,13 @@ class ResearcherController extends Controller
     public function register()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action register.");
+        // $this->view->navigationRoute = [
+        //     'Home' => '/',
+        //     'Pesquisadores' => '/pesquisadores',
+        //     'Cadastrar novo pesquisador' => '/pesquisador/registrar',
+        // ];
         $this->view->navigationRoute = [
-            'Home' => '/',
-            'Pesquisadores' => '/pesquisadores',
-            'Cadastrar novo pesquisador' => '/pesquisador/registrar',
+            'Cadastre uma conta antes de utilizar o sistema' => '/pesquisador/cadastrar'
         ];
         $this->loadView("researcher/register");
     }
@@ -92,7 +95,6 @@ class ResearcherController extends Controller
 
     public function delete($id)
     {
-        //TODO Researcher delete action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action delete.");
         try {
             $this->personModel->delete($id);

@@ -33,7 +33,7 @@ html
                     .dashboard__subDashboard_1
                         +box("informe os dados", false, "/questionarios/registrar", "/questionarios")
                             form(method="POST", action="/pesquisador/salvar")
-                                .row
+                                .row.mt-3
                                     .col-md-6.d-flex.align-items-center.justify-content-end
                                         input.w-auto.mr-3(type="radio", name="type", value="_ADMINISTRATOR_", onclick="document.getElementById('id_person_row').classList.add('d-none')", title="Clique caso voce queira criar um novo projeto.", alt="Botão para selecionar caso voce queira criar um novo projeto.")
                                         label(for="type") Cadastro de Administrador
@@ -51,12 +51,12 @@ html
                                     .col-md-6
                                         label CEP (natural)
                                         input#email(type="text", name="hometown_cep", placeholder="xxxxx - xxx", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
-                                .row.mt-3
+                                .row.mt-3.d-flex.align-items-center.justify-content-center
                                     .col-md-10
                                         label Telefone
                                         input(type="text", name="telelhone_add_field", placeholder="", title="Informe um telefone e adicione.", alt="Campo para informar telefone e adicionar.")
-                                    .col-md-2
-                                        button() add
+                                    .col-md-2.d-flex.align-items-end
+                                        button.align-self-end#addTelBtn(type="button", title="Clique para adicionar este número de telefone.", alt="Botão para adicionar este número de telefone.") adicionar telefone
                                     .col-md-12
                                         table
                                             .data-table
