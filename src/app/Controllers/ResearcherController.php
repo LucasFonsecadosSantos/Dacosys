@@ -37,14 +37,20 @@ class ResearcherController extends Controller
     public function listation()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
-        $this->view->researcherArray = $this->personModel->getAll('_RESEARCHER_');
         
-        $this->view->navigationRoute = [
-            'Home' => '/',
-            'Pesquisadores' => '/pesquisadores'
-        ];
+        try {
+            $this->view->researcherArray = $this->personModel->getAll('_RESEARCHER_');
+            $this->view->navigationRoute = [
+                'Home' => '/',
+                'Pesquisadores' => '/pesquisadores'
+            ];
+            $this->loadView("researcher/list");
+        } catch (\Exception $e) {
+            return Redirect::route('/', [
+                'errors' => ['Erro ao buscar pesquisadores no banco de dados. (' . $e->getMessage() . ')']
+            ]);
+        }
         
-        $this->loadView("researcher/list");
     }
 
     public function store($request)
@@ -53,37 +59,49 @@ class ResearcherController extends Controller
         $isAdmin = ($request->post->id_person != null) ? false : true;
         $idPerson = ($request->post->id_person != null) ? $request->post->id_person : Identificator::generateID('person_');
         
-        $this->personModel->create(
-            [
-                'id_person'             => $idPerson,
-                'type'                  => '_RESEARCHER_',
-                'name'                  => $request->post->name,
-                'email'                 => $request->post->email,
-                'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
-                'access_key'            => null,
-                'participated'          => null,
-                'sex'                   => $request->post->sex,
-                'hometown_cep'          => $request->post->hometown_cep,
-                'color'                 => $request->post->color,
-                'birth_day'             => $request->post->birth_day,
-                'latest_access'         => DateHandle::getDateTime(),
-                'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
-                'is_administrator'      => $isAdmin,
-                'supervisor_idPerson'   => null
-            ]
-        );
-        return Redirect::route("/pesquisadores",
-            [
-                'sucess' => ['Pesquisador registrado com sucesso!']
-            ]
-        );
+        try {
+            $this->personModel->create(
+                [
+                    'id_person'             => $idPerson,
+                    'type'                  => '_RESEARCHER_',
+                    'name'                  => $request->post->name,
+                    'email'                 => $request->post->email,
+                    'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
+                    'access_key'            => null,
+                    'participated'          => null,
+                    'sex'                   => $request->post->sex,
+                    'hometown_cep'          => $request->post->hometown_cep,
+                    'color'                 => $request->post->color,
+                    'birth_day'             => $request->post->birth_day,
+                    'latest_access'         => DateHandle::getDateTime(),
+                    'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+                    'is_administrator'      => $isAdmin,
+                    'supervisor_idPerson'   => null
+                ]
+            );
+            return Redirect::route("/pesquisadores",[
+                    'sucess' => ['Pesquisador registrado com sucesso!']
+                ]
+            );
+        } catch (\Exception $e) {
+            return Redirect::route("/pesquisadores",[
+                    'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
+                ]
+            );
+        }
     }
 
     public function delete($id)
     {
         //TODO Researcher delete action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action delete.");
-        $this->personModel->delete($id);
+        try {
+            $this->personModel->delete($id);
+        } catch (\Exception $e) {
+            return Redirect::route('/pesquisadores',[
+                'errors' => ['Erro ao remover pesquisador. (' . $e->getMessage() . ')']
+            ]);
+        }
     }
 
     public function update()
@@ -99,13 +117,23 @@ class ResearcherController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
         // foreach ($this-)
 
-        $this->view->person = $this->prepareToView($this->personModel->getByID($id, '_RESEARCHER_'));
+        try {
+            $this->view->person = $this->prepareToView($this->personModel->getByID($id, '_RESEARCHER_'));
 
-        $this->view->navigationRoute = [
-            'Home'          => '/',
-            'Pesquisadores' => '/pesquisadores',
-            $this->view->person->name => '/pesquisadores/' . $this->view->person->id_person . '/visualizar' 
-        ];
+            $this->view->navigationRoute = [
+                'Home'          => '/',
+                'Pesquisadores' => '/pesquisadores',
+                $this->view->person->name => '/pesquisadores/' . $this->view->person->id_person . '/visualizar' 
+            ];
+        } catch (\Exception $e) {
+            $this->view->navigationRoute = [
+                'Home'          => '/',
+                'Pesquisadores' => '/pesquisadores'
+            ];
+            return Redirect::route('/pesquisadores',[
+                'errors' => ['Erro ao buscar pesquisador. (' . $e->getMessage() . ')']
+            ]);
+        }
 
 
         $this->loadView('researcher/show');
