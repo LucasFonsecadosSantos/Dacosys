@@ -1,7 +1,7 @@
 input
     @include border_radius(4px)
     background: transparent
-    padding: $__SPACING__padding-default
+    padding: $__SPACING__padding-default/3
     width: 100%
     outline: none
     border: solid 2px $__COLOR__green-1
@@ -15,3 +15,8 @@ input
         color: $__COLOR__purple-5
     &:invalid
         border: solid 3px $__COLOR__red-1
+    &[type="radio"], &[type="checkbox"]
+        -webkit-user-select: none
+        -moz-user-select: none
+        -ms-user-select: none
+        user-select: none

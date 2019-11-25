@@ -26,6 +26,11 @@ class ResearcherController extends Controller
     public function register()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action register.");
+        $this->view->navigationRoute = [
+            'Home' => '/',
+            'Pesquisadores' => '/pesquisadores',
+            'Cadastrar novo pesquisador' => '/pesquisador/registrar',
+        ];
         $this->loadView("researcher/register");
     }
 

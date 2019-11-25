@@ -12,6 +12,7 @@ INSERT INTO person (
     color,
     birth_day,
     latest_access,
+    is_administrator,
     latest_ip_access,
     supervisor_idPerson
 ) VALUES (
@@ -19,13 +20,14 @@ INSERT INTO person (
     '_ADMINISTRATOR_',
     'Nome1',
     'email1@email.com',
-    '123456',
+    '$2y$10$QL4EPfSFFd0bWKERroRHTeBoBjBG/G8ITBfgPVPOCj7c4Yi2IDsa2',
     1,
     '_M_',
     '37200000',
     '_BRANCA_',
     '1996-01-20',
     '2019-06-08',
+    1,
     '192168200123',
     NULL
 );
@@ -42,6 +44,7 @@ INSERT INTO person (
     color,
     birth_day,
     latest_access,
+    is_administrator,
     latest_ip_access,
     supervisor_idPerson
 ) VALUES (
@@ -49,13 +52,14 @@ INSERT INTO person (
     '_RESEARCHER_',
     'Nome2',
     'email2@email.com',
-    '5495959',
+    '$2y$10$nBAwojgheo/nJCWzsjqCXOuXtK9sK9ND85/2VBuWipBILLi9w9z42',
     0,
     '_F_',
     '37200000',
     '_PRETA_',
     '1993-12-05',
     '2018-09-12',
+    0,
     '192168200111',
     NULL
 );
@@ -71,6 +75,7 @@ INSERT INTO person (
     color,
     birth_day,
     latest_access,
+    is_administrator,
     latest_ip_access,
     supervisor_idPerson    
 ) VALUES (
@@ -78,13 +83,14 @@ INSERT INTO person (
     '_PARTICIPANT_',
     'Nome3',
     'email3@email.com',
-    '632512',
+    '$2y$10$29e5mfc5gKK33NQ7jEQM9.mszKUyeTozNdKoFzqU07h904ZXmSvG6',
     0,
     '_M_',
     '37200000',
     '_PARDA_',
     '1986-01-07',
     '2017-10-05',
+    0,
     '192168145200',
     NULL
 );
@@ -100,6 +106,7 @@ INSERT INTO person (
     color,
     birth_day,
     latest_access,
+    is_administrator,
     latest_ip_access,
     supervisor_idPerson
 ) VALUES (
@@ -107,13 +114,14 @@ INSERT INTO person (
     '_RESEARCHER_',
     'Nome4',
     'email4@email.com',
-    '632514124',
+    '$2y$10$yaN.Zxt.Ai0VyM7ahTLiEONRXNpV5gn.aPEGgvww1GIFM5ok/71hu',
     1,
     '_F_',
     '37200000',
     '_BRANCA_',
     '1994-10-20',
     '2019-11-09',
+    0,
     '192168142122',
     NULL
 );
@@ -129,20 +137,22 @@ INSERT INTO person (
     color,
     birth_day,
     latest_access,
+    is_administrator,
     latest_ip_access,
     supervisor_idPerson  
 ) VALUES (
     'person_5dd2ac3bb8ee0',
-    '_ADMINISTRATOR_',
+    '_RESEARCHER_',
     'Nome5',
     'email5@email.com',
-    'erer854re',
+    '$2y$10$RAyYt4cqCIVTz6s823E7RuPWC4CTRzuU6Md8UkUM5PtDzjM8ijOpi',
     0,
     '_M_',
     '37201966',
     '_AMARELA_',
     '1997-07-30',
     '2019-08-15',
+    0,
     '177105023122',
     NULL
 );
@@ -158,6 +168,7 @@ INSERT INTO person (
     color,
     birth_day,
     latest_access,
+    is_administrator,
     latest_ip_access,
     supervisor_idPerson    
 ) VALUES (
@@ -165,13 +176,14 @@ INSERT INTO person (
     '_PARTICIPANT_',
     'Nome6',
     'email6@email.com',
-    'rge5er5ege5',
+    null,
     0,
     '_F_',
     '37201214',
     '_INDIGENA_',
     '1991-04-06',
     '2019-07-14',
+    0,
     '172172012142',
     NULL
 );
