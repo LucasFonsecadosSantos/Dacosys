@@ -6,7 +6,9 @@ use Core\Authenticate;
 use Core\Controller;
 use Core\DataBase;
 use Core\Container;
+use Core\Redirect;
 use Util\Logger;
+use Util\DateHandle;
 use Util\Identificator;
 
 class ResearcherController extends Controller 
@@ -60,8 +62,7 @@ class ResearcherController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
         $isAdmin = ($request->post->id_person != null) ? false : true;
-        $idPerson = ($request->post->id_person != null) ? $request->post->id_person : Identificator::generateID('person_');
-        
+        $idPerson = (($request->post->id_person != null) || ($request->post->id_person != "")) ? $request->post->id_person : Identificator::generateID('person_');
         try {
             $this->personModel->create(
                 [
@@ -86,10 +87,11 @@ class ResearcherController extends Controller
                 ]
             );
         } catch (\Exception $e) {
-            return Redirect::route("/pesquisadores",[
-                    'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
-                ]
-            );
+            echo $e->getMessage();
+            // return Redirect::route("/bosta",[
+            //         'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
+            //     ]
+            // );
         }
     }
 

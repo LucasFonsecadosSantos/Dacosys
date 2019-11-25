@@ -28,6 +28,7 @@ export class ParticipantRegisterController {
     }
     _initializeListeners() {
         this._addTelephoneButton.addEventListener('click', event => {
+            this._telephoneTable.classList.remove('d-none');
             this._telephoneTable.innerHTML += "<tr><td><p>" + this._fields['telephone'].value + "</p></td></tr>";
             this._fields['telephone'].value = "";
         });
