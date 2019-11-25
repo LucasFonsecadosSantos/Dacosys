@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Core\Authenticate;
 use Core\Controller;
 use Core\DataBase;
 use Core\Container;
@@ -10,6 +11,8 @@ use Util\Identificator;
 
 class ResearcherController extends Controller 
 {
+
+    use Authenticate;
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher instantiated.");
@@ -24,13 +27,6 @@ class ResearcherController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action register.");
         $this->loadView("researcher/register");
-    }
-
-    public function login()
-    {
-        //TODO Researcher login action method.
-        Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action login.");
-        $this->loadView("home/login");
     }
 
     public function listation()
@@ -58,7 +54,7 @@ class ResearcherController extends Controller
                 'type'                  => '_RESEARCHER_',
                 'name'                  => $request->post->name,
                 'email'                 => $request->post->email,
-                'password'              => $request->post->password,
+                'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
                 'access_key'            => null,
                 'participated'          => null,
                 'sex'                   => $request->post->sex,

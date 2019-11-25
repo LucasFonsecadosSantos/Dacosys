@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Lista de Participantes","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="dashboard")
+        header
+            include modules/components/_header.pug
+        main
+            .container
+                +title_page("Participantes", "Home > Participantes")
+                .row
+                    .dashboard__subDashboard_1
+                        +box("lista de pessoas participantes", false, "/questionarios/registrar", "/questionarios")
+                            table.data-table(column-amount="3")
+                                tbody
+                                    |   <?php
+                                    |       foreach ($this->view->participantArray as $participant) {
+                                    |           if ($participant->participated) {
+                                    |               echo    '<tr>';
+                                    |               echo        '<td title="Clique para acessar o perfil de ' . $participant->name . '." alt="Registro do participante ' . $participant->name . '." onclick="window.open(\'/participante/' . $participant->id_person . '/visualizar\',\'_self\')">';
+                                    |               echo            '<p>' . $participant->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td title="Clique para acessar as respostas de ' . $participant->name . '." alt="Registro do participante ' . $participant->name . '." onclick="window.open(\'/questionarios/' . $participant->quiz->id_quiz . '/visualizar\',\'_self\')">';
+                                    |               echo            '<p>Resposta: ' . $quiz->name . '</p>';
+                                    |               echo        '</td>';
+                                    |               echo        '<td>';
+                                    |               echo            '<a alt="Botão para visualizar o cadastro do participante ' . $participant->name . '." title="Clique para visualizar ' . $participant->name . '." href="/participante/' . $participant->id_person . '/visualizar"><i class="material-icons"> remove_red_eye </i></a>';
+                                    |               echo            '<a alt="Botão para remover o cadastro do participante ' . $participant->name . '." title="Clique para deletar o cadastro do participante ' . $participant->name . '." href="/participante/' . $participant->id_person . '/remover"><i class="material-icons"> delete_forever </i></a>';
+                                    |               echo        '</td>';
+                                    |               echo    '</tr>';
+                                    |           }
+                                    |       }
+                                    |   ?>
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

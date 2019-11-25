@@ -2,13 +2,14 @@
 
 //System
 $route[] = ['/',                            'DacosysController@index'];
-$route[] = ['/logout',                      'DacosysController@logout'];
 $route[] = ['/sobre',                       'DacosysController@about'];
 $route[] = ['/reportar-problema',           'DacosysController@bugReport'];
 $route[] = ['/gerar-chave-participante',    'DacosysController@keyGeneration'];
-$route[] = ['/login',                       'DacosysController@login'];
 
 //Researcher and Admin
+$route[] = ['/logout',                      'ResearcherController@logout'];
+$route[] = ['/login',                       'ResearcherController@login'];
+$route[] = ['/pesquisador/autenticar',      'ResearcherController@auth'];
 $route[] = ['/pesquisadores',               'ResearcherController@listation'];
 $route[] = ['/pesquisador/registrar',       'ResearcherController@register'];
 $route[] = ['/pesquisador/salvar',          'ResearcherController@store'];

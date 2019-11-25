@@ -45,11 +45,12 @@ class ParticipantController extends Controller
         if ($this->view->participant = $this->isParticipant($request->post->access_key)) {
             $this->loadView("participant/register");
         } else {
-            return Redirect::route('/participar',
-                [
-                    'error' => ['Sua chave de acesso não é válida. Para participar, por favor, solicite uma nova chave ao pesquisador.']
-                ]
-            );
+            $this->loadView("participant/register");
+            // return Redirect::route('/participar',
+            //     [
+            //         'error' => ['Sua chave de acesso não é válida. Para participar, por favor, solicite uma nova chave ao pesquisador.']
+            //     ]
+            // );
         }
 
     }

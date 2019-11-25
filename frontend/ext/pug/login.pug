@@ -22,7 +22,7 @@ html
                         .row.mt-4
                             h1 dacosys
                     .login__subLogin
-                        form()
+                        form(method="POST", action="/pesquisador/autenticar")
                             .container-fluid
                                 .row
                                     h2 login
@@ -30,7 +30,7 @@ html
                                     label email
                                     input#email(type="email", name="email", placeholder="email@email.com.br", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
                                     label.mt-3 senha
-                                    input#passwd(type="password", name="passwd", placeholder="", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                    input#passwd(type="password", name="password", placeholder="", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
                                 .row.mt-3
                                     .col-6.d-flex.justify-content-start.pl-0
                                         a
