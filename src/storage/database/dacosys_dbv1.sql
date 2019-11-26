@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`quiz` (
     `start_date`        DATE    NOT NULL,
     `end_date`          DATE    NOT NULL,
     `status`            TINYINT NOT NULL,
+    `description`       TEXT,
     PRIMARY KEY(`id_quiz`)
 )ENGINE = InnoDB;
 

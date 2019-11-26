@@ -33,6 +33,7 @@ $route[] = ['/participante/atualizar',          'ParticipantController@update'];
 $route[] = ['/questionarios',                           'QuizController@listation'];
 $route[] = ['/questionario/registrar',                  'QuizController@register'];
 $route[] = ['/questionario/salvar',                     'QuizController@store'];
+$route[] = ['/questionario/{id}/responder',             'QuizController@answer'];
 $route[] = ['/questionario/{id}/visualizar',            'QuizController@show'];
 $route[] = ['/questionario/{id}/editar',                'QuizController@edit'];
 $route[] = ['/questionario/{id}/registrar-pergunta',    'QuizController@itemStore'];

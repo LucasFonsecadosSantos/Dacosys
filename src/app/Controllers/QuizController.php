@@ -7,10 +7,15 @@ use Core\Redirect;
 use Core\Container;
 use Core\DataBase;
 use App\Models\QuizModel;
+use App\Models\ItemModel;
 use Util\Logger;
 
 class QuizController extends Controller 
 {
+
+    private $itemModel;
+    private $quizModel;
+    private $participantAnswerItemModel;
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController instantiated.");
@@ -26,6 +31,24 @@ class QuizController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action register.");
         $this->loadView("quiz/register");
+    }
+
+    public function answer($id)
+    {
+        try {
+            $this->view->quiz = $this->quizModel->getByID($id);
+            $this->view->items = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
+            $this->view->navigationRoute = [
+                'Participar'          => '/participar',
+                'Responder Questionário' => '/questionario/' . $id . '/responder'
+            ];
+            $this->loadView('quiz/quiz-answer');
+        } catch (\Exception $e) {
+            return Redirect::route('/participar',[
+                'errors' => ['Ops: Parece que encontramos um erro ao buscar o questionário em questão. Por favor, contate o administrador do sistema.']
+            ]);
+        }
+        
     }
 
     public function listation()

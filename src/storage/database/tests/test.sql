@@ -6,13 +6,15 @@ INSERT INTO quiz (
     name,
     start_date,
     end_date,
-    status
+    status,
+    description
 ) VALUES (
     'quiz_5dd2aec419004',
     'Questionario teste 01',
     '20190302',
     '20190320',
-    1
+    1,
+    "Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia, pesquisou uma das mais obscuras palavras em latim, consectetur, oriunda de uma passagem de Lorem Ipsum, e, procurando por entre citações da palavra na literatura clássica, descobriu a sua indubitável origem. Lorem Ipsum vem das seções 1.10.32 e 1.10.33 do  (Os Extremos do Bem e do Mal), de Cícero, escrito em 45 AC. Este livro é um tratado de teoria da ética muito popular na época da Renascença. A primeira linha de Lorem Ipsum,  vem de uma linha na seção 1.10.32."
 );
 
 INSERT INTO quiz (
@@ -20,13 +22,15 @@ INSERT INTO quiz (
     name,
     start_date,
     end_date,
-    status
+    status,
+    description
 ) VALUES (
     'quiz_5dd2af3e62fe3',
     'Questionario teste 02',
     '20190418',
     '20190501',
-    0
+    0,
+    "Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia, pesquisou uma das mais obscuras palavras em latim, consectetur, oriunda de uma passagem de Lorem Ipsum, e, procurando por entre citações da palavra na literatura clássica, descobriu a sua indubitável origem. Lorem Ipsum vem das seções 1.10.32 e 1.10.33 do  (Os Extremos do Bem e do Mal), de Cícero, escrito em 45 AC. Este livro é um tratado de teoria da ética muito popular na época da Renascença. A primeira linha de Lorem Ipsum,  vem de uma linha na seção 1.10.32."
 );
 
 INSERT INTO quiz (
@@ -34,13 +38,15 @@ INSERT INTO quiz (
     name,
     start_date,
     end_date,
-    status
+    status,
+    description
 ) VALUES (
     'quiz_5dd2af58cb953',
     'Questionario teste 03',
     '20190618',
     '20190710',
-    1
+    1,
+    "Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia, pesquisou uma das mais obscuras palavras em latim, consectetur, oriunda de uma passagem de Lorem Ipsum, e, procurando por entre citações da palavra na literatura clássica, descobriu a sua indubitável origem. Lorem Ipsum vem das seções 1.10.32 e 1.10.33 do  (Os Extremos do Bem e do Mal), de Cícero, escrito em 45 AC. Este livro é um tratado de teoria da ética muito popular na época da Renascença. A primeira linha de Lorem Ipsum,  vem de uma linha na seção 1.10.32."
 );
 
 INSERT INTO quiz (
@@ -48,13 +54,15 @@ INSERT INTO quiz (
     name,
     start_date,
     end_date,
-    status
+    status,
+    description
 ) VALUES (
     'quiz_5dd2af771e5f5',
     'Questionario teste 04',
     '20190120',
     '20190120',
-    0
+    0,
+    "Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia, pesquisou uma das mais obscuras palavras em latim, consectetur, oriunda de uma passagem de Lorem Ipsum, e, procurando por entre citações da palavra na literatura clássica, descobriu a sua indubitável origem. Lorem Ipsum vem das seções 1.10.32 e 1.10.33 do  (Os Extremos do Bem e do Mal), de Cícero, escrito em 45 AC. Este livro é um tratado de teoria da ética muito popular na época da Renascença. A primeira linha de Lorem Ipsum,  vem de uma linha na seção 1.10.32."
 );
 
 INSERT INTO quiz (
@@ -62,13 +70,15 @@ INSERT INTO quiz (
     name,
     start_date,
     end_date,
-    status
+    status,
+    description
 ) VALUES (
     'quiz_5dd2af8fe6957',
     'Questionario teste 05',
     '20190210',
     '20190213',
-    1
+    1,
+    "Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia, pesquisou uma das mais obscuras palavras em latim, consectetur, oriunda de uma passagem de Lorem Ipsum, e, procurando por entre citações da palavra na literatura clássica, descobriu a sua indubitável origem. Lorem Ipsum vem das seções 1.10.32 e 1.10.33 do  (Os Extremos do Bem e do Mal), de Cícero, escrito em 45 AC. Este livro é um tratado de teoria da ética muito popular na época da Renascença. A primeira linha de Lorem Ipsum,  vem de uma linha na seção 1.10.32."
 );
 
 

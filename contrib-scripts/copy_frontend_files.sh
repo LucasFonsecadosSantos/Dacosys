@@ -22,6 +22,7 @@ cp -avr ./../frontend/participant-register.html ./../src/app/Views/participant/r
 cp -avr ./../frontend/quiz.html ./../src/app/Views/quiz/show.phtml
 cp -avr ./../frontend/quiz-listation.html ./../src/app/Views/quiz/listation.phtml
 cp -avr ./../frontend/quiz-register.html ./../src/app/Views/quiz/register.phtml
+cp -avr ./../frontend/quiz-answer.html ./../src/app/Views/quiz/quiz-answer.phtml
 
 # RESEARCHER
 cp -avr ./../frontend/researcher-listation.html ./../src/app/Views/researcher/listation.phtml

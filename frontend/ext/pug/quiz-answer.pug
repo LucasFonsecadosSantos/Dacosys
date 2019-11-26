@@ -1,0 +1,49 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Responder Questionário","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="researcher-register")
+        //- header
+        //-     include modules/components/_header.pug
+        main
+            .container
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Responder a pesquisa</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
+                .row
+                    .dashboard__subDashboard_1
+                        +box("informações", false)
+                            |   <?php
+                            |       echo '<p class="white-color"><strong>status: </strong> ' . $this->view->quiz->status . '</p>';
+                            |       echo '<p class="white-color"><strong>data de abertura: </strong> ' . $this->view->quiz->start_date . '</p>';
+                            |       echo '<p class="white-color"><strong>data de fechamento: </strong> ' . $this->view->quiz->end_date . '</p>';
+                            |   ?>
+                        +box("descrição", false, "/questionarios/registrar", "/questionarios")
+                            |   <?php 
+                            |       echo '<form action="/item/' . array_pop($this->view->items)->id_item . '/responder" method="POST">';
+                            |       echo '<p class="white-color mb-6">' . $this->view->quiz->description . '</p>';
+                            |       echo '<div class="row"><div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center"><button>responder o questionário</button></div></div>';
+                            |   ?>
+                            
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

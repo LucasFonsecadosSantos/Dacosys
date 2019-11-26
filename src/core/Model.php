@@ -17,7 +17,7 @@ abstract class Model
 
     public function getFilteredByColumn($column, $value)
     {
-        $query = "SELECT * FROM {$this->table} WHERE {$column} = :value";
+        $query = "SELECT * FROM " . $this->table . " WHERE " . $column . " = :value";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':value', $value);
         $stmt->execute();
