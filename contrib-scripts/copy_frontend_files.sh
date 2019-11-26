@@ -11,6 +11,7 @@ cp -avr ./../frontend/login.html ./../src/app/Views/home/login.phtml
 # ITEM
 cp -avr ./../frontend/item-register.html ./../src/app/Views/item/register.phtml
 cp -avr ./../frontend/item-show.html ./../src/app/Views/item/show.phtml
+cp -avr ./../frontend/item-answer.html ./../src/app/Views/item/answer.phtml
 
 # PARTICIPANT
 cp -avr ./../frontend/participant-listation.html ./../src/app/Views/participant/listation.phtml

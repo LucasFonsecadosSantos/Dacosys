@@ -64,10 +64,23 @@ class ItemController extends Controller
         $this->loadView("item/show");
     }
 
-    public function answer()
+    public function answer($id)
     {
         //TODO ItemController answer action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
+        try {
+            $this->view->item = $this->itemModel->getByID($id);
+            $this->view->navigationRoute = [
+                'Participar'          => '/participar',
+                'Responder Questionário' => '/questionario/' . $this->view->item->quiz_idQuiz . '/responder',
+                'Responder a pergunta' => '/questionario/' . $this->view->item->id_item . '/responder'
+            ];
+            $this->loadView('item/answer');
+        } catch (\Exception $e) {
+            return Redirect::route('/participar',[
+                'errors' => ['Ops, parece que houve um erro ao buscar a pergunta. Por favor, contate o administrador do sistema.']
+            ]);
+        }
     }
 
     public function edit()

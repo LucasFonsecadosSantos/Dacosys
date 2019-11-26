@@ -5,7 +5,7 @@ html
         include modules/settings/_mixins.pug
         //PARAMS:
         //title,description,author,copyright,themeColor,language
-        +headerSettings("Dacosys | Responder Questionário","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        +headerSettings("Dacosys | Responder Pergunta","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
         //---------------------------------------------------------------//
         //---------------------------[IMPORTS]---------------------------//
         include modules/settings/_link-imports.pug
@@ -19,7 +19,7 @@ html
                     .container.mt-5.pb-5
                         .body__title
                             |   <?php
-                            |       echo '<h3 class="m-0 p-0">Responder a pesquisa</h3>';
+                            |       echo '<h3 class="m-0 p-0">Responder a pergunta</h3>';
                             |   ?>
                             .body__titleNavigation
                                 |   <?php
@@ -31,17 +31,11 @@ html
                                 |   ?>
                 .row
                     .dashboard__subDashboard_1
-                        +box("informações", false)
+                        +box("item", false)
                             |   <?php
-                            |       echo '<p class="white-color"><strong>status: </strong> ' . $this->view->quiz->status . '</p>';
-                            |       echo '<p class="white-color"><strong>data de abertura: </strong> ' . $this->view->quiz->start_date . '</p>';
-                            |       echo '<p class="white-color"><strong>data de fechamento: </strong> ' . $this->view->quiz->end_date . '</p>';
-                            |   ?>
-                        +box("descrição", false, "/questionarios/registrar", "/questionarios")
-                            |   <?php 
-                            |       echo '<form action="/pergunta/' . array_pop($this->view->items)->id_item . '/responder" method="POST">';
-                            |       echo '<p class="white-color mb-6">' . $this->view->quiz->description . '</p>';
-                            |       echo '<div class="row"><div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center"><button type="submit", title="Clique para responder o questionário.", alt="Botão para reponder o questionário.">responder o questionário</button></div></div>';
+                            |       echo '<form action="/item/' . $this->view->item-> . '/responder", method="POST">';
+                            |       echo '<h5>' . $this->view->item->enunciation . '</h5>';
+                            |       echo '</form>';
                             |   ?>
                             
         footer
