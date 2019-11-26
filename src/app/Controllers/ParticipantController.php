@@ -67,29 +67,34 @@ class ParticipantController extends Controller
         $this->loadView("participant/login");
     }
 
-    public function store()
+    public function store($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action store.");
-        $token = Identificator::generateID('participant');
-        $this->model->create(
-            [
-                'id_person'             => $token,
-                'type'                  => '_PARTICIPANT_',
-                'name'                  => null,
-                'email'                 => null,
-                'password'              => null,
-                'participated'          => false,
-                'sex'                   => null,
-                'hometown_cep'          => null,
-                'color'                 => null,
-                'birth_day'             => null,
-                'latest_access'         => null,
-                'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
-                'supervisor_idPerson'   => null
-            ]
-        );
-        // $this->loadView("participante/gerar-token");
-        // $this->view->token = $token;
+        try {
+            $this->model->create(
+                [
+                    'id_person'             => $request->post->id_person,
+                    'type'                  => '_PARTICIPANT_',
+                    'name'                  => $request->post->name,
+                    'email'                 => $request->post->email,
+                    'password'              => $request->post->password,
+                    'participated'          => false,
+                    'sex'                   => $request->post->sex,
+                    'hometown_cep'          => $request->post->hometown_cep,
+                    'color'                 => $request->post->color,
+                    'birth_day'             => $request->post->birth_day,
+                    'latest_access'         => DateHandle::getDateTime(),
+                    'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+                    'supervisor_idPerson'   => null
+                ]
+            );
+            // $this->loadView("participante/gerar-token");
+            // $this->view->token = $token;
+        } catch (\Exception $e) {
+            return Redirect::route('/participar', [
+                'errors' => ['Houve um erro ao realizarmos o seu cadastro. Por favor, contate o administrador do sistema.']
+            ]);
+        }
     }
 
     public function delete()
@@ -135,5 +140,18 @@ class ParticipantController extends Controller
         } else {
             echo 'Erro ao inserir no banco.';
         }
+    }
+
+    private function _prepareToInsert(array $data)
+    {
+        $data['hometown_cep'] = str_replace('-','',$data['hometown_cep']);
+        //$telephoneArray = explode('@', $data['telephone']);
+        // foreach ($telephoneArray as $telephone) {
+        //     $telephone = str_replace('(','',$telephone);
+        //     $telephone = str_replace(')','',$telephone);
+        //     $telephone = str_replace(' ','',$telephone);
+        //     $telephone = str_replace('-','',$telephone);
+        // }
+        return $data;
     }
 }

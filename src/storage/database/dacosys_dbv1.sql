@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `color`                     ENUM('_BRANCA_','_PARDA_','_PRETA_', '_AMARELA_', '_INDIGENA_'),
     `birth_day`                 DATE,
     `latest_access`             DATE,
-    `latest_ip_access`          VARCHAR(12),
+    `latest_ip_access`          VARCHAR(15),
     `is_administrator`          TINYINT NOT NULL,
     `supervisor_idPerson`       CHAR(20),
     PRIMARY KEY(`id_person`)
