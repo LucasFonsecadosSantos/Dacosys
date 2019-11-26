@@ -70,14 +70,13 @@ abstract class Model
 
     public function create(array $data)
     {
-        $data = $this->prepareDataToInsert($data);
+        $data = $this->prepareDataInsert($data);
         $query = "INSERT INTO {$this->table} ({$data[0]}) VALUES ({$data[1]})";
         $stmt = $this->pdo->prepare($query);
         $limit = count($data[2]);
         for ($i=0; $i < $limit; ++$i) {
-            $stmt->bindValue("{data[2][$i]}", $data[3][$i]);
+            $stmt->bindValue("{$data[2][$i]}", $data[3][$i]);
         }
-
         $result = $stmt->execute();
         $stmt->closeCursor();
         return $result;
@@ -109,7 +108,7 @@ abstract class Model
         return $result;
     }
 
-    private function prepareDataToInsert(array $data)
+    private function prepareDataInsert(array $data)
     {
         $strKeys = "";
         $strBinds = "";

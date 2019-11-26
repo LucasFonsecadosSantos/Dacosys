@@ -14,7 +14,7 @@ export class ResearcherRegisterController {
         this._fields['typeRadio1'] = document.getElementsByName('type')[0];
         this._fields['typeRadio2'] = document.getElementsByName('type')[1];
         this._fields['id_person'] = document.getElementsByName('id_person')[0];
-        this._fields['name'] = document.getElementsByName('name')[0];
+        this._fields['name'] = document.getElementsByName('name_person')[0];
         this._fields['name']['helper'] = document.getElementsByName('name-helper')[0];
         this._fields['hometown_cep'] = document.getElementsByName('hometown_cep')[0];
         this._fields['hometown_cep']['helper'] = document.getElementsByName('hometown_cep-helper')[0];

@@ -20,7 +20,7 @@ export class ResearcherRegisterController {
         this._fields['typeRadio1']      = <HTMLInputElement> document.getElementsByName('type')[0];
         this._fields['typeRadio2']      = <HTMLInputElement> document.getElementsByName('type')[1];
         this._fields['id_person']       = <HTMLInputElement> document.getElementsByName('id_person')[0];
-        this._fields['name']            = <HTMLInputElement> document.getElementsByName('name')[0];
+        this._fields['name']            = <HTMLInputElement> document.getElementsByName('name_person')[0];
         this._fields['name']['helper']  = <HTMLInputElement> document.getElementsByName('name-helper')[0];
         this._fields['hometown_cep']    = <HTMLInputElement> document.getElementsByName('hometown_cep')[0];
         this._fields['hometown_cep']['helper']    = <HTMLInputElement> document.getElementsByName('hometown_cep-helper')[0];

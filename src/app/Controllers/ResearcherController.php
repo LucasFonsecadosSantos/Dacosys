@@ -61,26 +61,25 @@ class ResearcherController extends Controller
     public function store($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
-        $isAdmin = ($request->post->id_person != null) ? false : true;
-        $idPerson = (($request->post->id_person != null) || ($request->post->id_person != "")) ? $request->post->id_person : Identificator::generateID('person_');
         try {
-            $this->personModel->create(
-                [
-                    'id_person'             => $idPerson,
-                    'type'                  => '_RESEARCHER_',
-                    'name'                  => $request->post->name,
-                    'email'                 => $request->post->email,
-                    'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
-                    'participated'          => 1,
-                    'sex'                   => $request->post->sex,
-                    'hometown_cep'          => $request->post->hometown_cep,
-                    'color'                 => $request->post->color,
-                    'birth_day'             => $request->post->birth_day,
-                    'latest_access'         => DateHandle::getDateTime(),
-                    'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
-                    'is_administrator'      => $isAdmin,
-                    'supervisor_idPerson'   => null
-                ]
+            $this->personModel->create($this->_prepareToInsert(
+                    [
+                        'id_person'             => $request->post->id_person,
+                        'type'                  => '_RESEARCHER_',
+                        'name'                  => $request->post->name_person,
+                        'email'                 => $request->post->email,
+                        'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
+                        'participated'          => 1,
+                        'sex'                   => $request->post->sex,
+                        'hometown_cep'          => $request->post->hometown_cep,
+                        'color'                 => $request->post->color,
+                        'birth_day'             => $request->post->birth_day,
+                        'latest_access'         => DateHandle::getDateTime(),
+                        'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+                        'is_administrator'      => "",
+                        'supervisor_idPerson'   => null
+                    ]
+                )
             );
             return Redirect::route("/pesquisadores",[
                     'sucess' => ['Pesquisador registrado com sucesso!']
@@ -88,10 +87,10 @@ class ResearcherController extends Controller
             );
         } catch (\Exception $e) {
             echo $e->getMessage();
-            // return Redirect::route("/bosta",[
-            //         'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
-            //     ]
-            // );
+            return Redirect::route("/bosta",[
+                    'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
+                ]
+            );
         }
     }
 
@@ -121,7 +120,7 @@ class ResearcherController extends Controller
         // foreach ($this-)
 
         try {
-            $this->view->person = $this->prepareToView($this->personModel->getByID($id, '_RESEARCHER_'));
+            $this->view->person = $this->_prepareToView($this->personModel->getByID($id, '_RESEARCHER_'));
 
             $this->view->navigationRoute = [
                 'Home'          => '/',
@@ -142,7 +141,22 @@ class ResearcherController extends Controller
         $this->loadView('researcher/show');
     }
 
-    private function prepareToView($person)
+    private function _prepareToInsert(array $data)
+    {
+        $data['hometown_cep'] = str_replace('-','',$data['hometown_cep']);
+        //$telephoneArray = explode('@', $data['telephone']);
+        $data['is_administrator'] = ($data['id_person'] != null) ? false : true;
+        $data['id_person'] = (($data['id_person'] != null) || ($data['id_person'] != "")) ? $data['id_person'] : Identificator::generateID('person_');
+        // foreach ($telephoneArray as $telephone) {
+        //     $telephone = str_replace('(','',$telephone);
+        //     $telephone = str_replace(')','',$telephone);
+        //     $telephone = str_replace(' ','',$telephone);
+        //     $telephone = str_replace('-','',$telephone);
+        // }
+        return $data;
+    }
+
+    private function _prepareToView($person)
     {
         switch ($person->color) {
             case '_PRETA_':
