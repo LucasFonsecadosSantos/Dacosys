@@ -1,24 +1,25 @@
+import { Validator } from "../../util/Validator.js";
+
 export class ResearcherRegisterController {
 
     private _addTelephoneButton:    HTMLButtonElement;
     private _telephoneTable:        HTMLTableElement;
     private _fields:                Array<HTMLElement>;
+    private _form:                  HTMLFormElement;
+    private _validator:             Validator;
 
     constructor() {
         this._fields = new Array<HTMLElement>();
+        this._validator = new Validator();
         this._setElements();
-        this._customizeComponents();
         this._initializeListeners();
-    }
-
-    private _customizeComponents(): void {
-        this._fields['email'].validationMessage = "O E-mail informado não é um e-mail válido.";
     }
 
     private _setElements(): void {
         this._addTelephoneButton        = <HTMLButtonElement> document.getElementById('addTelBtn');
         this._telephoneTable            = <HTMLTableElement> document.getElementById('telephoneTable');
-        this._fields['all_telephones'] =  <HTMLTableElement> document.getElementsByName('allTelephones')[0];
+        this._form                      = <HTMLFormElement> document.getElementById('mainForm');
+        this._fields['all_telephones']  = <HTMLTableElement> document.getElementsByName('allTelephones')[0];
         this._fields['id_person']       = <HTMLInputElement> document.getElementsByName('id_person')[0];
         this._fields['id_person']['helper'] = <HTMLInputElement> document.getElementsByName('id_person-helper')[0];
         this._fields['telephone']       = <HTMLInputElement> document.getElementsByName('telephone_add_field')[0];
@@ -37,9 +38,39 @@ export class ResearcherRegisterController {
         this._fields['email']['helper']           = <HTMLInputElement> document.getElementsByName('email-helper')[0];
         this._fields['password']        = <HTMLInputElement> document.getElementsByName('password')[0];
         this._fields['password2']       = <HTMLInputElement> document.getElementsByName('password2')[0];
+
+        this._fields.forEach(field => {
+            (field as HTMLInputElement).value = "";
+            console.log((field as HTMLInputElement).value);
+        });
     }
 
     private _initializeListeners(): void {
+        
+        this._form.addEventListener('submit', event => {
+            
+            if (!this._validator.makeValidation(this._fields['name'], "REQUIRED|MAX_LENGTH:40|MIN_LENGTH:4")) {
+                alert("erro");
+                return false;
+            }
+
+            if (!this._validator.makeValidation(this._fields['email'], "EMAIL|REQUIRED|MAX_LENGTH:40|MIN_LENGTH:4")) {
+                alert("erro");
+                return false;
+            }
+
+            if (!this._validator.makeValidation(this._fields['hometown_cep'], "REQUIRED|MAX_LENGTH:9|MIN_LENGTH:9")) {
+                alert("erro");
+                return false;
+            }
+
+            if (this._fields['password'] =! this._fields['password2']) {
+                alert("erro");
+                return false;
+            }
+
+        });
+
         this._addTelephoneButton.addEventListener('click', event => {
             this._telephoneTable.innerHTML += "<tr><td><p>" + this._fields['telephone'].value + "</p></td></tr>";
             this._fields['all_telephones'].value += '@' + this._fields['telephone'].value;
@@ -98,7 +129,7 @@ export class ResearcherRegisterController {
             if (this._fields['password2'].value.length == 0) {
                 this._fields['password2']['helper'].textContent = "Digite sua senha novamente para confirmar";
             } else if (this._fields['password'].value != this._fields['password2'].value) {
-                this._fields['password2'].setCustomValidity('no');
+                //this._fields['password2'].setCustomValidity('no');
                 this._fields['password2']['helper'].textContent = "A confirmação de senha ainda não está correta!";
 
             } else {

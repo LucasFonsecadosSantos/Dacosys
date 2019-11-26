@@ -1,16 +1,15 @@
+import { Validator } from "../../util/Validator.js";
 export class ResearcherRegisterController {
     constructor() {
         this._fields = new Array();
+        this._validator = new Validator();
         this._setElements();
-        this._customizeComponents();
         this._initializeListeners();
-    }
-    _customizeComponents() {
-        this._fields['email'].validationMessage = "O E-mail informado não é um e-mail válido.";
     }
     _setElements() {
         this._addTelephoneButton = document.getElementById('addTelBtn');
         this._telephoneTable = document.getElementById('telephoneTable');
+        this._form = document.getElementById('mainForm');
         this._fields['all_telephones'] = document.getElementsByName('allTelephones')[0];
         this._fields['id_person'] = document.getElementsByName('id_person')[0];
         this._fields['id_person']['helper'] = document.getElementsByName('id_person-helper')[0];
@@ -30,8 +29,30 @@ export class ResearcherRegisterController {
         this._fields['email']['helper'] = document.getElementsByName('email-helper')[0];
         this._fields['password'] = document.getElementsByName('password')[0];
         this._fields['password2'] = document.getElementsByName('password2')[0];
+        this._fields.forEach(field => {
+            field.value = "";
+            console.log(field.value);
+        });
     }
     _initializeListeners() {
+        this._form.addEventListener('submit', event => {
+            if (!this._validator.makeValidation(this._fields['name'], "REQUIRED|MAX_LENGTH:40|MIN_LENGTH:4")) {
+                alert("erro");
+                return false;
+            }
+            if (!this._validator.makeValidation(this._fields['email'], "EMAIL|REQUIRED|MAX_LENGTH:40|MIN_LENGTH:4")) {
+                alert("erro");
+                return false;
+            }
+            if (!this._validator.makeValidation(this._fields['hometown_cep'], "REQUIRED|MAX_LENGTH:9|MIN_LENGTH:9")) {
+                alert("erro");
+                return false;
+            }
+            if (this._fields['password'] = !this._fields['password2']) {
+                alert("erro");
+                return false;
+            }
+        });
         this._addTelephoneButton.addEventListener('click', event => {
             this._telephoneTable.innerHTML += "<tr><td><p>" + this._fields['telephone'].value + "</p></td></tr>";
             this._fields['all_telephones'].value += '@' + this._fields['telephone'].value;
@@ -85,7 +106,7 @@ export class ResearcherRegisterController {
                 this._fields['password2']['helper'].textContent = "Digite sua senha novamente para confirmar";
             }
             else if (this._fields['password'].value != this._fields['password2'].value) {
-                this._fields['password2'].setCustomValidity('no');
+                //this._fields['password2'].setCustomValidity('no');
                 this._fields['password2']['helper'].textContent = "A confirmação de senha ainda não está correta!";
             }
             else {
