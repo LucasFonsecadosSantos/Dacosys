@@ -76,6 +76,7 @@ class ResearcherController extends Controller
             'latest_access'         => DateHandle::getDateTime(),
             'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
             'is_administrator'      => "",
+            'observations'          => null,
             'supervisor_idPerson'   => null
         ];
 

@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `latest_access`             DATE,
     `latest_ip_access`          VARCHAR(15),
     `is_administrator`          TINYINT NOT NULL,
+    `observations`              TEXT,
     `supervisor_idPerson`       CHAR(20),
     PRIMARY KEY(`id_person`)
 )ENGINE = InnoDB;
@@ -60,12 +61,6 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`telephone` (
     `person_idPerson`   CHAR(20)      NOT NULL,
     `telephone`         VARCHAR(13) NOT NULL,
     PRIMARY KEY(`person_idPerson`, `telephone`)
-)ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `dacosys`.`special_needs` (
-    `participant_idPerson`  CHAR(20)  NOT NULL,
-    `need`                  VARCHAR(200)    NOT NULL,
-    PRIMARY KEY(`participant_idPerson`, `need`)
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dacosys`.`quiz` (
@@ -142,13 +137,6 @@ CREATE UNIQUE INDEX `uk_person_email` ON `dacosys`.`person` (`email` ASC);
 ALTER TABLE `telephone`
     ADD CONSTRAINT fk_person_person
     FOREIGN KEY (`person_idPerson`)
-    REFERENCES `person` (`id_person`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE;
-
-ALTER TABLE `special_needs`
-    ADD CONSTRAINT fk_person_participant
-    FOREIGN KEY (`participant_idPerson`)
     REFERENCES `person` (`id_person`)
     ON DELETE CASCADE
     ON UPDATE CASCADE;

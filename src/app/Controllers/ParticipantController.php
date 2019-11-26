@@ -17,6 +17,7 @@ class ParticipantController extends Controller
 
     private $answerModel;
     private $participantModel;
+    private $telephoneModel;
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController instantiated.");
@@ -24,6 +25,7 @@ class ParticipantController extends Controller
         $connection             = DataBase::getInstance();
         $this->answerModel      = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
         $this->participantModel = Container::getModelInstance('ParticipantModel', $connection);
+        $this->telephoneModel   = Container::getModelInstance('TelephoneModel', $connection);
         $this->view = new \stdClass;
     }
 
@@ -40,19 +42,20 @@ class ParticipantController extends Controller
     public function register($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action register.");
+    
+        $this->view->participant = $this->isParticipant($request->post->id_person);
         
-
-        if ($this->view->participant = $this->isParticipant($request->post->access_key)) {
+        if ($this->view->participant != null) {
             $this->view->navigationRoute = [
                 'Cadastre uma conta antes de utilizar o sistema' => '/participante/registrar'
             ];
             $this->loadView("participant/register");
         } else {
-            // return Redirect::route('/participar',
-            //     [
-            //         'error' => ['Sua chave de acesso não é válida. Para participar, por favor, solicite uma nova chave ao pesquisador.']
-            //     ]
-            // );
+            return Redirect::route('/participar',
+                [
+                    'error' => ['Sua chave de acesso não é válida. Para participar, por favor, solicite uma nova chave ao pesquisador.']
+                ]
+            );
         }
 
     }
@@ -60,7 +63,7 @@ class ParticipantController extends Controller
     private function isParticipant($key) 
     {
         $participant = $this->participantModel->getByID('person_' . $key,'_PARTICIPANT_');
-        return (isset($participant) && (!$participant->participated)) ? $participant : false;
+        return (($participant != null) && (!$participant->participated)) ? $participant : null;
     }
 
     public function login()
@@ -87,10 +90,10 @@ class ParticipantController extends Controller
             'latest_access'         => DateHandle::getDateTime(),
             'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
             'supervisor_idPerson'   => null
-        ]
+        ];
         
-        $personData = $this->participantModel->prepareToInsert($personData);
-        $dataTelephone = $this->telephoneModel->prepareToInsert($dataTelephone);
+        $personData     = $this->participantModel->prepareToInsert($personData);
+        $dataTelephone  = $this->telephoneModel->prepareToInsert($dataTelephone);
         
         
         try {
@@ -111,7 +114,7 @@ class ParticipantController extends Controller
             $this->participantModel->delete($id);
             return Redirect::route('/participantes',[
                 'success' => ['Tudo pronto! Removemos o participante.']
-            ])
+            ]);
         } catch (\Exception $e) {
             return Redirect::route('/participantes', [
                 'errors' => ['Ops: Parece que encontramos um problema ao remover o participante. Por favor, contate o administrador.']

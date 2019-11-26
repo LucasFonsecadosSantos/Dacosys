@@ -14,6 +14,7 @@ INSERT INTO person (
     latest_access,
     is_administrator,
     latest_ip_access,
+    observations,
     supervisor_idPerson
 ) VALUES (
     'person_5dd2aaab4f856',
@@ -29,6 +30,7 @@ INSERT INTO person (
     '2019-06-08',
     1,
     '192168200123',
+    NULL,
     NULL
 );
 
@@ -46,6 +48,7 @@ INSERT INTO person (
     latest_access,
     is_administrator,
     latest_ip_access,
+    observations,
     supervisor_idPerson
 ) VALUES (
     'person_5dd2abff62d27',
@@ -61,6 +64,7 @@ INSERT INTO person (
     '2018-09-12',
     0,
     '192168200111',
+    NULL,
     NULL
 );
 INSERT INTO person (
@@ -77,7 +81,8 @@ INSERT INTO person (
     latest_access,
     is_administrator,
     latest_ip_access,
-    supervisor_idPerson    
+    observations,
+    supervisor_idPerson
 ) VALUES (
     'person_5dd2ac1255e21',
     '_PARTICIPANT_',
@@ -92,6 +97,7 @@ INSERT INTO person (
     '2017-10-05',
     0,
     '192168145200',
+    'cego',
     NULL
 );
 INSERT INTO person (
@@ -108,6 +114,7 @@ INSERT INTO person (
     latest_access,
     is_administrator,
     latest_ip_access,
+    observations,
     supervisor_idPerson
 ) VALUES (
     'person_5dd2ac1aefcf4',
@@ -123,6 +130,7 @@ INSERT INTO person (
     '2019-11-09',
     0,
     '192168142122',
+    NULL,
     NULL
 );
 INSERT INTO person (
@@ -139,7 +147,8 @@ INSERT INTO person (
     latest_access,
     is_administrator,
     latest_ip_access,
-    supervisor_idPerson  
+    observations,
+    supervisor_idPerson
 ) VALUES (
     'person_5dd2ac3bb8ee0',
     '_RESEARCHER_',
@@ -154,6 +163,7 @@ INSERT INTO person (
     '2019-08-15',
     0,
     '177105023122',
+    NULL,
     NULL
 );
 INSERT INTO person (
@@ -170,7 +180,8 @@ INSERT INTO person (
     latest_access,
     is_administrator,
     latest_ip_access,
-    supervisor_idPerson    
+    observations,
+    supervisor_idPerson
 ) VALUES (
     'person_5dd2ac4490291',
     '_PARTICIPANT_',
@@ -185,6 +196,7 @@ INSERT INTO person (
     '2019-07-14',
     0,
     '172172012142',
+    NULL,
     NULL
 );
 
@@ -212,15 +224,6 @@ INSERT INTO telephone (
 ) VALUES (
     'person_5dd2ac4490291',
     '35998652563'
-);
-
-/*------------------necessidade especial-----------------*/
-INSERT INTO special_needs (
-    participant_idPerson,
-    need
-) VALUES (
-    'person_5dd2aaab4f856',
-    'cego'
 );
 
 /*---------------------------quiz------------------------*/
