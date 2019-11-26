@@ -10,6 +10,7 @@ class TelephoneModel extends Model
 
     public function prepareToInsert(array $data)
     {
+        // print_r($data)/
         if (($data['telephone'] != "") || $data['telephone']) {
             $data['telephone'] = explode('@', $data['telephone']);
             foreach ($data['telephone'] as $telephone) {

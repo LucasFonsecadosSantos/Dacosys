@@ -2,7 +2,11 @@ export class ResearcherRegisterController {
     constructor() {
         this._fields = new Array();
         this._setElements();
+        this._customizeComponents();
         this._initializeListeners();
+    }
+    _customizeComponents() {
+        this._fields['email'].validationMessage = "O E-mail informado não é um e-mail válido.";
     }
     _setElements() {
         this._addTelephoneButton = document.getElementById('addTelBtn');
@@ -75,6 +79,18 @@ export class ResearcherRegisterController {
                 this._fields['telephone'].value += '-';
             }
             this._fields['telephone']['helper'].textContent = "Você só pode digitar mais " + (15 - fieldLength) + " números.";
+        });
+        this._fields['password2'].addEventListener('keydown', event => {
+            if (this._fields['password2'].value.length == 0) {
+                this._fields['password2']['helper'].textContent = "Digite sua senha novamente para confirmar";
+            }
+            else if (this._fields['password'].value != this._fields['password2'].value) {
+                this._fields['password2'].setCustomValidity('no');
+                this._fields['password2']['helper'].textContent = "A confirmação de senha ainda não está correta!";
+            }
+            else {
+                this._fields['password2']['helper'].textContent = "Senha confirmada!";
+            }
         });
     }
 }

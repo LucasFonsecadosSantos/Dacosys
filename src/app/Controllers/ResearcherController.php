@@ -154,8 +154,6 @@ class ResearcherController extends Controller
                 'errors' => ['Erro ao buscar pesquisador. (' . $e->getMessage() . ')']
             ]);
         }
-
-
         $this->loadView('researcher/show');
     }
 
