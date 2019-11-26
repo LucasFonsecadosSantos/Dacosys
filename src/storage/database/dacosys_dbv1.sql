@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `dacosys`.`person` (
     `latest_ip_access`          VARCHAR(15),
     `is_administrator`          TINYINT NOT NULL,
     `observations`              TEXT,
+    `quiz_idQuiz`               CHAR(18),
     `supervisor_idPerson`       CHAR(20),
     PRIMARY KEY(`id_person`)
 )ENGINE = InnoDB;
@@ -127,6 +128,13 @@ CREATE UNIQUE INDEX `uk_person_email` ON `dacosys`.`person` (`email` ASC);
  * | CREATING ALL TABLE CONSTRAINTS                                 +
  * +----------------------------------------------------------------+
  */
+ ALTER TABLE `person`
+    ADD CONSTRAINT fk_quiz_person
+    FOREIGN KEY (`quiz_idQuiz`)
+    REFERENCES `quiz` (`id_quiz`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE;
+ 
  ALTER TABLE `person`
     ADD CONSTRAINT fk_person_supervisor
     FOREIGN KEY (`supervisor_idPerson`)

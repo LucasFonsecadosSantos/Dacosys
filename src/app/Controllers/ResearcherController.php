@@ -104,11 +104,11 @@ class ResearcherController extends Controller
                 ]
             );
         } catch (\Exception $e) {
-            echo $e->getMessage();
-            // return Redirect::route("/bosta",[
-            //         'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
-            //     ]
-            // );
+            //echo $e->getMessage();
+            return Redirect::route("/pesquisadores",[
+                    'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
+                ]
+            );
         }
     }
 

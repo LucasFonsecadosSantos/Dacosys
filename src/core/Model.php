@@ -95,12 +95,11 @@ abstract class Model
 
     public function update(array $data, $id)
     {
-        $data = $this->prepareDataToUpdate($data);
-        $query = 'UPDATE {$this->table} SET {$data[0]} WHERE id=:id';
+        $data = $this->prepareDataUpdate($data);
+        $query = "UPDATE " . $this->table . " SET " . $data[0] . "  WHERE id_" . $this->table . "=:id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
-        $limit = count($data[1]);
-        for ($i = 0; $i < limit; ++$i) {
+        for($i = 0; $i < count($data[1]); $i++){
             $stmt->bindValue("{$data[1][$i]}", $data[2][$i]);
         }
         $result = $stmt->execute();
@@ -125,19 +124,17 @@ abstract class Model
         return [$strKeys, $strBinds, $binds, $values];
     }
 
-    private function prepareDataToUpdate(array $data)
+    private function prepareDataUpdate(array $data)
     {
-        $strKeysBinds   = "";
-        $binds          = [];
-        $values         = [];
-
-        foreach ($data as $key => $value) {
+        $strKeysBinds = "";
+        $binds = [];
+        $values = [];
+        foreach ($data as $key => $value){
             $strKeysBinds = "{$strKeysBinds},{$key}=:{$key}";
             $binds[] = ":{$key}";
             $values[] = $value;
         }
-        $strKeysBinds = substr($strKeysBinds,1);
-
+        $strKeysBinds = substr($strKeysBinds, 1);
         return [$strKeysBinds, $binds, $values];
     }
 }

@@ -77,30 +77,37 @@ class ParticipantController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action store.");
         
         $personData = [
-            'id_person'             => $request->post->id_person,
+            'id_person'             => 'person_' . $request->post->id_person,
             'type'                  => '_PARTICIPANT_',
-            'name'                  => $request->post->name,
+            'name'                  => $request->post->name_person,
             'email'                 => $request->post->email,
             'password'              => null,
-            'participated'          => false,
+            'participated'          => 1,
             'sex'                   => $request->post->sex,
             'hometown_cep'          => $request->post->hometown_cep,
             'color'                 => $request->post->color,
             'birth_day'             => $request->post->birth_day,
             'latest_access'         => DateHandle::getDateTime(),
             'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+            'is_administrator'      => 0,
+            'observations'          => $request->post->observations,
+            'quiz_idQuiz'           => $request->post->id_quiz,
             'supervisor_idPerson'   => null
         ];
         
         $personData     = $this->participantModel->prepareToInsert($personData);
-        $dataTelephone  = $this->telephoneModel->prepareToInsert($dataTelephone);
-        
+        //$dataTelephone  = $this->telephoneModel->prepareToInsert($dataTelephone);
+    
         
         try {
-            $this->participantModel->create($personData);
+            $this->participantModel->update($personData, 'person_'.$request->post->id_person);
             //ainda precisa adicionar os telefones
             //ainda precisa adicionar as necessidades epeciais
+            return Redirect::route('/questionario/' . $personData['quiz_idQuiz'] . '/responder', [
+                'errors' => ['Houve um erro ao realizarmos o seu cadastro. Por favor, contate o administrador do sistema.']
+            ]);
         } catch (\Exception $e) {
+            // print_r($e->getMessage());
             return Redirect::route('/participar', [
                 'errors' => ['Houve um erro ao realizarmos o seu cadastro. Por favor, contate o administrador do sistema.']
             ]);

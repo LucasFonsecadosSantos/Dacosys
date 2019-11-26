@@ -1,231 +1,5 @@
 /*-------------------------Person------------------*/
 USE dacosys;
-INSERT INTO person (
-    id_person,
-    type,
-    name,
-    email,
-    password,
-    participated,
-    sex,
-    hometown_cep,
-    color,
-    birth_day,
-    latest_access,
-    is_administrator,
-    latest_ip_access,
-    observations,
-    supervisor_idPerson
-) VALUES (
-    'person_5dd2aaab4f856',
-    '_ADMINISTRATOR_',
-    'Nome1',
-    'email1@email.com',
-    '$2y$10$QL4EPfSFFd0bWKERroRHTeBoBjBG/G8ITBfgPVPOCj7c4Yi2IDsa2',
-    1,
-    '_M_',
-    '37200000',
-    '_BRANCA_',
-    '1996-01-20',
-    '2019-06-08',
-    1,
-    '192168200123',
-    NULL,
-    NULL
-);
-
-INSERT INTO person (
-    id_person,
-    type,
-    name,
-    email,
-    password,
-    participated,
-    sex,
-    hometown_cep,
-    color,
-    birth_day,
-    latest_access,
-    is_administrator,
-    latest_ip_access,
-    observations,
-    supervisor_idPerson
-) VALUES (
-    'person_5dd2abff62d27',
-    '_RESEARCHER_',
-    'Nome2',
-    'email2@email.com',
-    '$2y$10$nBAwojgheo/nJCWzsjqCXOuXtK9sK9ND85/2VBuWipBILLi9w9z42',
-    0,
-    '_F_',
-    '37200000',
-    '_PRETA_',
-    '1993-12-05',
-    '2018-09-12',
-    0,
-    '192168200111',
-    NULL,
-    NULL
-);
-INSERT INTO person (
-    id_person,
-    type,
-    name,
-    email,
-    password,
-    participated,
-    sex,
-    hometown_cep,
-    color,
-    birth_day,
-    latest_access,
-    is_administrator,
-    latest_ip_access,
-    observations,
-    supervisor_idPerson
-) VALUES (
-    'person_5dd2ac1255e21',
-    '_PARTICIPANT_',
-    'Nome3',
-    'email3@email.com',
-    '$2y$10$29e5mfc5gKK33NQ7jEQM9.mszKUyeTozNdKoFzqU07h904ZXmSvG6',
-    0,
-    '_M_',
-    '37200000',
-    '_PARDA_',
-    '1986-01-07',
-    '2017-10-05',
-    0,
-    '192168145200',
-    'cego',
-    NULL
-);
-INSERT INTO person (
-    id_person,
-    type,
-    name,
-    email,
-    password,
-    participated,
-    sex,
-    hometown_cep,
-    color,
-    birth_day,
-    latest_access,
-    is_administrator,
-    latest_ip_access,
-    observations,
-    supervisor_idPerson
-) VALUES (
-    'person_5dd2ac1aefcf4',
-    '_RESEARCHER_',
-    'Nome4',
-    'email4@email.com',
-    '$2y$10$yaN.Zxt.Ai0VyM7ahTLiEONRXNpV5gn.aPEGgvww1GIFM5ok/71hu',
-    1,
-    '_F_',
-    '37200000',
-    '_BRANCA_',
-    '1994-10-20',
-    '2019-11-09',
-    0,
-    '192168142122',
-    NULL,
-    NULL
-);
-INSERT INTO person (
-    id_person,
-    type,
-    name,
-    email,
-    password,
-    participated,
-    sex,
-    hometown_cep,
-    color,
-    birth_day,
-    latest_access,
-    is_administrator,
-    latest_ip_access,
-    observations,
-    supervisor_idPerson
-) VALUES (
-    'person_5dd2ac3bb8ee0',
-    '_RESEARCHER_',
-    'Nome5',
-    'email5@email.com',
-    '$2y$10$RAyYt4cqCIVTz6s823E7RuPWC4CTRzuU6Md8UkUM5PtDzjM8ijOpi',
-    0,
-    '_M_',
-    '37201966',
-    '_AMARELA_',
-    '1997-07-30',
-    '2019-08-15',
-    0,
-    '177105023122',
-    NULL,
-    NULL
-);
-INSERT INTO person (
-    id_person,
-    type,
-    name,
-    email,
-    password,
-    participated,
-    sex,
-    hometown_cep,
-    color,
-    birth_day,
-    latest_access,
-    is_administrator,
-    latest_ip_access,
-    observations,
-    supervisor_idPerson
-) VALUES (
-    'person_5dd2ac4490291',
-    '_PARTICIPANT_',
-    'Nome6',
-    'email6@email.com',
-    null,
-    0,
-    '_F_',
-    '37201214',
-    '_INDIGENA_',
-    '1991-04-06',
-    '2019-07-14',
-    0,
-    '172172012142',
-    NULL,
-    NULL
-);
-
-
-/*------------------------telefone-------------------------*/
-INSERT INTO telephone (
-    person_idPerson,
-    telephone
-) VALUES (
-    'person_5dd2aaab4f856',
-    '99999999999'
-);
-
-INSERT INTO telephone (
-    person_idPerson,
-    telephone
-) VALUES (
-    'person_5dd2aaab4f856',
-    '88888888888'
-);
-
-INSERT INTO telephone (
-    person_idPerson,
-    telephone
-) VALUES (
-    'person_5dd2ac4490291',
-    '35998652563'
-);
-
 /*---------------------------quiz------------------------*/
 INSERT INTO quiz (
     id_quiz,
@@ -296,6 +70,252 @@ INSERT INTO quiz (
     '20190213',
     1
 );
+
+
+
+
+
+
+
+INSERT INTO person (
+    id_person,
+    type,
+    name,
+    email,
+    password,
+    participated,
+    sex,
+    hometown_cep,
+    color,
+    birth_day,
+    latest_access,
+    is_administrator,
+    latest_ip_access,
+    observations,
+    quiz_idQuiz,
+    supervisor_idPerson
+) VALUES (
+    'person_5dd2aaab4f856',
+    '_ADMINISTRATOR_',
+    'Nome1',
+    'email1@email.com',
+    '$2y$10$QL4EPfSFFd0bWKERroRHTeBoBjBG/G8ITBfgPVPOCj7c4Yi2IDsa2',
+    1,
+    '_M_',
+    '37200000',
+    '_BRANCA_',
+    '1996-01-20',
+    '2019-06-08',
+    1,
+    '192168200123',
+    NULL,
+    NULL,
+    NULL
+);
+
+INSERT INTO person (
+    id_person,
+    type,
+    name,
+    email,
+    password,
+    participated,
+    sex,
+    hometown_cep,
+    color,
+    birth_day,
+    latest_access,
+    is_administrator,
+    latest_ip_access,
+    observations,
+    quiz_idQuiz,
+    supervisor_idPerson
+) VALUES (
+    'person_5dd2abff62d27',
+    '_RESEARCHER_',
+    'Nome2',
+    'email2@email.com',
+    '$2y$10$nBAwojgheo/nJCWzsjqCXOuXtK9sK9ND85/2VBuWipBILLi9w9z42',
+    0,
+    '_F_',
+    '37200000',
+    '_PRETA_',
+    '1993-12-05',
+    '2018-09-12',
+    0,
+    '192168200111',
+    NULL,
+    NULL,
+    NULL
+);
+INSERT INTO person (
+    id_person,
+    type,
+    name,
+    email,
+    password,
+    participated,
+    sex,
+    hometown_cep,
+    color,
+    birth_day,
+    latest_access,
+    is_administrator,
+    latest_ip_access,
+    observations,
+    quiz_idQuiz,
+    supervisor_idPerson
+) VALUES (
+    'person_5dd2ac1255e21',
+    '_PARTICIPANT_',
+    'Nome3',
+    'email3@email.com',
+    '$2y$10$29e5mfc5gKK33NQ7jEQM9.mszKUyeTozNdKoFzqU07h904ZXmSvG6',
+    0,
+    '_M_',
+    '37200000',
+    '_PARDA_',
+    '1986-01-07',
+    '2017-10-05',
+    0,
+    '192168145200',
+    'cego',
+    'quiz_5dd2aec419004',
+    NULL
+);
+INSERT INTO person (
+    id_person,
+    type,
+    name,
+    email,
+    password,
+    participated,
+    sex,
+    hometown_cep,
+    color,
+    birth_day,
+    latest_access,
+    is_administrator,
+    latest_ip_access,
+    observations,
+    quiz_idQuiz,
+    supervisor_idPerson
+) VALUES (
+    'person_5dd2ac1aefcf4',
+    '_RESEARCHER_',
+    'Nome4',
+    'email4@email.com',
+    '$2y$10$yaN.Zxt.Ai0VyM7ahTLiEONRXNpV5gn.aPEGgvww1GIFM5ok/71hu',
+    1,
+    '_F_',
+    '37200000',
+    '_BRANCA_',
+    '1994-10-20',
+    '2019-11-09',
+    0,
+    '192168142122',
+    NULL,
+    NULL,
+    NULL
+);
+INSERT INTO person (
+    id_person,
+    type,
+    name,
+    email,
+    password,
+    participated,
+    sex,
+    hometown_cep,
+    color,
+    birth_day,
+    latest_access,
+    is_administrator,
+    latest_ip_access,
+    observations,
+    quiz_idQuiz,
+    supervisor_idPerson
+) VALUES (
+    'person_5dd2ac3bb8ee0',
+    '_RESEARCHER_',
+    'Nome5',
+    'email5@email.com',
+    '$2y$10$RAyYt4cqCIVTz6s823E7RuPWC4CTRzuU6Md8UkUM5PtDzjM8ijOpi',
+    0,
+    '_M_',
+    '37201966',
+    '_AMARELA_',
+    '1997-07-30',
+    '2019-08-15',
+    0,
+    '177105023122',
+    NULL,
+    NULL,
+    NULL
+);
+INSERT INTO person (
+    id_person,
+    type,
+    name,
+    email,
+    password,
+    participated,
+    sex,
+    hometown_cep,
+    color,
+    birth_day,
+    latest_access,
+    is_administrator,
+    latest_ip_access,
+    observations,
+    quiz_idQuiz,
+    supervisor_idPerson
+) VALUES (
+    'person_5dd2ac4490291',
+    '_PARTICIPANT_',
+    'Nome6',
+    'email6@email.com',
+    null,
+    0,
+    '_F_',
+    '37201214',
+    '_INDIGENA_',
+    '1991-04-06',
+    '2019-07-14',
+    0,
+    '172172012142',
+    NULL,
+    'quiz_5dd2aec419004',
+    NULL
+);
+
+
+/*------------------------telefone-------------------------*/
+INSERT INTO telephone (
+    person_idPerson,
+    telephone
+) VALUES (
+    'person_5dd2aaab4f856',
+    '99999999999'
+);
+
+INSERT INTO telephone (
+    person_idPerson,
+    telephone
+) VALUES (
+    'person_5dd2aaab4f856',
+    '88888888888'
+);
+
+INSERT INTO telephone (
+    person_idPerson,
+    telephone
+) VALUES (
+    'person_5dd2ac4490291',
+    '35998652563'
+);
+
+
 
 /*---------------reseacher_access_quiz------------------*/
 INSERT INTO reseacher_access_quiz (

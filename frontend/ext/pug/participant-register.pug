@@ -19,7 +19,7 @@ html
                     .container.mt-5.pb-5
                         .body__title
                             |   <?php
-                            |       echo '<h3 class="m-0 p-0">dados demográficos</h3>';
+                            |       echo '<h3 class="m-0 p-0">Dados demográficos</h3>';
                             |   ?>
                             .body__titleNavigation
                                 |   <?php
@@ -36,8 +36,12 @@ html
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                         label Chave de Acesso *
-                                        input(type="text",maxlength=13,minlength=13 name="id_person", placeholder="Ex.: 5dd2aaab4f856", title="Identificador único do seu cadastro.", alt="Campo para inserir o identificador único do seu cadastro.")
-                                        p.white-color.small-font.mt-1(name="id_person-helper") Máximo 13 letras/números.
+                                        |   <?php
+                                        |       $id = str_replace("person_","",$this->view->participant->id_person);
+                                        |       echo '<input style="cursor: not-allowed" type="text" readonly value="' . $id . '" maxlength=13 minlength=13 name="id_person" placeholder="Ex.: 5dd2aaab4f856" title="Identificador único do seu cadastro." alt="Campo para inserir o identificador único do seu cadastro."/>'; 
+                                        |   ?>
+                                        //- input(type="text",maxlength=13,minlength=13 name="id_person", placeholder="Ex.: 5dd2aaab4f856", title="Identificador único do seu cadastro.", alt="Campo para inserir o identificador único do seu cadastro.")
+                                        p.white-color.small-font.mt-1(name="id_person-helper") Código único de identificação do cadastro.
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
                                         label nome *
@@ -63,6 +67,7 @@ html
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                         input(type="hidden", name="allTelephones", value="")
+                                        |   <?php echo '<input type="hidden" name="id_quiz" value="' . $this->view->participant->quiz_idQuiz . '"/>'; ?>
                                         table.data-table2.d-none#telephoneTable
                                             thead
                                                 tr
