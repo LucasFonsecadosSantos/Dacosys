@@ -1,0 +1,30 @@
+.data-table
+    width: 100%
+    tbody
+        tr
+            transition: all .8s
+            border-bottom: solid 1px lighten($__COLOR__carbon-dark-1, 10)
+            // border-bottom: solid 1px lighten($__COLOR__purple-1, 10)
+            cursor: pointer
+            &:last-child
+                border-bottom: none
+            &:hover
+                background: darken($__COLOR__green-1, 10)
+                & > td i
+                    color: #FFF
+            td
+                padding: $__SPACING__padding-default 0
+                align-items: center
+                p, i
+                    color: #FFF
+                    padding: 0px
+                    margin: 0px
+                    transition: all .8s
+                p
+                    font-style: italic
+                i
+                    color: $__COLOR__green-1
+                &:last-child
+                    width: 8%
+                    text-align: right
+                    cursor: pointer

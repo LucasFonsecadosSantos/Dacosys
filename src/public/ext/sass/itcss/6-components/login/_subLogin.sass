@@ -1,0 +1,20 @@
+.login__subLogin
+    background:         transparent
+    display:            flex
+    justify-content:    center
+    align-items:        center
+    height:             100vh
+    max-height:         100vh
+    overflow:           hidden
+    &:first-child
+        @extends .hidden-md-down
+        @include responsive_system(6,6,6,6,6)
+        flex-direction: column
+        justify-content: center
+    &:last-child
+        @include responsive_system(6,12,12,6,6)
+    p
+        color: $__COLOR__green-1
+    .login__logo
+        width: 30%
+        margin: 0px auto

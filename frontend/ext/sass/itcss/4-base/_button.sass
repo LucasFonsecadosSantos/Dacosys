@@ -1,0 +1,28 @@
+button
+    @include border_radius(4px)
+    outline: none
+    background: linear-gradient( 109.6deg,  #aaffa9 11.2%, #11ffbd 91.1% )
+    //background: $__COLOR__green-1
+    border: none
+    padding: $__SPACING__padding-default/2 $__SPACING__padding-default
+    font:
+        family: $__FONT__font-family-1
+        weight: 400
+        size: 1em
+    color: $__COLOR__carbon-dark-1
+    transition: all $__TIME__duration $__ANIMATION__transition
+    &:hover
+        background: #aaffa9
+    &:active
+        background: #11ffbd
+    &[class="btn-purple-alternative"]
+        display: flex
+        justify-content: center
+        align-items: center
+        background: transparent
+        border: solid 2px $__COLOR__green-1
+        color: $__COLOR__green-1
+        padding: $__SPACING__padding-default
+        &:hover
+            background: $__COLOR__green-1
+            color: #FFF

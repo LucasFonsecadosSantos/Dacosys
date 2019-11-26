@@ -12,10 +12,14 @@ class Container
         return new $controller;
     }
 
-    public static function getModelInstance($modelName)
+    public static function getModelInstance($modelName, $connection = null)
     {
         $model = "App\\Models\\" . $modelName;
-        return new $model(DataBase::getInstance());
+        if ($connection == null) {
+            return new $model(DataBase::getInstance());
+        } else {
+            return new $model($connection);
+        }
     }
 
     public static function Exception404()

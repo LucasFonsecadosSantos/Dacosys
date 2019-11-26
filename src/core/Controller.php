@@ -6,18 +6,46 @@ use Util\Logger;
 
 abstract class Controller
 {
+    protected   $model;
     protected   $view;
+    protected   $success;
+    protected   $error;
+    protected   $information;
+    protected   $navigationRoute;
     private     $viewPath;
 
-    public function __construct()
+    public function __construct($modelName = null)
     {
         $this->view = new \stdClass;
+        $this->view->navigationRoute = [];
+        // if ($modelName != null) {
+        //     $this->model = Container::getModelInstance($modelName);
+        // }
+        $this->checkMessages();
+    }
+
+    private function checkMessages()
+    {
+        if (Session::get('success')) {
+            $this->success = Session::get('success');
+            Session::destroy('success');
+        }
+
+        if (Session::get('error')) {
+            $this->error = Session::get('error');
+            Session::destroy('error');
+        }
+
+        if (Session::get('information')) {
+            $this->information = Session::get('information');
+            Session::destroy('information');
+        }
     }
 
     protected function loadView($path)
     {
         $this->viewPath = $path;
-        $this->getViewFile();
+        return $this->getViewFile();
     }
 
     protected function getViewFile()
@@ -25,7 +53,7 @@ abstract class Controller
         Logger::log_message(Logger::LOG_INFORMATION, "Getting view file...");
         if (file_exists(__DIR__ . "/../app/Views/{$this->viewPath}.phtml")) {
             Logger::log_message(Logger::LOG_SUCCESS, "View found! " . __DIR__ . "/../app/Views/{$this->viewPath}.phtml");
-            require_once __DIR__ . "/../app/Views/{$this->viewPath}.phtml";
+            return require_once __DIR__ . "/../app/Views/{$this->viewPath}.phtml";
         } else {
             Logger::log_message(Logger::LOG_ERROR, "View not found! " . __DIR__ . "/../app/Views/{$this->viewPath}.phtml");
             //TODO

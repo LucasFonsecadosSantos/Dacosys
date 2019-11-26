@@ -1,0 +1,107 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Cadastrar pesquisador","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="researcher-register")
+        //- header
+        //-     include modules/components/_header.pug
+        main
+            .container
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Cadastrar novo pesquisador</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
+                .row
+                    .dashboard__subDashboard_1
+                        +box("informe os dados", false, "/questionarios/registrar", "/questionarios")
+                            form#mainForm(method="POST", action="/pesquisador/salvar", autocomplete="off")
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6.d-flex.align-items-center.justify-content-center.justify-content-sm-center.justify-content-md-end.justify-content-lg-end.justify-content-xl-end
+                                        input.w-auto.mr-3(type="radio", name="type", value="_ADMINISTRATOR_",title="Clique caso voce queira criar um novo projeto.", alt="Botão para selecionar caso voce queira criar um novo projeto.")
+                                        label(for="type") Cadastro de Administrador
+                                    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6.d-flex.align-items-center.justify-content-center.justify-content-sm-center.justify-content-md-start.justify-content-lg-start.justify-content-xl-start
+                                        input.w-auto.mr-3(type="radio", name="type", value="_RESEARCHER_", title="Clique caso voce queira se submeter a projeto.", alt="Botão para selecionar caso voce queira se submeter a um projeto.")
+                                        label(for="type") Cadastro de Pesquisador
+                                .row.mt-3.d-none#id_person_row
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        label ID do cadastro
+                                        input#id_person(type="text",maxlength=13,minlength=13 name="id_person", placeholder="Ex.: 5dd2aaab4f856", title="Identificador único do seu cadastro.", alt="Campo para inserir o identificador único do seu cadastro.")
+                                        p.white-color.small-font.mt-1(name="id_person-helper") Máximo 13 letras/números.
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6
+                                        label nome
+                                        input(type="text",maxlength=40, name="name_person", placeholder="Ex.: Fulano da Silva", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
+                                        p.white-color.small-font.mt-1(name="name-helper") Máximo 40 letras.
+                                    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6
+                                        label CEP (natural)
+                                        input(type="text",maxlength=9,minlength=9, name="hometown_cep", placeholder="xxxxx - xxx", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
+                                        p.white-color.small-font.mt-1(name="hometown_cep-helper") Máximo 09 letras com traço.
+                                .row.mt-3.d-flex.align-items-center.justify-content-center
+                                    .col-12.col-sm-12.col-md-10.col-lg-10.col-xl-10
+                                        label Telefone
+                                        input(type="text", maxlength=15,name="telephone_add_field", placeholder="", title="Informe um telefone e adicione.", alt="Campo para informar telefone e adicionar.")
+                                        p.white-color.small-font.mt-1(name="telephone_add_field-helper") Máximo 15 números (não utilizar parenteses ou qualquer tipo de pontuação).
+                                    .col-12.col-sm-12.col-md-2.col-lg-2.col-xl-2.d-flex.align-items-end
+                                        button.align-self-end#addTelBtn(type="button", title="Clique para adicionar este número de telefone.", alt="Botão para adicionar este número de telefone.") adicionar telefone
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        input(type="hidden", name="allTelephones", value="")
+                                        table.data-table2.d-none#telephoneTable
+                                            thead
+                                                tr
+                                                    td
+                                                        h4 telefones adicionados
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
+                                        label Data de Nascimento
+                                        input(type="date", name="birth_day", placeholder="", title="Clique e selecione uma data.", alt="Campo para selecionar data de nascimento.")
+                                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
+                                        label Cor
+                                        select(name="color", placeholder="", title="Clique e selecione sua cor.", alt="Campo para selecionar sua cor.")
+                                            option(value="default", selected) -- CLIQUE E SELECIONE --
+                                            option(value="_PRETA_") Preta
+                                            option(value="_BRANCA_") Branca
+                                            option(value="_PARDA_") Parda
+                                            option(value="_AMARELA_") Amarela
+                                            option(value="_INDIGENA_") Indigena
+                                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
+                                        label Sexo
+                                        select(name="sex", placeholder="", title="Clique e informe um sexo.", alt="Campo para informar um sexo.")
+                                            option(value="default", selected) -- CLIQUE E SELECIONE --
+                                            option(value="_M_") Masculino
+                                            option(value="_F_") Feminino
+                                            option(value="_O_") Outro
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
+                                        label E-Mail
+                                        input(type="email", name="email", maxlength=40, placeholder="Ex.: email@email.com", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                        p.white-color.small-font.mt-1(name="email-helper") Máximo 40 caracteres.
+                                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
+                                        label senha
+                                        input(type="password", name="password", maxlength=40,placeholder="8 caracteres", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4
+                                        label confirmar senha
+                                        input(type="password", name="password2",maxlength=40,  placeholder="Reescreva sua senha", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
+                                        button(type="submit", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.") Finalizar cadastro
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

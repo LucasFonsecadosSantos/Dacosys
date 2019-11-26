@@ -1,0 +1,21 @@
+textarea
+    @include border_radius(4px)
+    background: transparent
+    padding: .8em
+    width: 100%
+    outline: none
+    border: solid 2px $__COLOR__green-1
+    font:
+        family: $__FONT__font-family-1
+        weight: 300
+    color: $__COLOR__green-1
+    transition: $__TIME__duration $__ANIMATION__transition
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    &:focus, &:hover
+        border-color: $__COLOR__purple-5
+        color: $__COLOR__purple-5
+    &:invalid
+        border: solid 3px $__COLOR__red-1

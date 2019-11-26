@@ -1,0 +1,46 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Login","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="login")
+        //header
+            include modules/components/_header.pug
+        main
+            .container-fluid
+                .row
+                    .login__subLogin.hidden-md-down
+                        .row
+                            img.login__logo(src="img/identity/icon-green.svg")
+                        .row.mt-4
+                            h1 dacosys
+                    .login__subLogin
+                        form(method="POST", action="/pesquisador/autenticar")
+                            .container-fluid
+                                .row
+                                    h2 login
+                                .row.mt-3
+                                    label email
+                                    input#email(type="email", name="email", placeholder="email@email.com.br", title="Acesse sua conta utilizando seu email cadastrado.", alt="Campo para inserir o email da conta.")
+                                    label.mt-3 senha
+                                    input#passwd(type="password", name="password", placeholder="", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
+                                .row.mt-3
+                                    .col-6.d-flex.justify-content-start.pl-0
+                                        a
+                                            p Esqueci minha senha
+                                    .col-6.d-flex.justify-content-end.pr-0
+                                        a(href="/pesquisador/registrar")
+                                            p Criar nova conta
+                                .row.d-flex.justify-content-end
+                                    button.flex-fill(title="Clique para acessar sua conta.", alt="Botão para acessar a conta.") acessar
+                            
+        //footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug
