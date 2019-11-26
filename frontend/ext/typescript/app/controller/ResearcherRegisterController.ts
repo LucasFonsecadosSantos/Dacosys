@@ -13,6 +13,7 @@ export class ResearcherRegisterController {
     private _setElements(): void {
         this._addTelephoneButton        = <HTMLButtonElement> document.getElementById('addTelBtn');
         this._telephoneTable            = <HTMLTableElement> document.getElementById('telephoneTable');
+        this._fields['all_telephones'] =  <HTMLTableElement> document.getElementsByName('allTelephones')[0];
         this._fields['id_person']       = <HTMLInputElement> document.getElementsByName('id_person')[0];
         this._fields['id_person']['helper'] = <HTMLInputElement> document.getElementsByName('id_person-helper')[0];
         this._fields['telephone']       = <HTMLInputElement> document.getElementsByName('telephone_add_field')[0];
@@ -36,6 +37,7 @@ export class ResearcherRegisterController {
     private _initializeListeners(): void {
         this._addTelephoneButton.addEventListener('click', event => {
             this._telephoneTable.innerHTML += "<tr><td><p>" + this._fields['telephone'].value + "</p></td></tr>";
+            this._fields['all_telephones'].value += '@' + this._fields['telephone'].value;
             this._fields['telephone'].value = "";
         });
 

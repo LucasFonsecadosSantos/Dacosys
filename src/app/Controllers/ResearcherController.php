@@ -20,8 +20,8 @@ class ResearcherController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher instantiated.");
         parent::__construct('ResearcherModel');
         $connection = DataBase::getInstance();
-        $this->personModel = Container::getModelInstance('ResearcherModel', $connection);
-        //$this->telephoneModel = Container::getModelInstance('TelephoneModel', $connection);
+        $this->researcherModel = Container::getModelInstance('ResearcherModel', $connection);
+        $this->telephoneModel = Container::getModelInstance('TelephoneModel', $connection);
         $this->view = new \stdClass;
     }
 
@@ -44,7 +44,7 @@ class ResearcherController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action listation.");
         
         try {
-            $this->view->researcherArray = $this->personModel->getAll('_RESEARCHER_');
+            $this->view->researcherArray = $this->researcherModel->getAll('_RESEARCHER_');
             $this->view->navigationRoute = [
                 'Home' => '/',
                 'Pesquisadores' => '/pesquisadores'
@@ -61,36 +61,53 @@ class ResearcherController extends Controller
     public function store($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action store.");
+        
+        $dataPerson = [
+            'id_person'             => $request->post->id_person,
+            'type'                  => '_RESEARCHER_',
+            'name'                  => $request->post->name_person,
+            'email'                 => $request->post->email,
+            'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
+            'participated'          => 1,
+            'sex'                   => $request->post->sex,
+            'hometown_cep'          => $request->post->hometown_cep,
+            'color'                 => $request->post->color,
+            'birth_day'             => $request->post->birth_day,
+            'latest_access'         => DateHandle::getDateTime(),
+            'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
+            'is_administrator'      => "",
+            'supervisor_idPerson'   => null
+        ];
+
+        $dataPerson = $this->researcherModel->prepareToInsert($dataPerson);
+        
+        $dataTelephone = [
+            'person_idPerson' => $dataPerson['id_person'],
+            'telephone' => $request->post->all_telephone
+        ];
+        $dataTelephone = $this->telephoneModel->prepareToInsert($dataTelephone);
+        
         try {
-            $this->personModel->create($this->_prepareToInsert(
-                    [
-                        'id_person'             => $request->post->id_person,
-                        'type'                  => '_RESEARCHER_',
-                        'name'                  => $request->post->name_person,
-                        'email'                 => $request->post->email,
-                        'password'              => password_hash($request->post->password, PASSWORD_BCRYPT),
-                        'participated'          => 1,
-                        'sex'                   => $request->post->sex,
-                        'hometown_cep'          => $request->post->hometown_cep,
-                        'color'                 => $request->post->color,
-                        'birth_day'             => $request->post->birth_day,
-                        'latest_access'         => DateHandle::getDateTime(),
-                        'latest_ip_access'      => $_SERVER['REMOTE_ADDR'],
-                        'is_administrator'      => "",
-                        'supervisor_idPerson'   => null
-                    ]
-                )
-            );
+            $this->researcherModel->create($dataPerson);
+
+            if ($dataTelephone['telephone'] != "" || $dataTelephone['telephone']) {
+                foreach ($dataTelephone['telephone'] as $telephone) {
+                    $this->telephoneModel->create([
+                        'person_idPerson' => $dataPerson['id_person'],
+                        'telephone' => $telephone
+                    ]);
+                }
+            }
             return Redirect::route("/pesquisadores",[
                     'sucess' => ['Pesquisador registrado com sucesso!']
                 ]
             );
         } catch (\Exception $e) {
             echo $e->getMessage();
-            return Redirect::route("/bosta",[
-                    'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
-                ]
-            );
+            // return Redirect::route("/bosta",[
+            //         'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
+            //     ]
+            // );
         }
     }
 
@@ -98,7 +115,10 @@ class ResearcherController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action delete.");
         try {
-            $this->personModel->delete($id);
+            $this->researcherModel->delete($id);
+            return Redirect::route('/pesquisadores',[
+                'success' => ['Pronto! Já removemos o pesquisador para você.']
+            ]);
         } catch (\Exception $e) {
             return Redirect::route('/pesquisadores',[
                 'errors' => ['Erro ao remover pesquisador. (' . $e->getMessage() . ')']
@@ -115,12 +135,10 @@ class ResearcherController extends Controller
 
     public function show($id)
     {
-        //TODO Researcher show action method.
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action show.");
-        // foreach ($this-)
 
         try {
-            $this->view->person = $this->_prepareToView($this->personModel->getByID($id, '_RESEARCHER_'));
+            $this->view->person = $this->researcherModel->prepareToView($this->researcherModel->getByID($id, '_RESEARCHER_'));
 
             $this->view->navigationRoute = [
                 'Home'          => '/',
@@ -141,66 +159,4 @@ class ResearcherController extends Controller
         $this->loadView('researcher/show');
     }
 
-    private function _prepareToInsert(array $data)
-    {
-        $data['hometown_cep'] = str_replace('-','',$data['hometown_cep']);
-        //$telephoneArray = explode('@', $data['telephone']);
-        $data['is_administrator'] = ($data['id_person'] != null) ? false : true;
-        $data['id_person'] = (($data['id_person'] != null) || ($data['id_person'] != "")) ? $data['id_person'] : Identificator::generateID('person_');
-        // foreach ($telephoneArray as $telephone) {
-        //     $telephone = str_replace('(','',$telephone);
-        //     $telephone = str_replace(')','',$telephone);
-        //     $telephone = str_replace(' ','',$telephone);
-        //     $telephone = str_replace('-','',$telephone);
-        // }
-        return $data;
-    }
-
-    private function _prepareToView($person)
-    {
-        switch ($person->color) {
-            case '_PRETA_':
-                $person->color = 'Preta';
-                break;
-            case '_BRANCA_':
-                $person->color = 'Branca';
-                break;
-            case '_INDIGENA_':
-                $person->color = 'Indigena';
-                break;
-            case '_PARDA_':
-                $person->color = 'Parda';
-                break;
-            case '_AMARELA_':
-                $person->color = 'Amarela';
-                break;
-
-        }
-
-        switch ($person->sex) {
-            case '_M_':
-                $person->sex = 'Masculino';
-                break;
-            case '_F_':
-                $person->sex = 'Feminino';
-                break;
-            case '_O_':
-                $person->sex = 'Outro ou Não Informado';
-                break;
-        }
-
-        switch ($person->type) {
-            case '_RESEARCHER_':
-                $person->function = 'Pesquisador';
-                break;
-            case '_PARTICIPANT_':
-                $person->function = 'Participante';
-                break;
-            case '_ADMINISTRATOR_':
-                $person->function = 'Administrador';
-                break;
-        }
-
-        return $person;
-    }
 }
