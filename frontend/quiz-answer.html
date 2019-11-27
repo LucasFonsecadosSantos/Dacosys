@@ -11,7 +11,7 @@
       echo '<p class="white-color"><strong>data de abertura: </strong> ' . $this->view->quiz->start_date . '</p>';
       echo '<p class="white-color"><strong>data de fechamento: </strong> ' . $this->view->quiz->end_date . '</p>';
   ?></div><div class="box__footer"></div></div><div class="row"></div><div class="box mb-4"><div class="box__header mb-3"><h4>descrição</h4></div><div class="box__body">  <?php 
-      echo '<form action="/pergunta/' . $this->view->firstID . '/responder" method="POST">';
+      echo '<form action="/pergunta/' . $this->view->nextID . '/responder", method="POST">';
       echo '<p class="white-color mb-6">' . $this->view->quiz->description . '</p>';
       echo '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
       echo '<div class="row"><div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center"><button type="submit", title="Clique para responder o questionário.", alt="Botão para reponder o questionário.">responder o questionário</button></div></div>';

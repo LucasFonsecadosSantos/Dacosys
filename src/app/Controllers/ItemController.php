@@ -75,12 +75,9 @@ class ItemController extends Controller
                 'Responder Questionário' => '/questionario/' . $this->view->item->quiz_idQuiz . '/responder',
                 'Responder a pergunta' => '/questionario/' . $this->view->item->id_item . '/responder'
             ];
-            $this->view->idItems    = Parser::getIdItemsArrayString($request->post->id_item_list);
-            print_r($this->view->idItems);
-            // $this->view->nextID     = Parser::getFirstID($this->view->idItems);
-            // $this->view->idItems    = Parser::removeFirstIndex($this->view->idItems);
-
-            // $this->loadView('item/answer');
+            $this->view->nextID = Parser::getID($request->post->id_item_list);
+            $this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
+            $this->loadView('item/answer');
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
                 'errors' => ['Ops, parece que houve um erro ao buscar a pergunta. Por favor, contate o administrador do sistema.']

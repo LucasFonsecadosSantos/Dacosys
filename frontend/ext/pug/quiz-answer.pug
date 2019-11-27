@@ -39,7 +39,7 @@ html
                             |   ?>
                         +box("descrição", false, "/questionarios/registrar", "/questionarios")
                             |   <?php 
-                            |       echo '<form action="/pergunta/' . $this->view->firstID . '/responder" method="POST">';
+                            |       echo '<form action="/pergunta/' . $this->view->nextID . '/responder", method="POST">';
                             |       echo '<p class="white-color mb-6">' . $this->view->quiz->description . '</p>';
                             |       echo '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
                             |       echo '<div class="row"><div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center"><button type="submit", title="Clique para responder o questionário.", alt="Botão para reponder o questionário.">responder o questionário</button></div></div>';

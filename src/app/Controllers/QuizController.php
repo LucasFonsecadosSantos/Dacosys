@@ -45,11 +45,18 @@ class QuizController extends Controller
             ];
             
             
-            $this->view->idItems = Parser::getIdItemsArrayString($this->view->items);
-            $this->view->firstID = Parser::getFirstID($this->view->idItems);
+            // $this->view->idItems = Parser::getIdItemsArrayString($this->view->items);
+            // $this->view->firstID = Parser::getFirstID($this->view->idItems);
             
-            $this->view->idItems = Parser::removeFirstIndex($this->view->idItems);
+            // $this->view->idItems = Parser::removeFirstIndex($this->view->idItems);
+
+            $itemsID = "";
+            foreach ($this->view->items as $item) {
+                $itemsID .= $item->id_item . '@';
+            }
             
+            $this->view->nextID = Parser::getID($itemsID);
+            $this->view->idItems = Parser::shiftID($this->view->nextID, $itemsID);
             $this->loadView('quiz/quiz-answer');
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
