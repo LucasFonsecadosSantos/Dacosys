@@ -33,8 +33,10 @@ html
                     .dashboard__subDashboard_1
                         +box("item", false)
                             |   <?php
-                            |       echo '<form action="/item/' . $this->view->item-> . '/responder", method="POST">';
+                            |       echo '<form action="/item/' . $this->view->nextID . '/responder", method="POST">';
+                            |       echo '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
                             |       echo '<h5>' . $this->view->item->enunciation . '</h5>';
+                            |       echo '<button type="submit"> próxima pergunta</button>';
                             |       echo '</form>';
                             |   ?>
                             

@@ -9,6 +9,7 @@ use Core\Container;
 use Core\Redirect;
 use Util\Identificator;
 use Util\Logger;
+use Util\Parser;
 
 class ItemController extends Controller 
 {
@@ -64,9 +65,8 @@ class ItemController extends Controller
         $this->loadView("item/show");
     }
 
-    public function answer($id)
+    public function answer($id, $request)
     {
-        //TODO ItemController answer action method.
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
         try {
             $this->view->item = $this->itemModel->getByID($id);
@@ -75,7 +75,12 @@ class ItemController extends Controller
                 'Responder Questionário' => '/questionario/' . $this->view->item->quiz_idQuiz . '/responder',
                 'Responder a pergunta' => '/questionario/' . $this->view->item->id_item . '/responder'
             ];
-            $this->loadView('item/answer');
+            $this->view->idItems    = Parser::getIdItemsArrayString($request->post->id_item_list);
+            print_r($this->view->idItems);
+            // $this->view->nextID     = Parser::getFirstID($this->view->idItems);
+            // $this->view->idItems    = Parser::removeFirstIndex($this->view->idItems);
+
+            // $this->loadView('item/answer');
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
                 'errors' => ['Ops, parece que houve um erro ao buscar a pergunta. Por favor, contate o administrador do sistema.']

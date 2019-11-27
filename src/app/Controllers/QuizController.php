@@ -9,6 +9,7 @@ use Core\DataBase;
 use App\Models\QuizModel;
 use App\Models\ItemModel;
 use Util\Logger;
+use Util\Parser;
 
 class QuizController extends Controller 
 {
@@ -42,6 +43,13 @@ class QuizController extends Controller
                 'Participar'          => '/participar',
                 'Responder Questionário' => '/questionario/' . $id . '/responder'
             ];
+            
+            
+            $this->view->idItems = Parser::getIdItemsArrayString($this->view->items);
+            $this->view->firstID = Parser::getFirstID($this->view->idItems);
+            
+            $this->view->idItems = Parser::removeFirstIndex($this->view->idItems);
+            
             $this->loadView('quiz/quiz-answer');
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
