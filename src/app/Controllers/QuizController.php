@@ -45,11 +45,6 @@ class QuizController extends Controller
                 'Responder Questionário' => '/questionario/' . $id . '/responder'
             ];
             
-            
-            // $this->view->idItems = Parser::getIdItemsArrayString($this->view->items);
-            // $this->view->firstID = Parser::getFirstID($this->view->idItems);
-            
-            // $this->view->idItems = Parser::removeFirstIndex($this->view->idItems);
 
             $itemsID = "";
             foreach ($this->view->items as $item) {

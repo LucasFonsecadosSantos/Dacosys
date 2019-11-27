@@ -19,13 +19,17 @@ class ItemController extends Controller
     private $itemModel;
     private $telephoneModel;
     private $participantAnswerItemModel;
+    private $itemHasPictureModel;
+    private $itemPictureModel;
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController instantiated.");
         parent::__construct('ItemModel');
-        $connection = DataBase::getInstance();
-        $this->itemModel = Container::getModelInstance('ItemModel', $connection);
-        $this->participantAnswerItemModel = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
+        $connection                         = DataBase::getInstance();
+        $this->itemModel                    = Container::getModelInstance('ItemModel', $connection);
+        $this->participantAnswerItemModel   = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
+        $this->itemHasPictureModel          = Container::getModelInstance('ItemHasPictureModel', $connection);
+        $this->itemPictureModel             = Container::getModelInstance('ItemPictureModel', $connection);
         $this->view = new \stdClass;
     }
 
@@ -93,12 +97,24 @@ class ItemController extends Controller
     public function answer($id, $request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
+        
         if ($request->post->answerStore) {
             $this->_storeAnswer($request);
         }
         
         try {
+            
             $this->view->item = $this->itemModel->getByID($id);
+            $this->view->options = null;
+
+            if ($this->view->item->answer_type == '_DISCREET_') {
+                $this->view->options = $this->itemHasPictureModel->getFilteredByColumn('item_idItem', $id);
+                $this->view->image_options = [];
+                foreach ($this->view->options as $option) {
+                    array_push($this->view->image_options, $option);
+                }
+            }
+
             $this->view->navigationRoute = [
                 'Participar'          => '/participar',
                 'Responder Questionário' => '/questionario/' . $this->view->item->quiz_idQuiz . '/responder',
@@ -106,9 +122,11 @@ class ItemController extends Controller
             ];
 
             $this->view->nextID = Parser::getID($request->post->id_item_list);
-            $this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
-            Session::set('id_item',$id);
             
+            $this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
+
+            Session::set('id_item',$id);
+            print_r($this->view->image_options);
             $this->loadView('item/answer');
             
         } catch (\Exception $e) {
