@@ -11,10 +11,7 @@ export class ParticipantRegisterController {
         this._fields['id_person']['helper'] = document.getElementsByName('id_person-helper')[0];
         this._fields['telephone'] = document.getElementsByName('telephone_add_field')[0];
         this._fields['telephone']['helper'] = document.getElementsByName('telephone_add_field-helper')[0];
-        this._fields['typeRadio1'] = document.getElementsByName('type')[0];
-        this._fields['typeRadio2'] = document.getElementsByName('type')[1];
-        this._fields['id_person'] = document.getElementsByName('id_person')[0];
-        this._fields['name'] = document.getElementsByName('name')[0];
+        this._fields['name'] = document.getElementsByName('name_person')[0];
         this._fields['name']['helper'] = document.getElementsByName('name-helper')[0];
         this._fields['hometown_cep'] = document.getElementsByName('hometown_cep')[0];
         this._fields['hometown_cep']['helper'] = document.getElementsByName('hometown_cep-helper')[0];
@@ -23,24 +20,14 @@ export class ParticipantRegisterController {
         this._fields['sex'] = document.getElementsByName('sex')[0];
         this._fields['email'] = document.getElementsByName('email')[0];
         this._fields['email']['helper'] = document.getElementsByName('email-helper')[0];
-        this._fields['password'] = document.getElementsByName('password')[0];
-        this._fields['password2'] = document.getElementsByName('password2')[0];
+        this._fields['observations'] = document.getElementsByName('observations')[0];
+        this._fields['id_quiz'] = document.getElementsByName('id_quiz')[0];
     }
     _initializeListeners() {
         this._addTelephoneButton.addEventListener('click', event => {
             this._telephoneTable.classList.remove('d-none');
             this._telephoneTable.innerHTML += "<tr><td><p>" + this._fields['telephone'].value + "</p></td></tr>";
             this._fields['telephone'].value = "";
-        });
-        this._fields['typeRadio1'].addEventListener('click', event => {
-            if (this._fields['typeRadio1'].checked) {
-                document.getElementById('id_person_row').classList.add('d-none');
-            }
-        });
-        this._fields['typeRadio2'].addEventListener('click', event => {
-            if (this._fields['typeRadio2'].checked) {
-                document.getElementById('id_person_row').classList.remove('d-none');
-            }
         });
         this._fields['name'].addEventListener('keydown', event => {
             this._fields['name']['helper'].textContent = "Você só pode digitar mais " + (40 - this._fields['name'].value.length) + " letras.";

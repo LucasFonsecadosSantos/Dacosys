@@ -17,10 +17,7 @@ export class ParticipantRegisterController {
         this._fields['id_person']['helper'] = <HTMLInputElement> document.getElementsByName('id_person-helper')[0];
         this._fields['telephone']       = <HTMLInputElement> document.getElementsByName('telephone_add_field')[0];
         this._fields['telephone']['helper']       = <HTMLInputElement> document.getElementsByName('telephone_add_field-helper')[0];
-        this._fields['typeRadio1']      = <HTMLInputElement> document.getElementsByName('type')[0];
-        this._fields['typeRadio2']      = <HTMLInputElement> document.getElementsByName('type')[1];
-        this._fields['id_person']       = <HTMLInputElement> document.getElementsByName('id_person')[0];
-        this._fields['name']            = <HTMLInputElement> document.getElementsByName('name')[0];
+        this._fields['name']            = <HTMLInputElement> document.getElementsByName('name_person')[0];
         this._fields['name']['helper']  = <HTMLInputElement> document.getElementsByName('name-helper')[0];
         this._fields['hometown_cep']    = <HTMLInputElement> document.getElementsByName('hometown_cep')[0];
         this._fields['hometown_cep']['helper']    = <HTMLInputElement> document.getElementsByName('hometown_cep-helper')[0];
@@ -29,8 +26,8 @@ export class ParticipantRegisterController {
         this._fields['sex']             = <HTMLSelectElement> document.getElementsByName('sex')[0];
         this._fields['email']           = <HTMLInputElement> document.getElementsByName('email')[0];
         this._fields['email']['helper']           = <HTMLInputElement> document.getElementsByName('email-helper')[0];
-        this._fields['password']        = <HTMLInputElement> document.getElementsByName('password')[0];
-        this._fields['password2']       = <HTMLInputElement> document.getElementsByName('password2')[0];
+        this._fields['observations']    = <HTMLTextAreaElement> document.getElementsByName('observations')[0];
+        this._fields['id_quiz']         = <HTMLInputElement> document.getElementsByName('id_quiz')[0];
     }
 
     private _initializeListeners(): void {
@@ -38,18 +35,6 @@ export class ParticipantRegisterController {
             this._telephoneTable.classList.remove('d-none');
             this._telephoneTable.innerHTML += "<tr><td><p>" + this._fields['telephone'].value + "</p></td></tr>";
             this._fields['telephone'].value = "";
-        });
-
-        this._fields['typeRadio1'].addEventListener('click', event => {
-            if (this._fields['typeRadio1'].checked) {
-                document.getElementById('id_person_row').classList.add('d-none');
-            }
-        });
-
-        this._fields['typeRadio2'].addEventListener('click', event => {
-            if (this._fields['typeRadio2'].checked) {
-                document.getElementById('id_person_row').classList.remove('d-none');
-            }
         });
 
         this._fields['name'].addEventListener('keydown', event => {
