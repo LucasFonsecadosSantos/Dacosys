@@ -8,6 +8,7 @@ use App\Models\ParticipantModel;
 use Core\Container;
 use Core\DataBase;
 use Core\Redirect;
+use Core\Session;
 use Util\DateHandle;
 use Util\Identificator;
 use Util\Logger;
@@ -98,7 +99,8 @@ class ParticipantController extends Controller
         $personData     = $this->participantModel->prepareToInsert($personData);
         //$dataTelephone  = $this->telephoneModel->prepareToInsert($dataTelephone);
     
-        
+        Session::set('user',$personData);
+
         try {
             $this->participantModel->update($personData, 'person_'.$request->post->id_person);
             //ainda precisa adicionar os telefones
@@ -132,7 +134,7 @@ class ParticipantController extends Controller
     public function show($id)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ParticipantController, action show.");
-        $participant = $this->model->getByID($id,'_PARTICIPANT_');
+        $participant = $this->participantModel->getByID($id, '_PARTICIPANT_');
         print_r($participant);
     }
 

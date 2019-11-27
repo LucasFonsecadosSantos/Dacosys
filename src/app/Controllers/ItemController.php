@@ -7,20 +7,25 @@ use Core\Controller;
 use Core\DataBase;
 use Core\Container;
 use Core\Redirect;
+use Core\Session;
 use Util\Identificator;
 use Util\Logger;
+use Util\DateHandler;
 use Util\Parser;
 
 class ItemController extends Controller 
 {
 
     private $itemModel;
+    private $telephoneModel;
+    private $participantAnswerItemModel;
 
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController instantiated.");
         parent::__construct('ItemModel');
         $connection = DataBase::getInstance();
         $this->itemModel = Container::getModelInstance('ItemModel', $connection);
+        $this->participantAnswerItemModel = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
         $this->view = new \stdClass;
     }
 
@@ -65,9 +70,33 @@ class ItemController extends Controller
         $this->loadView("item/show");
     }
 
+    private function _storeAnswer($request)
+    {
+        try {
+            $this->participantAnswerItemModel->create(
+                [
+                    'participant_idPerson'  =>  Session::get('user')['id_person'],
+                    'item_idItem'           =>  Session::get('id_item'),
+                    'description'           =>  $request->post->description,
+                    'answer'                =>  $request->post->answer,
+                    'data_hour'             =>  DateHandler::getDateTime()
+                ]
+            );
+        } catch (\Exception $e) {
+            return Redirect::route('/participar', [
+                'errors' => ['Ops: Houve um erro ao salvar sua resposta. Por favor, contate o administrador.']
+            ]);
+        }
+    }
+
+
     public function answer($id, $request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
+        if ($request->post->answerStore) {
+            $this->_storeAnswer($request);
+        }
+        
         try {
             $this->view->item = $this->itemModel->getByID($id);
             $this->view->navigationRoute = [
@@ -75,9 +104,13 @@ class ItemController extends Controller
                 'Responder Questionário' => '/questionario/' . $this->view->item->quiz_idQuiz . '/responder',
                 'Responder a pergunta' => '/questionario/' . $this->view->item->id_item . '/responder'
             ];
+
             $this->view->nextID = Parser::getID($request->post->id_item_list);
             $this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
+            Session::set('id_item',$id);
+            
             $this->loadView('item/answer');
+            
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
                 'errors' => ['Ops, parece que houve um erro ao buscar a pergunta. Por favor, contate o administrador do sistema.']

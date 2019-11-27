@@ -34,9 +34,26 @@ html
                         +box("item", false)
                             |   <?php
                             |       echo '<form action="/pergunta/' . $this->view->nextID . '/responder", method="POST">';
-                            |       echo '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
-                            |       echo '<h5>' . $this->view->item->enunciation . '</h5>';
-                            |       echo '<button type="submit"> próxima pergunta</button>';
+                            |       echo    '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
+                            |       echo    '<input type="hidden" value="' . $this->view->answerStore . '" name="answerStore"/>';
+                            |       echo    '<h5>' . $this->view->item->enunciation . '</h5>';
+                            |       echo    '<div class="row mt-3">';
+                            |       echo    '</div>';
+                            |       echo    '<div class="row mt-3">';
+                            |       echo        '<div class="col-l2 col-sm-12 col-md-12 col-lg-12 col-xl-12">';
+                            |       if ($this->view->item->answer_type == '_CONTINUOUS_') {
+                            |           echo        '<input type="range" name="answer" title="Arraste o botão de acordo com sua resposta." alt="Campo de intervalo para selecionar sua resposta"/>';
+                            |       } else {
+                            |           
+                            |           echo        '<input type="range" name="answer" title="Arraste o botão de acordo com sua resposta." alt="Campo de intervalo para selecionar sua resposta"/>';
+                            |       }
+                            |       echo        '</div>';
+                            |       echo    '</div>';
+                            |       echo    '<div class="row mt-3">';
+                            |       echo        '<div class="col-l2 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-end">';
+                            |       echo            '<button type="submit"> próxima pergunta</button>';
+                            |       echo        '</div>';
+                            |       echo    '</div>';
                             |       echo '</form>';
                             |   ?>
                             

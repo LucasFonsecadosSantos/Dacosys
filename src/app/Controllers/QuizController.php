@@ -24,6 +24,7 @@ class QuizController extends Controller
         $connection                         = DataBase::getInstance();
         $this->quizModel                    = Container::getModelInstance('QuizModel', $connection);
         $this->itemModel                    = Container::getModelInstance('ItemModel', $connection);
+        $this->participantModel             = Container::getModelInstance('ParticipantModel', $connection);
         $this->participantAnswerItemModel   = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
         $this->view = new \stdClass;
     }
@@ -57,6 +58,7 @@ class QuizController extends Controller
             
             $this->view->nextID = Parser::getID($itemsID);
             $this->view->idItems = Parser::shiftID($this->view->nextID, $itemsID);
+            $this->view->answerStore = false;
             $this->loadView('quiz/quiz-answer');
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
@@ -144,17 +146,10 @@ class QuizController extends Controller
         try {
             $this->view->quiz               = $this->quizModel->getByID($id);
             $this->view->itemArray          = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
-            $answeredItems                  = $this->participantAnswerItemModel->getAll();
-            $this->view->answeredItemArray  = [];
+            $this->view->participantArray   = $this->participantModel->getFilteredByColumn('quiz_idQuiz', $id);
+            //$this->view->answerArray        = $this->participantAnswerItemModel->getFilteredByColumn('quiz_idQuiz', $id)
 
-            foreach ($this->view->itemArray as $item) {
-                foreach ($answeredItems as $answeredItem)  {
-                    if ($item->id_item == $answeredItem->item_idItem) {
-                        array_push($this->view->answeredItemArray, $answeredItem);
-                    }
-                }
-            }
-            
+
             $this->view->navigationRoute = [
                 'Home'          => '/',
                 'Questionários' => '/questionarios',
