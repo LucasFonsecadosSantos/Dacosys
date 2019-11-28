@@ -10,7 +10,7 @@ use Core\Redirect;
 use Core\Session;
 use Util\Identificator;
 use Util\Logger;
-use Util\DateHandler;
+use Util\DateHandle;
 use Util\Parser;
 
 class ItemController extends Controller 
@@ -40,14 +40,6 @@ class ItemController extends Controller
         // $this->loadView("item/register");
     }
 
-    public function listation()
-    {
-        //TODO ItemController key generation store method.
-        Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action listation.");
-        $itemArray = $this->model->getAll();
-        print_r($itemArray);
-    }
-
     public function store($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action store.");
@@ -74,22 +66,24 @@ class ItemController extends Controller
         $this->loadView("item/show");
     }
 
-    private function _storeAnswer($request)
+    public function storeAnswer($request)
     {
         try {
-            $this->participantAnswerItemModel->create(
-                [
-                    'participant_idPerson'  =>  Session::get('user')['id_person'],
-                    'item_idItem'           =>  Session::get('id_item'),
-                    'description'           =>  $request->post->description,
-                    'answer'                =>  $request->post->answer,
-                    'data_hour'             =>  DateHandler::getDateTime()
-                ]
-            );
+            print_r($request->post->answer);
+            // $this->participantAnswerItemModel->create(
+            //     [
+            //         'participant_idPerson'  =>  Session::get('user')['id_person'],
+            //         'item_idItem'           =>  Session::get('id_item'),
+            //         'description'           =>  $request->post->description,
+            //         'answer'                =>  $request->post->answer,
+            //         'data_hour'             =>  DateHandle::getDateTime()
+            //     ]
+            // );
         } catch (\Exception $e) {
-            return Redirect::route('/participar', [
-                'errors' => ['Ops: Houve um erro ao salvar sua resposta. Por favor, contate o administrador.']
-            ]);
+            echo $e->getMessage();
+            // return Redirect::route('/participar', [
+            //     'errors' => ['Ops: Houve um erro ao salvar sua resposta. Por favor, contate o administrador.']
+            // ]);
         }
     }
 
@@ -97,10 +91,6 @@ class ItemController extends Controller
     public function answer($id, $request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
-        
-        if ($request->post->answerStore) {
-            $this->_storeAnswer($request);
-        }
         
         try {
             
@@ -126,7 +116,7 @@ class ItemController extends Controller
             $this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
 
             Session::set('id_item',$id);
-            print_r($this->view->image_options);
+            
             $this->loadView('item/answer');
             
         } catch (\Exception $e) {

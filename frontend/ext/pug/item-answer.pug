@@ -10,7 +10,7 @@ html
         //---------------------------[IMPORTS]---------------------------//
         include modules/settings/_link-imports.pug
         //---------------------------------------------------------------//
-    body(page="researcher-register")
+    body(page="item-answer")
         //- header
         //-     include modules/components/_header.pug
         main
@@ -33,22 +33,22 @@ html
                     .dashboard__subDashboard_1
                         +box("item", false)
                             |   <?php
-                            |       echo '<form action="/pergunta/' . $this->view->nextID . '/responder", method="POST">';
+                            |       echo '<form action="/pergunta/salvar-resposta", method="POST">';
                             |       echo    '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
-                            |       echo    '<input type="hidden" value="' . $this->view->answerStore . '" name="answerStore"/>';
                             |       echo    '<h5>' . $this->view->item->enunciation . '</h5>';
                             |       echo    '<div class="row mt-3">';
                             |       echo    '</div>';
                             |       echo    '<div class="row mt-3">';
                             |       if ($this->view->item->answer_type == '_CONTINUOUS_') {
                             |           echo    '<div class="col-l2 col-sm-12 col-md-12 col-lg-12 col-xl-12">';
-                            |           echo        '<input type="range" name="answer" title="Arraste o botão de acordo com sua resposta." alt="Campo de intervalo para selecionar sua resposta"/>';
+                            |           echo        '<input type="range" name="answer" value="" title="Arraste o botão de acordo com sua resposta." alt="Campo de intervalo para selecionar sua resposta"/>';
                             |           echo    '</div>';
                             |       } else {
                             |           foreach ($this->view->image_options as $option) {
+                            |               echo    '<input type="hidden" name="answer" value=""/>';
                             |               echo    '<div class="col-l2 col-sm-12 col-md-4 col-lg-4 col-xl-4">';
                             |               echo        '<img src="../storage/upload/item_picture/' . $option->path . '" class="option"/>';
-                            |               echo        '<input name="option1" type="radio" title="Clique para selecionar esta opção." alt="Botão para selecionar a presente opção."/>';
+                            |               echo        '<input name="radioOption" value="" type="radio" title="Clique para selecionar esta opção." alt="Botão para selecionar a presente opção."/>';
                             |               echo    '</div>';
                             |           }
                             |       }
@@ -56,7 +56,8 @@ html
                             |       echo    '</div>';
                             |       echo    '<div class="row mt-3">';
                             |       echo        '<div class="col-l2 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-end">';
-                            |       echo            '<button type="submit"> próxima pergunta</button>';
+                            |       echo            '<button type="submit" id="storeBtn"> salvar resposta</button>';
+                            |       echo            '<a href="/pergunta/' . $this->view->nextID . '/responder" id="nextBtn" class="d-none ml-3"><button> próxima pergunta</button></a>';
                             |       echo        '</div>';
                             |       echo    '</div>';
                             |       echo '</form>';
