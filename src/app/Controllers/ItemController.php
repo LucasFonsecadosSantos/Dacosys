@@ -66,19 +66,30 @@ class ItemController extends Controller
         $this->loadView("item/show");
     }
 
-    public function storeAnswer($request)
+    public function storeAnswer($id,$request)
     {
         try {
-            //print_r($request->post);
-            // $this->participantAnswerItemModel->create(
-            //     [
-            //         'participant_idPerson'  =>  Session::get('user')['id_person'],
-            //         'item_idItem'           =>  Session::get('id_item'),
-            //         'description'           =>  $request->post->description,
-            //         'answer'                =>  $request->post->answer,
-            //         'data_hour'             =>  DateHandle::getDateTime()
-            //     ]
-            // );
+            print_r($request->post);
+            $this->participantAnswerItemModel->create(
+                [
+                    'participant_idPerson'  =>  Session::get('user')['id_person'],
+                    'item_idItem'           =>  $id,
+                    'description'           =>  $request->post->description,
+                    'answer'                =>  $request->post->answer,
+                    'data_hour'             =>  DateHandle::getDateTime()
+                ]
+            );
+            
+            $nextID = Session::get('items_id')[0];
+            if (($nextID != "") || (Session::get('items_id') != null)) {
+                $array = Session::get('items_id');
+                array_shift($array);
+                Session::set('items_id', $array);
+                return Redirect::route('/pergunta/' . Session::get('items_id')[0] . '/responder');
+            } else {
+                return Redirect::route('/questionario/agradecimento');
+            }
+
         } catch (\Exception $e) {
             echo $e->getMessage();
             // return Redirect::route('/participar', [
@@ -88,22 +99,15 @@ class ItemController extends Controller
     }
 
 
-    public function answer($id, $request)
+    public function answer($id)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
         
         try {
-            
+            print_r($_SESSION['items_id']);
             $this->view->item = $this->itemModel->getByID($id);
-            $this->view->options = null;
-
-            if ($this->view->item->answer_type == '_DISCREET_') {
-                $this->view->options = $this->itemHasPictureModel->getFilteredByColumn('item_idItem', $id);
-                $this->view->image_options = [];
-                foreach ($this->view->options as $option) {
-                    array_push($this->view->image_options, $this->itemPictureModel->getByID($option->item_picture_idPicture));
-                }
-            }
+            
+            $this->view->options = $this->_getOptions($this->view->item);
 
             $this->view->navigationRoute = [
                 'Participar'          => '/participar',
@@ -112,18 +116,42 @@ class ItemController extends Controller
             ];
 
             $this->view->nextID = Session::get('items_id')[0];
+            $array = Session::get('items_id');
+            Session::set('items_id', $array);
             
-            Session::set('items_id', [Parser::getID(Session::get('items_id')[1]),Parser::shiftID(Session::get('items_id')[0], Session::get('items_id')[1])]);
-            //$this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
-
-            Session::set('id_item',$id);
-            print_r($_SESSION);
-
-            //$this->loadView('item/answer');
+            $this->loadView('item/answer');
             
         } catch (\Exception $e) {
             return Redirect::route('/participar',[
                 'errors' => ['Ops, parece que houve um erro ao buscar a pergunta. Por favor, contate o administrador do sistema.']
+            ]);
+        }
+    }
+
+    private function _getOptions($item)
+    {
+        
+        $image_options = [];
+        
+        try {
+
+            if ($item->answer_type == '_DISCREET_') {
+
+                $options = $this->itemHasPictureModel->getFilteredByColumn('item_idItem', $item->id_item);
+
+                foreach ($options as $option) {
+                
+                    array_push($image_options, $this->itemPictureModel->getByID($option->item_picture_idPicture));
+                
+                }
+            }
+        
+            return $image_options;
+
+        } catch (\Exception $e) {
+        
+            return Redirect::route('/participar', [
+                'errors' => ['Hmm, enfrentamos um erro ao carregar dados da pergunta. Por favor, entre em contato com o administrador do sistema.']
             ]);
         }
     }

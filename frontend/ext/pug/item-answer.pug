@@ -31,10 +31,9 @@ html
                                 |   ?>
                 .row
                     .dashboard__subDashboard_1
-                        +box("item", false)
+                        +box("dacosys - Sistema para coleta de dados de pesquisa", false)
                             |   <?php
-                            |       echo '<form action="/pergunta/salvar-resposta", method="POST">';
-                            |       echo    '<input type="hidden" value="' . $this->view->idItems . '" name="id_item_list"/>';
+                            |       echo '<form action="/pergunta/' . $this->view->item->id_item . '/salvar-resposta", method="POST">';
                             |       echo    '<h5>' . $this->view->item->enunciation . '</h5>';
                             |       echo    '<div class="row mt-3">';
                             |       echo    '</div>';
@@ -45,7 +44,7 @@ html
                             |           echo    '</div>';
                             |       } else {
                             |           $count = 0;
-                            |           foreach ($this->view->image_options as $option) {
+                            |           foreach ($this->view->options as $option) {
                             |               echo    '<div class="item-option">';
                             |               echo        '<div class="item-option__header"></div>';
                             |               echo        '<div class="item-option__body">';
@@ -62,8 +61,7 @@ html
                             |       echo    '</div>';
                             |       echo    '<div class="row mt-3">';
                             |       echo        '<div class="col-l2 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-end">';
-                            |       echo            '<button type="submit" id="storeBtn"> salvar resposta</button>';
-                            |       echo            '<a href="/pergunta/' . $this->view->nextID . '/responder" id="nextBtn" class="d-none ml-3"><button> próxima pergunta</button></a>';
+                            |       echo            '<button type="submit" id="storeBtn"> pŕoxima pergunta</button>';
                             |       echo        '</div>';
                             |       echo    '</div>';
                             |       echo '</form>';

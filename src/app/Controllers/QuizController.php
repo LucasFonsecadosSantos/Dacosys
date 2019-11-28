@@ -6,6 +6,7 @@ use Core\Controller;
 use Core\Redirect;
 use Core\Container;
 use Core\DataBase;
+use Core\Session;
 use App\Models\QuizModel;
 use App\Models\ItemModel;
 use Util\Logger;
@@ -37,29 +38,40 @@ class QuizController extends Controller
 
     public function answer($id)
     {
+
         try {
+            
             $this->view->quiz = $this->quizModel->getByID($id);
+            
             $this->view->items = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
+            
             $this->view->navigationRoute = [
                 'Participar'          => '/participar',
                 'Responder Questionário' => '/questionario/' . $id . '/responder'
             ];
             
-
-            $itemsID = "";
+            $itemsID = array();
+            
             foreach ($this->view->items as $item) {
-                $itemsID .= $item->id_item . '@';
+                array_push($itemsID, $item->id_item);
             }
             
-            // $this->view->nextID = Parser::getID($itemsID);
-            // $this->view->idItems = Parser::shiftID($this->view->nextID, $itemsID);
+            Session::set('items_id', $itemsID);
+
+            $this->view->nextID = Session::get('items_id')[0];
+
+            $array = Session::get('items_id');
+            array_shift($array);
+            Session::set('items_id', $array);
             
-            Session::set('items_id',[Parser::getID($itemsID),Parser::shiftID($this->view->nextID, $itemsID)]);
             $this->loadView('quiz/quiz-answer');
+
         } catch (\Exception $e) {
+            
             return Redirect::route('/participar',[
                 'errors' => ['Ops: Parece que encontramos um erro ao buscar o questionário em questão. Por favor, contate o administrador do sistema.']
             ]);
+        
         }
         
     }

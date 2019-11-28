@@ -44,7 +44,7 @@ $route[] = ['/questionario/{id}/estatisticas',          'QuizController@metrics'
 
 //Item
 $route[] = ['/pergunta/cadastrar',          'ItemController@register'];
-$route[] = ['/pergunta/salvar-resposta',    'ItemController@storeAnswer'];
+$route[] = ['/pergunta/{id}/salvar-resposta',    'ItemController@storeAnswer'];
 $route[] = ['/pergunta/salvar',             'ItemController@store'];
 $route[] = ['/pergunta/{id}/visualizar',    'ItemController@show'];
 $route[] = ['/pergunta/{id}/responder',     'ItemController@answer'];
