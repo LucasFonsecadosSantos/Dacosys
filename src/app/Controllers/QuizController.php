@@ -51,9 +51,10 @@ class QuizController extends Controller
                 $itemsID .= $item->id_item . '@';
             }
             
-            $this->view->nextID = Parser::getID($itemsID);
-            $this->view->idItems = Parser::shiftID($this->view->nextID, $itemsID);
-            $this->view->answerStore = false;
+            // $this->view->nextID = Parser::getID($itemsID);
+            // $this->view->idItems = Parser::shiftID($this->view->nextID, $itemsID);
+            
+            Session::set('items_id',[Parser::getID($itemsID),Parser::shiftID($this->view->nextID, $itemsID)]);
             $this->loadView('quiz/quiz-answer');
         } catch (\Exception $e) {
             return Redirect::route('/participar',[

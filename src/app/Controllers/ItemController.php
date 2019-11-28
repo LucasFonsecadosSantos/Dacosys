@@ -69,7 +69,7 @@ class ItemController extends Controller
     public function storeAnswer($request)
     {
         try {
-            print_r($request->post->answer);
+            //print_r($request->post);
             // $this->participantAnswerItemModel->create(
             //     [
             //         'participant_idPerson'  =>  Session::get('user')['id_person'],
@@ -101,7 +101,7 @@ class ItemController extends Controller
                 $this->view->options = $this->itemHasPictureModel->getFilteredByColumn('item_idItem', $id);
                 $this->view->image_options = [];
                 foreach ($this->view->options as $option) {
-                    array_push($this->view->image_options, $option);
+                    array_push($this->view->image_options, $this->itemPictureModel->getByID($option->item_picture_idPicture));
                 }
             }
 
@@ -111,13 +111,15 @@ class ItemController extends Controller
                 'Responder a pergunta' => '/questionario/' . $this->view->item->id_item . '/responder'
             ];
 
-            $this->view->nextID = Parser::getID($request->post->id_item_list);
+            $this->view->nextID = Session::get('items_id')[0];
             
-            $this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
+            Session::set('items_id', [Parser::getID(Session::get('items_id')[1]),Parser::shiftID(Session::get('items_id')[0], Session::get('items_id')[1])]);
+            //$this->view->idItems = Parser::shiftID($this->view->nextID, $request->post->id_item_list);
 
             Session::set('id_item',$id);
-            
-            $this->loadView('item/answer');
+            print_r($_SESSION);
+
+            //$this->loadView('item/answer');
             
         } catch (\Exception $e) {
             return Redirect::route('/participar',[

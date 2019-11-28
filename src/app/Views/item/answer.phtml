@@ -18,12 +18,18 @@
           echo        '<input type="range" name="answer" value="" title="Arraste o botão de acordo com sua resposta." alt="Campo de intervalo para selecionar sua resposta"/>';
           echo    '</div>';
       } else {
+          $count = 0;
           foreach ($this->view->image_options as $option) {
-              echo    '<input type="hidden" name="answer" value=""/>';
-              echo    '<div class="col-l2 col-sm-12 col-md-4 col-lg-4 col-xl-4">';
-              echo        '<img src="../storage/upload/item_picture/' . $option->path . '" class="option"/>';
-              echo        '<input name="radioOption" value="" type="radio" title="Clique para selecionar esta opção." alt="Botão para selecionar a presente opção."/>';
+              echo    '<div class="item-option">';
+              echo        '<div class="item-option__header"></div>';
+              echo        '<div class="item-option__body">';
+              echo            '<img src="/data/upload/' . $option->path . '" class="option"/>';
+              echo        '</div>';
+              echo        '<div class="item-option__footer">';
+              echo            '<input name="answer" value="' . $count . '" type="radio" title="Clique para selecionar esta opção." alt="Botão para selecionar a presente opção."/>';
+              echo        '</div>';
               echo    '</div>';
+              ++$count;
           }
       }
       echo        '</div>';
