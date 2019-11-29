@@ -81,11 +81,11 @@ class ItemController extends Controller
             );
             
             $nextID = Session::get('items_id')[0];
-            if (($nextID != "") || (Session::get('items_id') != null)) {
+            if (($nextID != "") && (Session::get('items_id') != null) && ($nextID != null)) {
                 $array = Session::get('items_id');
                 array_shift($array);
                 Session::set('items_id', $array);
-                return Redirect::route('/pergunta/' . Session::get('items_id')[0] . '/responder');
+                return Redirect::route('/pergunta/' . $nextID . '/responder');
             } else {
                 return Redirect::route('/questionario/agradecimento');
             }

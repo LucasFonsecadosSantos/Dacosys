@@ -7,6 +7,7 @@ cp -avr ./../frontend/accesskey.html ./../src/app/Views/home/accesskey.phtml
 cp -avr ./../frontend/bug-report.html ./../src/app/Views/home/bug-report.phtml
 cp -avr ./../frontend/dashboard.html ./../src/app/Views/home/index.phtml
 cp -avr ./../frontend/login.html ./../src/app/Views/home/login.phtml
+cp -avr ./../frontend/thanks.html ./../src/app/Views/quiz/thanks.phtml
 
 # ITEM
 cp -avr ./../frontend/item-register.html ./../src/app/Views/item/register.phtml

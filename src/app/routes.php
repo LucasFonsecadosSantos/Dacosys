@@ -40,6 +40,7 @@ $route[] = ['/questionario/{id}/registrar-pergunta',    'QuizController@itemStor
 $route[] = ['/questionario/atualizar',                  'QuizController@update'];
 $route[] = ['/questionario/{id}/remover',               'QuizController@delete'];
 $route[] = ['/questionario/{id}/estatisticas',          'QuizController@metrics'];
+$route[] = ['/questionario/agradecimento',              'QuizController@thanks'];
 
 
 //Item

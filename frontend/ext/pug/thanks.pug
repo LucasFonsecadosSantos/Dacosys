@@ -1,0 +1,40 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Questionário finalizado.","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="thanks")
+        //- header
+        //-     include modules/components/_header.pug
+        main
+            .container
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Questionário finalizado</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
+                .row
+                    .dashboard__subDashboard_1
+                        +box("questionário finalizado", false, "/questionarios/registrar", "/questionarios")
+                            h3 agradecemos sua participação!
+                            form(action="/participar")
+                                button(type="submit", title="Clique para finalizar sua participação.", alt="Botão para finalizar a participação no questionário.") finalizar
+        //footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

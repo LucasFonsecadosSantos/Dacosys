@@ -76,28 +76,42 @@ class QuizController extends Controller
         
     }
 
+    public function thanks()
+    {
+        Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action thanks.");
+        $this->loadView('quiz/thanks');
+    }
+
     public function listation()
     {
+        
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action listation.");
         
         try {
+        
             $this->view->quizArray = $this->quizModel->getAll();
             $this->view->navigationRoute = [
                 'Home' => '/',
                 'Questionários' => '/questionarios'
             ];
             $this->loadView("quiz/list");
+        
         } catch (\Exception $e) {
+        
             return Redirect::route('/',[
                 'errors' => ['Erro ao listar questionários do banco de dados. (' . $e->getMessage() . ')']
             ]);
+        
         }
     }
 
     public function store($request)
     {
+        
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
+        
         try {
+        
             $this->quizModel->create(
                 [
                     'id_quiz'       => Indentificator::generateID('quiz_'),
@@ -107,23 +121,31 @@ class QuizController extends Controller
                     'status'        => true
                 ]
             );
+        
             Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
+        
             return Redirect::route("/questionarios",
                 [
                     "success" => ["Questionário registrado com sucesso."]
                 ]
             );
+        
         } catch (\Exception $e) {
+        
             return Redirect::route('/questionarios',[
                 'errors' => ['Erro ao cadastrar novo quetionário. (' . $e->getMessage() . ')']
             ]);
+        
         }
     }
 
     public function itemStore($request)
     {
+        
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
+        
         try {
+        
             $this->quizModel->create(
                 [
                     'id_item'               => Indentificator::generateID('item_'),
@@ -133,16 +155,21 @@ class QuizController extends Controller
                     'answer_discret_amount' => $request->post->answer_discret_amount
                 ]
             );
+        
             Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
+        
             return Redirect::route("/questionario/" . $request->post->quiz_idQuiz . "/visualizar",
                 [
                     "success" => ["Questionário registrado com sucesso."]
                 ]
             );
+        
         } catch (\Exception $e) {
+        
             return Redirect::route('/questionario/' . $request->post->quiz_idQuiz . '/visualizar', [
                 'errors' => ['Erro ao buscar perguntas do presente questionário. (' . $e->getMessage() . ')']
             ]);
+        
         }
     }
 
@@ -152,11 +179,11 @@ class QuizController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action show.");
 
         try {
+        
             $this->view->quiz               = $this->quizModel->getByID($id);
             $this->view->itemArray          = $this->itemModel->getFilteredByColumn('quiz_idQuiz',$id);
             $this->view->participantArray   = $this->participantModel->getFilteredByColumn('quiz_idQuiz', $id);
             //$this->view->answerArray        = $this->participantAnswerItemModel->getFilteredByColumn('quiz_idQuiz', $id)
-
 
             $this->view->navigationRoute = [
                 'Home'          => '/',
@@ -165,10 +192,13 @@ class QuizController extends Controller
             ];
             
             $this->loadView("quiz/show");
+        
         } catch (\Exception $e) {
+        
             return Redirect::route('/questionarios', [
                 'errors' => ['Erro ao buscar o questionário no banco de dados. (' . $e->getMessage() . ')']
             ]);
+        
         }
     }
 
@@ -188,18 +218,25 @@ class QuizController extends Controller
 
     public function delete($id)
     {
+       
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action delete.");
+       
         try {
+       
             $this->quizModel->delete($id);
+       
             return Redirect::route('/questionarios',
                 [
                     'success' => ['Questionário removido.']
                 ]
             );
+       
         } catch (\Exception $e) {
+       
             return Redirect::route('/questionarios', [
                 'errors' => ['Erro ao remover o questionário. (' . $e->getMessage() . ')']
             ]);
+       
         }
     }
 
