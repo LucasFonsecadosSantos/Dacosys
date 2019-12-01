@@ -10,19 +10,13 @@ export class ItemAnswerController {
         this._nextItemButton = document.getElementById('nextBtn');
         this._storeAnswerButton = document.getElementById('storeBtn');
         this._fields['answer'] = document.getElementsByName('answer')[0];
+        this._options = document.getElementsByClassName('item-option');
     }
     _initializeListeners() {
         this._form.addEventListener('submit', event => {
         });
         this._storeAnswerButton.addEventListener('click', event => {
             this._nextItemButton.classList.remove('d-none');
-        });
-        // @ts-ignore
-        document.getElementsByTagName('input').forEach(element => {
-            element.addEventListener('change', event => {
-                this._fields['answer'].value = event.target.value;
-                alert('asdad');
-            });
         });
     }
 }

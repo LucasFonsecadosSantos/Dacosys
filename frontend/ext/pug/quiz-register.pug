@@ -1,0 +1,84 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | Registrar novo questionário","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="quiz-register")
+        header
+            include modules/components/_header.pug
+        main
+            .container
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Cadastrar novo pesquisador</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
+                form#mainForm(method="POST", action="/questionario/salvar", autocomplete="off")
+                    .row
+                        .dashboard__subDashboard_1
+                            +box("informe os dados", false, "/questionarios/registrar", "/questionarios")
+                                .row.mt-3.d-none#id_person_row
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        label ID do cadastro
+                                        input#id_person(type="text",maxlength=13,minlength=13 name="id_person", placeholder="Ex.: 5dd2aaab4f856", title="Identificador único do seu cadastro.", alt="Campo para inserir o identificador único do seu cadastro.")
+                                        p.white-color.small-font.mt-1(name="id_person-helper") Máximo 13 letras/números.
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        label título do questionário *
+                                        input(type="text", name="name", placeholder="Ex.: Avaliação de usabilidade com usuários", title="Insira o título do questionário.", alt="Campo para inserir o título do questionário.")
+                                        //p.white-color.small-font.mt-1(name="name-helper") Máximo 40 letras.
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6
+                                        label Data de Abertura *
+                                        input(type="date", name="start_date", placeholder="", title="Clique e selecione uma data.", alt="Campo para selecionar data de abertura do questionário.")
+                                    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6
+                                        label Data de encerramento *
+                                        input(type="date", name="end_date", placeholder="", title="Clique e selecione uma data.", alt="Campo para selecionar data de encerramento do questionário.")
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        label descrição da pesquisa
+                                        textarea(type="date", name="description", placeholder="", title="Descreva os objetivos e metodos de sua pesquisa.", alt="Campo para descrever objetivos e métodos da pesquisa.")
+                    .row
+                        .dashboard__subDashboard_1
+                            +box("insira as perguntas", false, "/questionarios/registrar", "/questionarios")
+                                .modal#item-modal.d-none
+                                    .modal__content
+                                        .row
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                                span.close#close-item-modal &times;
+                                                .box__header.mb-3(style="margin-bottom-color: #25282F")
+                                                    h4(style="color: #25282F") nova pergunta
+                                        .row.mt-5
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                                label enunciado da pergunta
+                                                input(name="enunciation", maxlength=150,minlength=5,placeholder="Ex.: Dentre os tipos de café apresentados, qual mais lhe agradou?", title="Insira o enunciado da pergunta.", alt="Campo para inserir o enunciado da pergunta.")
+                                                p.white-color.small-font.mt-1(name="enunciation-helper") Máximo 150 letras/números.
+                                        .row.mt-3
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
+                                            button(name="addItemModalAddBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.") adicionar
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
+                                        button(name="addItemBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.") asdasd
+                                .row-mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        table.data-table
+                                            tbody
+        footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug
