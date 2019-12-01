@@ -19,10 +19,15 @@ class ResearcherController extends Controller
     public function __construct() {
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher instantiated.");
         parent::__construct('ResearcherModel');
-        $connection = DataBase::getInstance();
-        $this->researcherModel = Container::getModelInstance('ResearcherModel', $connection);
-        $this->telephoneModel = Container::getModelInstance('TelephoneModel', $connection);
-        $this->view = new \stdClass;
+        $this->connection       = DataBase::getInstance();
+        $this->researcherModel  = Container::getModelInstance('ResearcherModel', $this->connection);
+        $this->telephoneModel   = Container::getModelInstance('TelephoneModel', $this->connection);
+        $this->view             = new \stdClass;
+    }
+
+    public function auth($request)
+    {
+        $this->authenticateAuth($this->researcherModel, $request);
     }
 
     public function register()
@@ -86,44 +91,58 @@ class ResearcherController extends Controller
             'person_idPerson' => $dataPerson['id_person'],
             'telephone' => $request->post->all_telephone
         ];
+        
         $dataTelephone = $this->telephoneModel->prepareToInsert($dataTelephone);
         
         try {
+        
             $this->researcherModel->create($dataPerson);
 
             if ($dataTelephone['telephone'] != "" || $dataTelephone['telephone']) {
+                
                 foreach ($dataTelephone['telephone'] as $telephone) {
                     $this->telephoneModel->create([
                         'person_idPerson' => $dataPerson['id_person'],
                         'telephone' => $telephone
                     ]);
                 }
+            
             }
+            
             return Redirect::route("/pesquisadores",[
                     'sucess' => ['Pesquisador registrado com sucesso!']
                 ]
             );
+        
         } catch (\Exception $e) {
-            //echo $e->getMessage();
+        
             return Redirect::route("/pesquisadores",[
                     'errors' => ['Erro ao cadastrar nova entidade. (' . $e->getMessage() . ')']
                 ]
             );
+        
         }
     }
 
     public function delete($id)
     {
+        
         Logger::log_message(Logger::LOG_INFORMATION, "Researcher, action delete.");
+
         try {
+        
             $this->researcherModel->delete($id);
+        
             return Redirect::route('/pesquisadores',[
                 'success' => ['Pronto! Já removemos o pesquisador para você.']
             ]);
+        
         } catch (\Exception $e) {
+        
             return Redirect::route('/pesquisadores',[
                 'errors' => ['Erro ao remover pesquisador. (' . $e->getMessage() . ')']
             ]);
+        
         }
     }
 

@@ -2,6 +2,8 @@
 
 namespace Core;
 
+USE Core\DataBase;
+
 trait Authenticate
 {
     public function login()
@@ -9,16 +11,17 @@ trait Authenticate
         $this->loadView("home/login");
     }
 
-    public function auth($request)
+    public function authenticateAuth($model,$request)
     {
      
-        $model = Container::getModelInstance('ResearcherModel', DataBase::getInstance());
-        // $modelName = "App\\Models\\ResearcherModel";
+        //$model = Container::getModelInstance('ResearcherModel', DataBase::getInstance());
+        
         // $ob = new $modelName(DataBase::getInstance());
         $result = $model->getFilteredByColumn('email',$request->post->email)[0];
         
-        if ($result && password_verify($request->post->password,$result->password)) {
         
+        if ($result && password_verify($request->post->password,$result->password)) {
+
             $user = [
                 'id_person' => $result->id_person,
                 'name'      => $result->name,
@@ -27,12 +30,17 @@ trait Authenticate
         
             Session::set('user', $user);
         
-            return Redirect::route('/');
-        }
+            return Redirect::route('/', [
+                'informations' => ['']
+            ]);
 
-        return Redirect::route('/login',[
-            'errors' => ['Usuário ou senha incorretos.']
-        ]);
+        } else {
+
+            return Redirect::route('/login',[
+                'errors' => ['Usuário ou senha incorretos.']
+            ]);
+
+        }
     }
 
     public function logout()

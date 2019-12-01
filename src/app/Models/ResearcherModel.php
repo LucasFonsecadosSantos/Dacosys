@@ -2,12 +2,25 @@
 
 namespace App\Models;
 
+use PDO;
 use Core\Model;
 use Util\Identificator;
 
 class ResearcherModel extends Model
 {
     protected $table = "person";
+
+    public static function where($column, $value)
+    {
+        $self = new static;
+        $query = "SELECT * FROM person WHERE " . $column . "=:value" ;
+        $stmt = $self->pdo->prepare($query);
+        $stmt->bindValue(':value', $value);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
 
     public function prepareToInsert(array $data)
     {
