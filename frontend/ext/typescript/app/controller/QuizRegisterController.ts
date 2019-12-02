@@ -21,8 +21,10 @@ export class QuizRegisterController {
 
     private _setElements(): void {
         this._buttons['addItemBtn']             = <HTMLButtonElement> document.getElementsByName('addItemBtn')[0];
+        this._buttons['generate-access-key']    = <HTMLButtonElement> document.getElementsByName('generateAccessKey')[0];
         this._buttons['addItemModalAddBtn']     = <HTMLButtonElement> document.getElementsByName('addItemModalAddBtn')[0];
         this._tables['item-table']               = <HTMLTableElement> document.getElementsByName('itemTable')[0];
+        this._tables['accessKeyTable']          = <HTMLTableElement> document.getElementsByName('accessKeyTable')[0];
         this._modals['item-modal']              = <HTMLDivElement> document.getElementById("item-modal");
         this._modals['item-modal']['close-btn'] = <HTMLSpanElement> document.getElementById('close-item-modal');
         this._fields['enunciation']             = <HTMLInputElement> document.getElementsByName('enunciation')[0];
@@ -34,13 +36,31 @@ export class QuizRegisterController {
     private _initializeListeners(): void {
 
         this._buttons['addItemBtn'].addEventListener('click', event => {
+            
             this._modals['item-modal'].classList.remove('d-none');
             this._modals['item-modal'].classList.add('d-block');
+        
+        });
+
+        this._buttons['generate-access-key'].addEventListener('click', event => {
+
+            let row = this._tables['accessKeyTable'].insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+
+            cell1.classList.add('white-color');
+            cell1.textContent = "Este token de acesso estará disponivel após a conclusão do registro deste questionário.";
+
+            cell2.classList.add('white-color');
+            cell2.innerHTML = '<i class="material-icons">delete</i>';
+
         });
 
         this._modals['item-modal']['close-btn'].addEventListener('click', event => {
+        
             this._modals['item-modal'].classList.add('d-none');
             this._modals['item-modal'].classList.remove('d-block');
+        
         });
 
         this._fields['enunciation'].addEventListener('keydown', event => {

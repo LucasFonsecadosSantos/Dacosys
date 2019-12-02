@@ -99,7 +99,23 @@ html
                                 .row-mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pt-3
                                         table.data-table(name="itemTable")
-                                            
+                    .row
+                        .dashboard__subDashboard_1
+                            +box("participantes", false, "/questionarios/registrar", "/questionarios")
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
+                                        button.d-flex.justify-conter.align-items-center(name="generateAccessKey", type="button", title="Clique para gerar uma chave de acesso.", alt="Botão para gerar nova chave de acesso.")
+                                            | gerar nova chave de acesso
+                                            span.material-icons add
+                                .row.mt-3
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        table.data-table(name="accessKeyTable")
+                    .row.mt-3.mb-5
+                        .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-center
+                            button.flex-fill.d-flex.justify-content-center.align-items-center(name="submitBtn", type="submit", title="CLique para finalizar o cadastro deste novo questionário.", alt="Botão para finalizar o cadastro deste novo questionário.")
+                                | finalizar cadastro
+                                span.material-icons add_box
+
         footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

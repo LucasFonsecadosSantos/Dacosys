@@ -33,6 +33,10 @@ class QuizController extends Controller
     public function register()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action register.");
+        $this->view->navigationRoute = [
+            'Questionarios'          => '/questionarios',
+            'Registrar Novo Questionário' => '/questionario/registrar'
+        ];
         $this->loadView("quiz/register");
     }
 

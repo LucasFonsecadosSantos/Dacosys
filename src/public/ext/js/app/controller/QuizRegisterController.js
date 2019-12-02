@@ -11,8 +11,10 @@ export class QuizRegisterController {
     }
     _setElements() {
         this._buttons['addItemBtn'] = document.getElementsByName('addItemBtn')[0];
+        this._buttons['generate-access-key'] = document.getElementsByName('generateAccessKey')[0];
         this._buttons['addItemModalAddBtn'] = document.getElementsByName('addItemModalAddBtn')[0];
         this._tables['item-table'] = document.getElementsByName('itemTable')[0];
+        this._tables['accessKeyTable'] = document.getElementsByName('accessKeyTable')[0];
         this._modals['item-modal'] = document.getElementById("item-modal");
         this._modals['item-modal']['close-btn'] = document.getElementById('close-item-modal');
         this._fields['enunciation'] = document.getElementsByName('enunciation')[0];
@@ -24,6 +26,15 @@ export class QuizRegisterController {
         this._buttons['addItemBtn'].addEventListener('click', event => {
             this._modals['item-modal'].classList.remove('d-none');
             this._modals['item-modal'].classList.add('d-block');
+        });
+        this._buttons['generate-access-key'].addEventListener('click', event => {
+            let row = this._tables['accessKeyTable'].insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.classList.add('white-color');
+            cell1.textContent = "Este token de acesso estará disponivel após a conclusão do registro deste questionário.";
+            cell2.classList.add('white-color');
+            cell2.innerHTML = '<i class="material-icons">delete</i>';
         });
         this._modals['item-modal']['close-btn'].addEventListener('click', event => {
             this._modals['item-modal'].classList.add('d-none');
