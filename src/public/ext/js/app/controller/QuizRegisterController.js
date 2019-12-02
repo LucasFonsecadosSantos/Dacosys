@@ -67,9 +67,17 @@ export class QuizRegisterController {
             }
         });
         this._fields['answer_image'].addEventListener('change', event => {
-            if (this._fields['answer_image'].value != null) {
-                document.getElementById('add-image-row').innerHTML += '<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"> teste </div>';
+            let files = this._fields['answer_image'].files;
+            if (files && (files[0] != null)) {
+                let count = 0;
+                Array.from(files).forEach(element => {
+                    document.getElementById('add-image-row').innerHTML += '<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 item-image-container"><img src="' + URL.createObjectURL(this._fields['answer_image'].files[count]) + '"/></div>';
+                    count++;
+                });
             }
+        });
+        this._fields['answer_image'].addEventListener('click', event => {
+            this._fields['answer_image'].value = "";
         });
     }
 }

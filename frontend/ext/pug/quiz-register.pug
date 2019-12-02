@@ -53,7 +53,7 @@ html
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                         label descrição da pesquisa
-                                        textarea(type="date", name="description", placeholder="", title="Descreva os objetivos e metodos de sua pesquisa.", alt="Campo para descrever objetivos e métodos da pesquisa.")
+                                        textarea(type="date", name="description", placeholder="Ex.: Essa pesquisa objetiva o levantamento de requisitos para o desenvolvimento de um sistema responsável ...", title="Descreva os objetivos e metodos de sua pesquisa.", alt="Campo para descrever objetivos e métodos da pesquisa.")
                     .row
                         .dashboard__subDashboard_1
                             +box("insira as perguntas", false, "/questionarios/registrar", "/questionarios")
@@ -84,7 +84,7 @@ html
                                                 p.white-color.small-font.mt-1(name="answer_discret_amount-helper") Selecione uma opção de 5 à 9.
                                         .row.mt-3#add-image-row
                                             .col-12.col-sm-6.col-md-4.col-lg-4.col-xl-4#add-image-button-container
-                                                input#image_01(name="answer_image", type="file", alt="Campo para inserir uma image.", title="Clique para inserir uma nova imagem.")
+                                                input#image_01(multiple, name="answer_image", type="file", alt="Campo para inserir uma image.", title="Clique para inserir uma nova imagem.")
                                                 label.add-image-button(for="image_01")
                                                     i.material-icons add_a_photo
                                                     | adicionar imagem
