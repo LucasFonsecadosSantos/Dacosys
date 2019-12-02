@@ -66,28 +66,26 @@ html
                                                 span.close#close-item-modal &times;
                                                 .box__header.mb-3(style="margin-bottom-color: #25282F")
                                                     h4(style="color: #25282F") nova pergunta
-                                        .row.mt-5
+                                        .row.mt-3
                                             .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                                 label enunciado da pergunta
                                                 input(name="enunciation", maxlength=150,minlength=5,placeholder="Ex.: Dentre os tipos de café apresentados, qual mais lhe agradou?", title="Insira o enunciado da pergunta.", alt="Campo para inserir o enunciado da pergunta.")
-                                                p.white-color.small-font.mt-1(name="enunciation-helper") Máximo 150 letras/números.
+                                                p.green-color.small-font.mt-1(name="enunciation-helper") Máximo 150 letras/números.
                                         .row.mt-3
-                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12#answer_type_container
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                                 label tipo da pergunta
-                                                select(name="answer_type", title="Selecione o tipo da pergunta.", alt="Campo para selecionar o tipo da pergunta.")
+                                                select(name="answer_type",accept="image/jpg, image/jpeg, image/svg", title="Selecione o tipo da pergunta.", alt="Campo para selecionar o tipo da pergunta.")
                                                     option(value="default", selected) -- SELECIONE --
                                                     option(value="_DISCRET_") Discreto
                                                     option(value="_CONTINUOS_") Continua
-                                            .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6.d-none#answer_amount_container
-                                                label quantiade de opções
-                                                input(type="number", min="5", max="9", name="answer_discret_amount", title="Informe a quantidade de opções.", alt="Campo para informar a quantidade de opções.", placeholder="Ex.: 3")
-                                                p.white-color.small-font.mt-1(name="answer_discret_amount-helper") Selecione uma opção de 5 à 9.
-                                        .row.mt-3#add-image-row
-                                            .col-12.col-sm-6.col-md-4.col-lg-4.col-xl-4#add-image-button-container
+                                        .row.mt-3
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-none#add-image-button-container
                                                 input#image_01(multiple, name="answer_image", type="file", alt="Campo para inserir uma image.", title="Clique para inserir uma nova imagem.")
                                                 label.add-image-button(for="image_01")
                                                     i.material-icons add_a_photo
                                                     | adicionar imagem
+                                        .row.mt-3.mb-10.d-none#add-image-row
+                                            
                                         .row.mt-3
                                             .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
                                                 button.d-flex.justify-conter.align-items-center(name="addItemModalAddBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.")
@@ -99,9 +97,9 @@ html
                                             | Adicionar nova pergunta
                                             span.material-icons add
                                 .row-mt-3
-                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
-                                        table.data-table
-                                            tbody
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pt-3
+                                        table.data-table(name="itemTable")
+                                            
         footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

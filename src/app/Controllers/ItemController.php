@@ -42,7 +42,9 @@ class ItemController extends Controller
 
     public function store($request)
     {
+        
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action store.");
+        
         $this->model->create(
             [
                 'id_item' => Identificator::generateID('_item'),
@@ -51,12 +53,13 @@ class ItemController extends Controller
                 'answer_discret_amount' => $request->post->answer_discret_amount
             ]
         );
-        return Redirect::route(
-            '/questionario/' . $request->post->quiz_idQuiz . '/visualizar',
+        
+        return Redirect::route('/questionario/' . $request->post->quiz_idQuiz . '/visualizar',
             [
                 'success' => ['Tudo ok! A sua nova pergunta foi cadastrada.']
             ]
         );
+    
     }
 
     public function show($id)
@@ -68,8 +71,9 @@ class ItemController extends Controller
 
     public function storeAnswer($id,$request)
     {
+        
         try {
-            print_r($request->post);
+            
             $this->participantAnswerItemModel->create(
                 [
                     'participant_idPerson'  =>  Session::get('user')['id_person'],
@@ -81,20 +85,26 @@ class ItemController extends Controller
             );
             
             $nextID = Session::get('items_id')[0];
+            
             if (($nextID != "") && (Session::get('items_id') != null) && ($nextID != null)) {
+            
                 $array = Session::get('items_id');
                 array_shift($array);
                 Session::set('items_id', $array);
                 return Redirect::route('/pergunta/' . $nextID . '/responder');
+           
             } else {
+           
                 return Redirect::route('/questionario/agradecimento');
+           
             }
 
         } catch (\Exception $e) {
-            echo $e->getMessage();
-            // return Redirect::route('/participar', [
-            //     'errors' => ['Ops: Houve um erro ao salvar sua resposta. Por favor, contate o administrador.']
-            // ]);
+            
+            return Redirect::route('/participar', [
+                'errors' => ['Ops: Houve um erro ao salvar sua resposta. Por favor, contate o administrador.']
+            ]);
+
         }
     }
 
@@ -104,7 +114,7 @@ class ItemController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "ItemController, action answer.");
         
         try {
-            print_r($_SESSION['items_id']);
+            
             $this->view->item = $this->itemModel->getByID($id);
             
             $this->view->options = $this->_getOptions($this->view->item);
@@ -122,9 +132,11 @@ class ItemController extends Controller
             $this->loadView('item/answer');
             
         } catch (\Exception $e) {
+
             return Redirect::route('/participar',[
                 'errors' => ['Ops, parece que houve um erro ao buscar a pergunta. Por favor, contate o administrador do sistema.']
             ]);
+
         }
     }
 

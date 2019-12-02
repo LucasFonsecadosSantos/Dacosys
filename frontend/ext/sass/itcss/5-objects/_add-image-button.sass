@@ -1,7 +1,19 @@
 .add-image-button
     @extend .d-flex, .justify-content-center, .align-items-center, .flex-column
     @include border_radius(8px)
-    width: 100%
+    width: 50%
     height: 150px
     border: dashed 2px $__COLOR__green-1
     cursor: pointer
+    transition: all .5s
+    &:hover
+        background: $__COLOR__green-1
+        color: #FFF
+    
+.item-image-container
+    
+    img
+        border: solid 1px $__COLOR__green-1
+        @extend .rounded
+        width: 100%
+        height: 150px

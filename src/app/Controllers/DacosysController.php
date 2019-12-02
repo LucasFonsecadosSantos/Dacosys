@@ -28,21 +28,32 @@ class DacosysController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action index.");
         
         try {
+            
             $this->view->user               = $this->personModel->getAll('_ADMINISTRATOR_');
             $this->view->researcherArray    = $this->personModel->getAll('_RESEARCHER_');
             $this->view->participantArray   = $this->personModel->getAll('_PARTICIPANT_');
             $this->view->quizArray          = $this->quizModel->getAll();
+            $this->view->navigationRoute = [
+                'Dashboard de controle' => '/',
+            ];
             
             $this->loadView("home/index");
+        
         } catch (\Exception $e) {
             
+            return Redirect::route("/500", [
+                'errors' => ['Hmm, parece que não foi possivel carregar alguns dados da aplicação. Por favor, contate o administrador do sistema.']
+            ]);
+
         }
     }
 
     public function keyGeneration($request)
     {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action key generation.");
+        
         try {
+        
             $this->personModel->create(
                 [
                     'id_person'             => Indentificator::generateID("person_"),
@@ -59,11 +70,15 @@ class DacosysController extends Controller
                     'supervisor_idPerson'   => null,
                 ]
             );
+        
             $this->loadView("home/accesskey");
+        
         } catch (\Exception $e) {
+        
             return Redirect::route('/',[
                 'errors' => ['Erro ao cadastrar novo participante no banco de dados. (' . $e->getMessage() . ')']
             ]);
+        
         }
     }
 
@@ -90,4 +105,5 @@ class DacosysController extends Controller
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action participantLogin.");
         $this->loadView('home/participant-login');
     }
+
 }

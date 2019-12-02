@@ -15,7 +15,20 @@ html
             include modules/components/_header.pug
         main
             .container
-                +title_page("Seja bem vindo, lucas.", "dashboard de controle")
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Seja bem vindo, ' . $_SESSION['user']['name'] . '</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
                 .row
                     .dashboard__subDashboard_2
                         +box("questionários em andamento", true, "/questionarios/registrar", "/questionarios")
