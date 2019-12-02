@@ -8,6 +8,7 @@ abstract class Controller
 {
     protected   $model;
     protected   $view;
+    protected   $auth;
     protected   $success;
     protected   $error;
     protected   $information;
@@ -18,6 +19,7 @@ abstract class Controller
     {
         $this->view = new \stdClass;
         $this->view->navigationRoute = [];
+        $this->auth = new Auth;
         // if ($modelName != null) {
         //     $this->model = Container::getModelInstance($modelName);
         // }
@@ -59,5 +61,10 @@ abstract class Controller
             //TODO
             // View path not found
         }
+    }
+
+    public function forbiden()
+    {
+        return Redirect::route('/login');
     }
 }

@@ -27,6 +27,8 @@ export class QuizRegisterController {
         this._modals['item-modal']['close-btn'] = <HTMLSpanElement> document.getElementById('close-item-modal');
         this._fields['enunciation'] = <HTMLInputElement> document.getElementsByName('enunciation')[0];
         this._fields['enunciation']['helper'] = <HTMLParagraphElement> document.getElementsByName('enunciation-helper')[0];
+        this._fields['answer_type'] = <HTMLSelectElement> document.getElementsByName('answer_type')[0];
+        this._fields['answer_image'] = <HTMLInputElement> document.getElementsByName('answer_image')[0];
     }
 
     private _initializeListeners(): void {
@@ -74,5 +76,23 @@ export class QuizRegisterController {
             this._modals['item-modal'].classList.remove('d-block');
         });
 
+        this._fields['answer_type'].addEventListener('change', event => {
+            if (event.target.value == '_DISCRET_') {
+                document.getElementById('answer_amount_container').classList.remove('d-none');
+                document.getElementById('answer_amount_container').classList.add('d-block');
+                document.getElementById('answer_type_container').classList.remove('col-xl-12');
+                document.getElementById('answer_type_container').classList.remove('col-lg-12');
+                document.getElementById('answer_type_container').classList.remove('col-md-12');
+                document.getElementById('answer_type_container').classList.add('col-md-6');
+                document.getElementById('answer_type_container').classList.add('col-lg-6');
+                document.getElementById('answer_type_container').classList.add('col-xl-6');
+            }
+        });
+
+        this._fields['answer_image'].addEventListener('change', event => {
+            if (this._fields['answer_image'].value != null) {
+                document.getElementById('add-image-row').innerHTML += '<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"> teste </div>';
+            }
+        });
     }
 }

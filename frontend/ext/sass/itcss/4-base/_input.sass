@@ -20,3 +20,13 @@ input
         -moz-user-select: none
         -ms-user-select: none
         user-select: none
+    &[type="file"]
+        @extend .d-none
+        @include border_radius(8px)
+        -webkit-appearance: none
+        -moz-appearance:    none
+        appearance:         none
+        width: 100%
+        height: 150px
+        border: dashed 2px $__COLOR__green-1
+        cursor: pointer

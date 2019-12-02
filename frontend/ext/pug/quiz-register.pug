@@ -19,7 +19,7 @@ html
                     .container.mt-5.pb-5
                         .body__title
                             |   <?php
-                            |       echo '<h3 class="m-0 p-0">Cadastrar novo pesquisador</h3>';
+                            |       echo '<h3 class="m-0 p-0">Cadastrar novo questionário</h3>';
                             |   ?>
                             .body__titleNavigation
                                 |   <?php
@@ -58,6 +58,8 @@ html
                         .dashboard__subDashboard_1
                             +box("insira as perguntas", false, "/questionarios/registrar", "/questionarios")
                                 .modal#item-modal.d-none
+
+                                    //AddItemModal
                                     .modal__content
                                         .row
                                             .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
@@ -70,11 +72,32 @@ html
                                                 input(name="enunciation", maxlength=150,minlength=5,placeholder="Ex.: Dentre os tipos de café apresentados, qual mais lhe agradou?", title="Insira o enunciado da pergunta.", alt="Campo para inserir o enunciado da pergunta.")
                                                 p.white-color.small-font.mt-1(name="enunciation-helper") Máximo 150 letras/números.
                                         .row.mt-3
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12#answer_type_container
+                                                label tipo da pergunta
+                                                select(name="answer_type", title="Selecione o tipo da pergunta.", alt="Campo para selecionar o tipo da pergunta.")
+                                                    option(value="default", selected) -- SELECIONE --
+                                                    option(value="_DISCRET_") Discreto
+                                                    option(value="_CONTINUOS_") Continua
+                                            .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-6.d-none#answer_amount_container
+                                                label quantiade de opções
+                                                input(type="number", min="5", max="9", name="answer_discret_amount", title="Informe a quantidade de opções.", alt="Campo para informar a quantidade de opções.", placeholder="Ex.: 3")
+                                                p.white-color.small-font.mt-1(name="answer_discret_amount-helper") Selecione uma opção de 5 à 9.
+                                        .row.mt-3#add-image-row
+                                            .col-12.col-sm-6.col-md-4.col-lg-4.col-xl-4#add-image-button-container
+                                                input#image_01(name="answer_image", type="file", alt="Campo para inserir uma image.", title="Clique para inserir uma nova imagem.")
+                                                label.add-image-button(for="image_01")
+                                                    i.material-icons add_a_photo
+                                                    | adicionar imagem
+                                        .row.mt-3
                                             .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
-                                            button(name="addItemModalAddBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.") adicionar
+                                                button.d-flex.justify-conter.align-items-center(name="addItemModalAddBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.")
+                                                    | adicionar
+                                                    span.material-icons add
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
-                                        button(name="addItemBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.") asdasd
+                                        button.d-flex.justify-conter.align-items-center(name="addItemBtn", type="button", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.")
+                                            | Adicionar nova pergunta
+                                            span.material-icons add
                                 .row-mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                         table.data-table
