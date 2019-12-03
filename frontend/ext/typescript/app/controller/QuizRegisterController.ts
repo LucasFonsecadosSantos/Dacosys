@@ -31,6 +31,7 @@ export class QuizRegisterController {
         this._fields['enunciation']['helper']   = <HTMLParagraphElement> document.getElementsByName('enunciation-helper')[0];
         this._fields['answer_type']             = <HTMLSelectElement> document.getElementsByName('answer_type')[0];
         this._fields['answer_image']            = <HTMLInputElement> document.getElementsByName('answer_image')[0];
+        this._fields['token_amount']            = <HTMLInputElement> document.getElementsByName('token_amount')[0];
     }
 
     private _initializeListeners(): void {
@@ -53,6 +54,10 @@ export class QuizRegisterController {
 
             cell2.classList.add('white-color');
             cell2.innerHTML = '<i class="material-icons">delete</i>';
+
+            let amount = parseInt(this._fields['token_amount'].value);
+            amount += 1;
+            this._fields["token_amount"].value = "" + amount;
 
         });
 
@@ -146,9 +151,19 @@ export class QuizRegisterController {
         let cell3 = document.createElement('TD');
         let p;
         //row.setAttribute('value','ENUNCIATION=' + )
-
+        row.setAttribute('name','item_row')
         images.setAttribute('type', 'hidden');
+        let nameCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        images.setAttribute('name', nameCode);
         images.setAttribute('value', this._getModalImageOptions());
+        
+        (document.getElementsByName('item_images-input-name')[0] as HTMLInputElement).value += nameCode + '@';
+        (document.getElementsByName('item_enunciation')[0] as HTMLInputElement).value += this._fields['enunciation'].value + "@";
+        (document.getElementsByName('item_answer-type')[0] as HTMLInputElement).value += this._fields['answer_type'].value + "@";
+        
+        (document.getElementsByName('item_answer-type')[0] as HTMLInputElement).value = (document.getElementsByName('item_answer-type')[0] as HTMLInputElement).value.replace(/.$/,"");
+        (document.getElementsByName('item_enunciation')[0] as HTMLInputElement).value = (document.getElementsByName('item_enunciation')[0] as HTMLInputElement).value.replace(/.$/,"");
+        (document.getElementsByName('item_images-input-name')[0] as HTMLInputElement).value = (document.getElementsByName('item_images-input-name')[0] as HTMLInputElement).value.replace(/.$/,"");
 
         row.addEventListener('click', event => {
             alert("Em implementação.");

@@ -10,6 +10,7 @@ use Core\Session;
 use App\Models\QuizModel;
 use App\Models\ItemModel;
 use Util\Logger;
+use Util\Identificator;
 use Util\Parser;
 
 class QuizController extends Controller 
@@ -17,6 +18,9 @@ class QuizController extends Controller
 
     private $itemModel;
     private $quizModel;
+    private $itemPictureModel;
+    private $itemHasPictureModel;
+    private $participantModel;
     private $participantAnswerItemModel;
 
     public function __construct() {
@@ -26,6 +30,9 @@ class QuizController extends Controller
         $this->quizModel                    = Container::getModelInstance('QuizModel', $connection);
         $this->itemModel                    = Container::getModelInstance('ItemModel', $connection);
         $this->participantModel             = Container::getModelInstance('ParticipantModel', $connection);
+        $this->itemPictureModel             = Container::getModelInstance('ItemPictureModel', $connection);
+        $this->itemHasPictureModel          = Container::getModelInstance('ItemHasPictureModel', $connection);
+        $this->participantModel             = Container::getModelInstance('ParticipantModel', $connection);
         $this->participantAnswerItemModel   = Container::getModelInstance('ParticipantAnswerItemModel', $connection);
         $this->view = new \stdClass;
     }
@@ -33,10 +40,12 @@ class QuizController extends Controller
     public function register()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action register.");
+        
         $this->view->navigationRoute = [
             'Questionarios'          => '/questionarios',
             'Registrar Novo Questionário' => '/questionario/registrar'
         ];
+        
         $this->loadView("quiz/register");
     }
 
@@ -114,33 +123,120 @@ class QuizController extends Controller
         
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
         
+        $quizId = Identificator::generateID('quiz_');
+
         try {
         
             $this->quizModel->create(
                 [
-                    'id_quiz'       => Indentificator::generateID('quiz_'),
+                    'id_quiz'       => $quizId,
+                    'name'          => $request->post->name,
                     'start_date'    => $request->post->start_date,
                     'end_date'      => $request->post->end_date,
                     'start_date'    => $request->post->start_date,
-                    'status'        => true
+                    'status'        => true,
+                    'description'   => $request->post->description
                 ]
             );
         
             Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
         
-            return Redirect::route("/questionarios",
-                [
-                    "success" => ["Questionário registrado com sucesso."]
-                ]
-            );
+            
         
         } catch (\Exception $e) {
         
             return Redirect::route('/questionarios',[
-                'errors' => ['Erro ao cadastrar novo quetionário. (' . $e->getMessage() . ')']
+                'errors' => ['Erro ao cadastrar novo questionário. (' . $e->getMessage() . ')']
             ]);
         
         }
+
+        try {
+
+            $amount = (int) $request->post->token_amount;
+            $idItem;
+            
+            for ($i=0; $i < $amount; ++$i) {
+                
+                $this->participantModel->create([
+
+                    'id_person'             => Identificator::generateID("person_"),
+                    'type'                  => '_PARTICIPANT_',
+                    'name'                  => null,
+                    'email'                 => null,
+                    'password'              => null,
+                    'sex'                   => null,
+                    'hometown_cep'          => null,
+                    'color'                 => null,
+                    'birth_day'             => null,
+                    'latest_access'         => null,
+                    'latest_ip_access'      => null,
+                    'is_administrator'      => 0,
+                    'observations'          => null,
+                    'quiz_idQuiz'           => $quizId,
+                    'supervisor_idPerson'   => null
+                
+                ]);
+
+            }
+
+        } catch (\Exception $e) {
+            
+            return Redirect::route('/questionarios',[
+                'errors' => ['Erro ao cadastrar os tokens. (' . $e->getMessage() . ')']
+            ]);
+
+        }
+
+        try {
+
+            $amount = count(explode('@',$request->post->item_enunciation));
+            print_r($amount);
+            // foreach ($request->post->item_row as $item) {
+
+            //     $idItem = Identificator::generateID('item_');
+
+            //     $this->itemModel->create([
+
+            //         'id_item'               => $idItem,
+            //         'enunciation'           => $request->post->enunciation,
+            //         'quiz_idQuiz'           => $quizId,
+            //         'answer_type'           => $request->post->answer_type,
+            //         'answer_discret_amount' => null
+                
+            //     ]);
+
+            //     //TODO create image and item_+has_image
+
+            // }
+            
+
+            // return Redirect::route('/questionarios', [
+            //     'success' => ['Tudo ok! Seu questionário foi registrado.']
+            // ]);
+
+        } catch (\Exception $e) {
+
+            return Redirect::route('/questionarios', [
+                'errors' => ['Ops: Parece que houve um problema ao salvar o questionário.']
+            ]);
+
+        }
+        // try {
+
+        //     return Redirect::route("/questionarios",
+        //         [
+        //             "success" => ["Questionário registrado com sucesso."]
+        //         ]
+        //     );
+
+        // } catch (\Exception $e) {
+            
+        //     return Redirect::route('/questionarios',[
+        //         'errors' => ['Erro ao cadastrar as imagens. (' . $e->getMessage() . ')']
+        //     ]);
+
+        // }
     }
 
     public function itemStore($request)

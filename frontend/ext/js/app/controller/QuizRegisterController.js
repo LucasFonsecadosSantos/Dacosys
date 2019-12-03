@@ -21,6 +21,7 @@ export class QuizRegisterController {
         this._fields['enunciation']['helper'] = document.getElementsByName('enunciation-helper')[0];
         this._fields['answer_type'] = document.getElementsByName('answer_type')[0];
         this._fields['answer_image'] = document.getElementsByName('answer_image')[0];
+        this._fields['token_amount'] = document.getElementsByName('token_amount')[0];
     }
     _initializeListeners() {
         this._buttons['addItemBtn'].addEventListener('click', event => {
@@ -35,6 +36,9 @@ export class QuizRegisterController {
             cell1.textContent = "Este token de acesso estará disponivel após a conclusão do registro deste questionário.";
             cell2.classList.add('white-color');
             cell2.innerHTML = '<i class="material-icons">delete</i>';
+            let amount = parseInt(this._fields['token_amount'].value);
+            amount += 1;
+            this._fields["token_amount"].value = "" + amount;
         });
         this._modals['item-modal']['close-btn'].addEventListener('click', event => {
             this._modals['item-modal'].classList.add('d-none');
@@ -103,8 +107,17 @@ export class QuizRegisterController {
         let cell3 = document.createElement('TD');
         let p;
         //row.setAttribute('value','ENUNCIATION=' + )
+        row.setAttribute('name', 'item_row');
         images.setAttribute('type', 'hidden');
+        let nameCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        images.setAttribute('name', nameCode);
         images.setAttribute('value', this._getModalImageOptions());
+        document.getElementsByName('item_images-input-name')[0].value += nameCode + '@';
+        document.getElementsByName('item_enunciation')[0].value += this._fields['enunciation'].value + "@";
+        document.getElementsByName('item_answer-type')[0].value += this._fields['answer_type'].value + "@";
+        document.getElementsByName('item_answer-type')[0].value = document.getElementsByName('item_answer-type')[0].value.replace(/.$/, "");
+        document.getElementsByName('item_enunciation')[0].value = document.getElementsByName('item_enunciation')[0].value.replace(/.$/, "");
+        document.getElementsByName('item_images-input-name')[0].value = document.getElementsByName('item_images-input-name')[0].value.replace(/.$/, "");
         row.addEventListener('click', event => {
             alert("Em implementação.");
         });

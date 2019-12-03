@@ -98,6 +98,9 @@ html
                                             span.material-icons add
                                 .row-mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pt-3
+                                        input(type="hidden", name="item_enunciation", value="")
+                                        input(type="hidden", name="item_answer-type", value="")
+                                        input(type="hidden", name="item_images-input-name", value="")
                                         table.data-table(name="itemTable")
                     .row
                         .dashboard__subDashboard_1
@@ -109,6 +112,7 @@ html
                                             span.material-icons add
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                        input(type="hidden", value="0", name="token_amount")
                                         table.data-table(name="accessKeyTable")
                     .row.mt-3.mb-5
                         .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-center

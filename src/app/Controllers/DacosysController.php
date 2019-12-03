@@ -48,40 +48,6 @@ class DacosysController extends Controller
         }
     }
 
-    public function keyGeneration($request)
-    {
-        Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action key generation.");
-        
-        try {
-        
-            $this->personModel->create(
-                [
-                    'id_person'             => Indentificator::generateID("person_"),
-                    'type'                  => '_PARTICIPANT_',
-                    'name'                  => null,
-                    'email'                 => null,
-                    'password'              => null,
-                    'sex'                   => null,
-                    'hometown_cep'          => null,
-                    'color'                 => null,
-                    'birth_day'             => null,
-                    'latest_access'         => null,
-                    'latest_ip_access'      => null,
-                    'supervisor_idPerson'   => null,
-                ]
-            );
-        
-            $this->loadView("home/accesskey");
-        
-        } catch (\Exception $e) {
-        
-            return Redirect::route('/',[
-                'errors' => ['Erro ao cadastrar novo participante no banco de dados. (' . $e->getMessage() . ')']
-            ]);
-        
-        }
-    }
-
     public function bugReport()
     {
         Logger::log_message(Logger::LOG_INFORMATION, "DacosysController, action bug report.");
