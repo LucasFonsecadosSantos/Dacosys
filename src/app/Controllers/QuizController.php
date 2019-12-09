@@ -10,6 +10,7 @@ use Core\Session;
 use App\Models\QuizModel;
 use App\Models\ItemModel;
 use Util\Logger;
+use Util\Uploader;
 use Util\Identificator;
 use Util\Parser;
 
@@ -41,6 +42,8 @@ class QuizController extends Controller
     {
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action register.");
         
+        unset($_FILES);
+
         $this->view->navigationRoute = [
             'Questionarios'          => '/questionarios',
             'Registrar Novo Questionário' => '/questionario/registrar'
@@ -182,7 +185,7 @@ class QuizController extends Controller
 
         } catch (\Exception $e) {
             
-            return Redirect::route('/questionarios',[
+            return Redirect::route('/questionarios',[+
                 'errors' => ['Erro ao cadastrar os tokens. (' . $e->getMessage() . ')']
             ]);
 
@@ -190,8 +193,78 @@ class QuizController extends Controller
 
         try {
 
-            $amount = count(explode('@',$request->post->item_enunciation));
-            print_r($amount);
+            $items = [];
+            $itemsImage = [];
+            $size = count($request->post->item_answerEnunciation);
+
+            for ($i = 0; $i < $size; ++$i) {
+                $idItem = Identificator::generateID('item_');
+                
+                $items[$i] = [
+                    'id_item' => $idItem,
+                    'enunciation' => $request->post->item_answerEnunciation[$i],
+                    'quiz_idQuiz' => $quizId,
+                    'answer_type' => $request->post->item_answerType[$i],
+                    'answer_discret_amount' => null
+                ];
+
+                $count = 0;
+                
+                while(true) {
+                    if ($_FILES["item_answerImages_itemNumber".$count]) {
+                        $idImage = Identificator::generateID('item_picture_');
+
+                        $itemsImage[$count] = [
+                            'id_item_picture'   => $idImage,
+                            'title'             => '',
+                            'path'              => Uploader::makeUpload("item_answerImages_itemNumber".$count)
+                        ];
+
+                        unset($_FILES["item_answerImages_itemNumber".$count]);
+                        $count++;
+                    } else {
+                        break;
+                    }
+                }
+                
+                // do {
+
+                //     if (isset($_FILES["item_answerImages_itemNumber0"])) {
+                        
+                //         $idImage = Identificator::generateID('item_picture_');
+
+                //         $itemsImage[$i] = [
+                //             'id_item_picture'   => $idImage,
+                //             'title'             => '',
+                //             'path'              => Uploader::makeUpload("item_answerImages_itemNumber".$count)
+                //         ];
+                //     }
+                //     ++$count;
+                //     unset($_FILES['item_answerImages_itemNumber'.$count]);
+                // } while (isset($_FILES["item_answerImages_itemNumber".$count]));
+
+                print_r($itemsImage[0]['path']);
+                //$images = Parser::getItemImage($request->post->item_answerImages[$i]);
+            
+                // $imageAmount = count($images);
+
+                // for ($j = 0; $j < $imageAmount; ++$j) {
+                    
+                //     $idImage = Identificator::generateID('item_picture_');
+
+                //     $itemsImage[$i] = [
+                //         'id_item_picture'   => $idImage,
+                //         'title'             => '',
+                //         'path'              => Uploader::makeUpload($images[$j])
+                //     ];
+
+                // }
+
+            }
+
+            
+            
+            //print_r($_POST);
             // foreach ($request->post->item_row as $item) {
 
             //     $idItem = Identificator::generateID('item_');

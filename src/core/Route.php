@@ -74,10 +74,10 @@ class Route
                 $action = $route[2];
                 Logger::log_message(Logger::LOG_SUCCESS, "Controller found: $controller");
                 Logger::log_message(Logger::LOG_SUCCESS, "Action found: $action");
-                //$auth = new Auth;
-                //if(isset($route[3]) && $route[3] == 'auth' && !$auth->check()){
-                  //  $action = 'forbiden';
-               // }
+                $auth = new Auth;
+                if(isset($route[3]) && $route[3] == 'auth' && !$auth->check()){
+                   $action = 'forbiden';
+               }
                 break;
             }
         }

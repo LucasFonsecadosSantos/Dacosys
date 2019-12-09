@@ -4,15 +4,18 @@ namespace Core;
 
 class Auth
 {
-    private $id = null;
-    private $name = null;
-    private $email = null;
+    private static $id = null;
+    private static $name = null;
+    private static $email = null;
 
     public function __construct()
     {
-        $this->id = Session::get('user')['id_person'];
-        $this->name = Session::get('user')['name'];
-        $this->email = Session::get('user')['email'];
+        if (Session::get('user')) {
+            $user = Session::get('user');
+            self::$id       = $user['id_person'];
+            self::$name     = $user['name'];
+            self::$email    = $user['email'];
+        }
     }
 
     public static function id()
@@ -32,6 +35,8 @@ class Auth
 
     public static function check()
     {
-        return ((self::id == null) || (self::name == null) || (self::email == null)) ? false : true;
+        if(self::$id == null || self::$name == null || self::$email == null)
+            return false;
+        return true;
     }
 }

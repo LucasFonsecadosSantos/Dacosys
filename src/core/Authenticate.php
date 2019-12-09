@@ -13,7 +13,9 @@ trait Authenticate
 
     public function authenticateAuth($model,$request)
     {
-     
+        
+        print_r($model);
+        print_r($request);
         //$model = Container::getModelInstance('ResearcherModel', DataBase::getInstance());
         
         // $ob = new $modelName(DataBase::getInstance());
@@ -35,7 +37,7 @@ trait Authenticate
             ]);
 
         } else {
-
+            
             return Redirect::route('/login',[
                 'errors' => ['Usuário ou senha incorretos.']
             ]);

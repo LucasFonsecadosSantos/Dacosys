@@ -8,13 +8,17 @@ export class QuizRegisterController {
     private _fields:    Array<HTMLElement>;
     private _form:      HTMLFormElement;
     private _validator: Validator;
+    private _sharedFields: Array<HTMLInputElement>;
+    private _itemNumber: number;
 
     constructor() {
         this._fields    = new Array<HTMLElement>();
         this._buttons   = new Array<HTMLButtonElement>();
         this._tables    = new Array<HTMLTableElement>();
         this._modals    = new Array<HTMLDivElement>();
+        this._sharedFields = new Array<HTMLInputElement>();
         this._validator = new Validator();
+        this._itemNumber = 0;
         this._setElements();
         this._initializeListeners();
     }
@@ -32,6 +36,9 @@ export class QuizRegisterController {
         this._fields['answer_type']             = <HTMLSelectElement> document.getElementsByName('answer_type')[0];
         this._fields['answer_image']            = <HTMLInputElement> document.getElementsByName('answer_image')[0];
         this._fields['token_amount']            = <HTMLInputElement> document.getElementsByName('token_amount')[0];
+        this._fields['item_answerEnunciation'] = <HTMLInputElement> document.getElementsByName('item_answerEnunciation')[0];
+        this._fields['item_answerType'] = <HTMLInputElement> document.getElementsByName('item_answerType')[0];
+        this._fields['item_answerImages'] = <HTMLInputElement> document.getElementsByName('item_answerImages')[0];
     }
 
     private _initializeListeners(): void {
@@ -99,19 +106,32 @@ export class QuizRegisterController {
             let containerDiv;
             let inputOptionValue;
             let hiddenInputOptionValue;
+            let hiddenInputFile;
             let img;
+            
 
             if (this._verifyImageLimit(files)) {
                 let count = 0;
-
+                let clone = this._fields['answer_image'].cloneNode(true);
+                clone.setAttribute('item',this._itemNumber);
+                clone.setAttribute('id',"");
+                clone.setAttribute('name', 'item_answerImages_itemNumber'+this._itemNumber);
+                this._sharedFields.push(clone);
+                
                 Array.from(files).forEach(element => {
 
                     img = document.createElement("IMG");
+                    
+                    //itemFileInput.setAttribute('optionValue', )
+                    hiddenInputFile = document.createElement('INPUT');
                     hiddenInputOptionValue = document.createElement('INPUT');
+                    hiddenInputFile.setAttribute('type', 'hidden');
+                    hiddenInputFile.setAttribute('value', this._fields['answer_image'].files[count]);
                     hiddenInputOptionValue.setAttribute('type','hidden');
                     hiddenInputOptionValue.setAttribute('name','option-' + count + '-path');
                     img.classList.add("mt-3");
                     img.setAttribute('src', URL.createObjectURL(this._fields['answer_image'].files[count]));
+                    img.setAttribute('uploadValue', this._fields['answer_image'].files[count]);
                     containerDiv = document.createElement("DIV");
                     containerDiv.classList.add("col-12", "col-sm-6", "col-md-3", "col-lg-3", "col-xl-3", "item-image-container", "d-flex", "flex-column", "justify-content-center");
                     inputOptionValue = document.createElement('INPUT');
@@ -119,9 +139,11 @@ export class QuizRegisterController {
                     inputOptionValue.setAttribute('width','90%');
                     inputOptionValue.setAttribute('name','option-value-' + count);
                     inputOptionValue.classList.add('mt-1');
+                    containerDiv.appendChild(hiddenInputFile);
                     containerDiv.appendChild(img);
                     containerDiv.appendChild(hiddenInputOptionValue);
-                    containerDiv.appendChild(inputOptionValue);
+                    
+                    
                     document.getElementById('add-image-row').appendChild(containerDiv);
                     count++;
                 
@@ -145,25 +167,39 @@ export class QuizRegisterController {
     private _getModalItems() {
 
         let row = document.createElement('TR');
-        let images = document.createElement('INPUT');
         let cell1 = document.createElement('TD');
         let cell2 = document.createElement('TD');
         let cell3 = document.createElement('TD');
         let p;
-        //row.setAttribute('value','ENUNCIATION=' + )
-        row.setAttribute('name','item_row')
-        images.setAttribute('type', 'hidden');
-        let nameCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        images.setAttribute('name', nameCode);
-        images.setAttribute('value', this._getModalImageOptions());
+
+        let itemEnunciationInput = document.createElement('INPUT');
+        let itemTypeInput = document.createElement('INPUT');
+        // let itemImageInput = document.createElement('INPUT');
+        //let itemImageInput = document.getElementsByName('item_answerImages');
+
+        // itemImageInput.setAttribute('type','hidden');
+        // itemImageInput.setAttribute('name','item_answerImages[]');
+        // document.getElementById('add-image-row').childNodes.forEach(node => {
+        //     let itemFileInput = document.createElement('INPUT');
+        //     itemFileInput.setAttribute('type','file');
+        //     itemFileInput.setAttribute('name','item_answerImages[]');
+        //     itemFileInput.classList.add('d-none');
+            
+            
+            
+        //     row.appendChild(itemFileInput);
+        // });
+        itemEnunciationInput.setAttribute('type', 'hidden');
+        itemEnunciationInput.setAttribute('name', 'item_answerEnunciation[]');
+        itemTypeInput.setAttribute('type', 'hidden');
+        itemTypeInput.setAttribute('name', 'item_answerType[]');
+
+        row.setAttribute('name','item_row');
         
-        (document.getElementsByName('item_images-input-name')[0] as HTMLInputElement).value += nameCode + '@';
-        (document.getElementsByName('item_enunciation')[0] as HTMLInputElement).value += this._fields['enunciation'].value + "@";
-        (document.getElementsByName('item_answer-type')[0] as HTMLInputElement).value += this._fields['answer_type'].value + "@";
+        //(itemImageInput as HTMLInputElement).value          = this._getModalImageOptions();
+        (itemEnunciationInput as HTMLInputElement).value    = this._fields['enunciation'].value;
+        (itemTypeInput as HTMLInputElement).value           = this._fields['answer_type'].value;
         
-        (document.getElementsByName('item_answer-type')[0] as HTMLInputElement).value = (document.getElementsByName('item_answer-type')[0] as HTMLInputElement).value.replace(/.$/,"");
-        (document.getElementsByName('item_enunciation')[0] as HTMLInputElement).value = (document.getElementsByName('item_enunciation')[0] as HTMLInputElement).value.replace(/.$/,"");
-        (document.getElementsByName('item_images-input-name')[0] as HTMLInputElement).value = (document.getElementsByName('item_images-input-name')[0] as HTMLInputElement).value.replace(/.$/,"");
 
         row.addEventListener('click', event => {
             alert("Em implementação.");
@@ -173,12 +209,12 @@ export class QuizRegisterController {
         p.classList.add('white-color');
 
         cell1.classList.add('white-color');
-        cell1.textContent = this._fields['enunciation'].value;
+        cell1.textContent = (itemEnunciationInput as HTMLInputElement).value;
 
-        p.textContent = this._fields['answer_type'].value;
+        p.textContent = (itemTypeInput as HTMLInputElement).value;
         
         cell2.classList.add('white-color');
-        cell2.textContent = this._fields['answer_type'].value;
+        cell2.textContent = (itemTypeInput as HTMLInputElement).value;
 
         let actionIcon1 = document.createElement('I');
         let actionIcon2 = document.createElement('I');
@@ -206,12 +242,26 @@ export class QuizRegisterController {
         cell3.appendChild(actionIcon2);
         cell3.appendChild(actionIcon3);
 
-        row.appendChild(images);
+        row.appendChild(itemEnunciationInput);
+        row.appendChild(itemTypeInput);
+        //row.appendChild(itemImageInput);
         row.appendChild(cell1);
         row.appendChild(cell2);
         row.appendChild(cell3);
+        
+        this._sharedFields.forEach(element => {
+            document.getElementById('data-row').appendChild(element);
+        })
 
+        this._clearItemModal();
+        this._itemNumber++;
         return row;
+    }
+
+    private _clearItemModal() {
+        document.getElementById('add-image-row').innerHTML = "";
+        this._fields['enunciation'].value = "";
+        this._fields['answer_type'].value = "";
     }
 
     private _getModalImageOptions() {

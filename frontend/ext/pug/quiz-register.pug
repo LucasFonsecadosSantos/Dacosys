@@ -29,7 +29,7 @@ html
                                 |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
                                 |       }
                                 |   ?>
-                form#mainForm(method="POST", action="/questionario/salvar", autocomplete="off")
+                form#mainForm(method="POST", action="/questionario/salvar", autocomplete="off", enctype="multipart/form-data")
                     .row
                         .dashboard__subDashboard_1
                             +box("informe os dados", false, "/questionarios/registrar", "/questionarios")
@@ -97,10 +97,10 @@ html
                                             | Adicionar nova pergunta
                                             span.material-icons add
                                 .row-mt-3
-                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pt-3
-                                        input(type="hidden", name="item_enunciation", value="")
-                                        input(type="hidden", name="item_answer-type", value="")
-                                        input(type="hidden", name="item_images-input-name", value="")
+                                    .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pt-3#data-row
+                                        //input(type="hidden", name="item_answerEnunciation", value="")
+                                        //input(type="hidden", name="item_answerType", value="")
+                                        //input(type="hidden", name="item_answerImages", value="")
                                         table.data-table(name="itemTable")
                     .row
                         .dashboard__subDashboard_1
