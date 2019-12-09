@@ -1,0 +1,32 @@
+.alert
+    @extend .align-items-center, .flex-row, .justify-content-between
+    @extend .p-4
+    @include border_radius(6px)
+    //border: solid 3px darken($__COLOR__red-1, 20)
+    width: 100%
+    p   
+        @extend .ml-4
+        color: #FFF
+        line-height: 0px
+        font-weight: 700
+        &::first-letter
+            text-transform: uppercase
+    i   
+        color: darken($__COLOR__red-1, 30)
+        font-size: inherit
+        &:last-child
+            @extend .ml-auto
+            cursor: pointer
+
+.error
+    background: $__COLOR__red-1
+
+.information
+    background: $__COLOR__yellow_accent-3
+    p, i
+        color: $__COLOR__carbon-dark-1
+
+.success
+    background: $__COLOR__green-3
+    p, i
+        color: $__COLOR__carbon-dark-1

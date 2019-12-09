@@ -45,6 +45,7 @@ class QuizController extends Controller
         unset($_FILES);
 
         $this->view->navigationRoute = [
+            'Home'          => '/',
             'Questionarios'          => '/questionarios',
             'Registrar Novo Questionário' => '/questionario/registrar'
         ];

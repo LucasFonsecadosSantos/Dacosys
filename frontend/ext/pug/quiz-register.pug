@@ -29,6 +29,14 @@ html
                                 |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
                                 |       }
                                 |   ?>
+                .row
+                    .container
+                        .alert.success.d-flex
+                            i.material-icons check_circle
+                            //i.material-icons warning
+                            //i.material-icons error
+                            p teste de mensagem
+                            i.material-icons close
                 form#mainForm(method="POST", action="/questionario/salvar", autocomplete="off", enctype="multipart/form-data")
                     .row
                         .dashboard__subDashboard_1

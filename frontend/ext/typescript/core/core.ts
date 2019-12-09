@@ -2,8 +2,10 @@ import { ResearcherRegisterController } from "./../app/controller/ResearcherRegi
 import { ParticipantRegisterController } from "./../app/controller/ParticipantRegisterController.js";
 import { ItemAnswerController } from "./../app/controller/ItemAnswerController.js";
 import { QuizRegisterController } from "./../app/controller/QuizRegisterController.js";
+import { SystemController } from "./../app/controller/SystemController.js";
 
 (() => {
+    new SystemController();
     switch (document.getElementsByTagName('body')[0].getAttribute('page')) {
         
         case 'researcher-register':
