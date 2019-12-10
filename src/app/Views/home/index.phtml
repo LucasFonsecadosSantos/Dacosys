@@ -6,7 +6,47 @@
           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
       }
-  ?></div></div></div></div><div class="row"><div class="dashboard__subDashboard_2"><div class="row"></div><div class="box mb-4"><div class="box__header mb-3"><h4>questionários em andamento</h4></div><div class="box__body_fixedHeight"><table class="data-table"><tbody>  <?php
+  ?></div></div></div></div>  <?php
+      if ($this->errors) {
+          foreach ($this->errors as $error) {
+              echo '<div class="row">';
+              echo    '<div class="container">';
+              echo        '<div class="alert error d-flex">';
+              echo            '<i class="material-icons">check_circle</i>';
+              echo            '<p class="white-color">' . $error . '</p>';
+              echo            '<i class="material-icons">close</i>';
+              echo        '</div>';
+              echo    '</div>';
+              echo '</div>';
+          }
+      }
+      if ($this->success) {
+          foreach ($this->success as $success) {
+              echo '<div class="row">';
+              echo    '<div class="container">';
+              echo        '<div class="alert success d-flex">';
+              echo            '<i class="material-icons">check_circle</i>';
+              echo            '<p class="material-icons">' . $success . '</p>';
+              echo            '<i class="material-icons">close</i>';
+              echo        '</div>';
+              echo    '</div>';
+              echo '</div>';
+          }
+      }
+      if ($this->information) {
+          foreach ($this->informations as $information) {
+              echo '<div class="row">';
+              echo    '<div class="container">';
+              echo        '<div class="alert information d-flex">';
+              echo            '<i class="material-icons">check_circle</i>';
+              echo            '<p class="material-icons">' . $information . '</p>';
+              echo            '<i class="material-icons">close</i>';
+              echo        '</div>';
+              echo    '</div>';
+              echo '</div>';
+          }
+      }
+  ?><div class="row"><div class="dashboard__subDashboard_2"><div class="row"></div><div class="box mb-4"><div class="box__header mb-3"><h4>questionários em andamento</h4></div><div class="box__body_fixedHeight"><table class="data-table"><tbody>  <?php
       foreach ($this->view->quizArray as $quiz) {
           if ($quiz->status) {
               echo    '<tr>';

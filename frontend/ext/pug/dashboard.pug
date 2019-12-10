@@ -29,6 +29,47 @@ html
                                 |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
                                 |       }
                                 |   ?>
+                |   <?php
+                |       if ($this->errors) {
+                |           foreach ($this->errors as $error) {
+                |               echo '<div class="row">';
+                |               echo    '<div class="container">';
+                |               echo        '<div class="alert error d-flex">';
+                |               echo            '<i class="material-icons">check_circle</i>';
+                |               echo            '<p class="white-color">' . $error . '</p>';
+                |               echo            '<i class="material-icons">close</i>';
+                |               echo        '</div>';
+                |               echo    '</div>';
+                |               echo '</div>';
+                |           }
+                |       }
+                |       if ($this->success) {
+                |           foreach ($this->success as $success) {
+                |               echo '<div class="row">';
+                |               echo    '<div class="container">';
+                |               echo        '<div class="alert success d-flex">';
+                |               echo            '<i class="material-icons">check_circle</i>';
+                |               echo            '<p class="material-icons">' . $success . '</p>';
+                |               echo            '<i class="material-icons">close</i>';
+                |               echo        '</div>';
+                |               echo    '</div>';
+                |               echo '</div>';
+                |           }
+                |       }
+                |       if ($this->information) {
+                |           foreach ($this->informations as $information) {
+                |               echo '<div class="row">';
+                |               echo    '<div class="container">';
+                |               echo        '<div class="alert information d-flex">';
+                |               echo            '<i class="material-icons">check_circle</i>';
+                |               echo            '<p class="material-icons">' . $information . '</p>';
+                |               echo            '<i class="material-icons">close</i>';
+                |               echo        '</div>';
+                |               echo    '</div>';
+                |               echo '</div>';
+                |           }
+                |       }
+                |   ?>
                 .row
                     .dashboard__subDashboard_2
                         +box("questionários em andamento", true, "/questionarios/registrar", "/questionarios")
