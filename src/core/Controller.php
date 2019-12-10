@@ -33,14 +33,14 @@ abstract class Controller
             Session::destroy('success');
         }
 
-        if (Session::get('error')) {
-            $this->error = Session::get('error');
+        if (Session::get('errors')) {
+            $this->errors = Session::get('errors');
             Session::destroy('error');
         }
 
-        if (Session::get('information')) {
-            $this->information = Session::get('information');
-            Session::destroy('information');
+        if (Session::get('informations')) {
+            $this->information = Session::get('informations');
+            Session::destroy('informations');
         }
     }
 

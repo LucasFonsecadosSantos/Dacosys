@@ -48,6 +48,8 @@ trait Authenticate
     public function logout()
     {
         Session::destroy('user');
-        return Redirect::route('/login');
+        return Redirect::route('/login', [
+            'success' => ['Conta deslogada.']
+        ]);
     }
 }

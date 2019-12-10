@@ -31,6 +31,34 @@ html
                                 |   ?>
                 .row
                     .dashboard__subDashboard_1
+                        +box("ações", false, "/questionarios/registrar", "/questionarios")
+                            .row.d-flex.align-items-center
+                                .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-between
+                                    p.white-color
+                                        strong quantidade de questionários em aberto:
+                                        |  22 questionários.
+                                    p.white-color
+                                        strong quantidade de questionários encerrados:
+                                        |  09 questionários.
+                            .row.d-flex.align-items-center.mt-3
+                                .col-12.col-sm-12.col-md-3.col-lg-2.col-xl-2
+                                    a(href="/questionario/registrar", target="_self")
+                                        button.btn-purple-alternative()
+                                            | cadastrar
+                                            i.material-icons add
+                                .col-12.col-sm-12.col-md-3.col-lg-2.col-xl-2
+                                    a(href="", target="_self")
+                                        button.btn-purple-alternative()
+                                            | excluir
+                                            i.material-icons delete_forever
+                                .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-8
+                                    form.d-flex.justify-content-between(action="/questionario/buscar", target="_self")
+                                        input.flex-grow-1(type="text", placeholder="Título ou ID do questionário")
+                                        button.flex-grow-0.ml-3(type="submit")
+                                            | buscar questionário
+                                            i.material-icons search
+                .row
+                    .dashboard__subDashboard_1
                         +box("lista de questionários em aberto", false, "/questionarios/registrar", "/questionarios")
                             table.data-table(column-amount="3")
                                 tbody
@@ -38,7 +66,7 @@ html
                                     |       foreach ($this->view->quizArray as $quiz) {
                                     |           if ($quiz->status) {
                                     |               echo    '<tr>';
-                                    |               echo        '<td title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';
+                                    |               echo        '<td title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\', /"_self/")">';
                                     |               echo            '<div class="label bg-green-1">aberto</div>';
                                     |               echo        '</td>';
                                     |               echo        '<td title="Clique para acessar o questionário ' . $quiz->name . '." alt="Registro do questionário ' . $quiz->name . '." onclick="window.open(\'/questionario/' . $quiz->id_quiz . '/visualizar\')">';

@@ -24,6 +24,47 @@ html
                     .login__subLogin
                         form(method="POST", action="/pesquisador/autenticar")
                             .container-fluid
+                                |   <?php
+                                |       if ($this->errors) {
+                                |           foreach ($this->errors as $error) {
+                                |               echo '<div class="row">';
+                                |               echo    '<div class="container">';
+                                |               echo        '<div class="alert error d-flex">';
+                                |               echo            '<i class="material-icons">check_circle</i>';
+                                |               echo            '<p class="white-color">' . $error . '</p>';
+                                |               echo            '<i class="material-icons">close</i>';
+                                |               echo        '</div>';
+                                |               echo    '</div>';
+                                |               echo '</div>';
+                                |           }
+                                |       }
+                                |       if ($this->success) {
+                                |           foreach ($this->success as $success) {
+                                |               echo '<div class="row">';
+                                |               echo    '<div class="container">';
+                                |               echo        '<div class="alert success d-flex">';
+                                |               echo            '<i class="material-icons">check_circle</i>';
+                                |               echo            '<p class="material-icons">' . $success . '</p>';
+                                |               echo            '<i class="material-icons">close</i>';
+                                |               echo        '</div>';
+                                |               echo    '</div>';
+                                |               echo '</div>';
+                                |           }
+                                |       }
+                                |       if ($this->information) {
+                                |           foreach ($this->informations as $information) {
+                                |               echo '<div class="row">';
+                                |               echo    '<div class="container">';
+                                |               echo        '<div class="alert information d-flex">';
+                                |               echo            '<i class="material-icons">check_circle</i>';
+                                |               echo            '<p class="material-icons">' . $information . '</p>';
+                                |               echo            '<i class="material-icons">close</i>';
+                                |               echo        '</div>';
+                                |               echo    '</div>';
+                                |               echo '</div>';
+                                |           }
+                                |       }
+                                |   ?>
                                 .row
                                     h2 login
                                 .row.mt-3
@@ -38,7 +79,7 @@ html
                                     .col-6.d-flex.justify-content-end.pr-0
                                         a(href="/pesquisador/registrar")
                                             p Criar nova conta
-                                .row.d-flex.justify-content-end
+                                .row.d-flex.justify-content-end.mt-3
                                     button.flex-fill(title="Clique para acessar sua conta.", alt="Botão para acessar a conta.") acessar
                             
         //footer

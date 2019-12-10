@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        //----------------------------[METAS]----------------------------//
+        include modules/settings/_mixins.pug
+        //PARAMS:
+        //title,description,author,copyright,themeColor,language
+        +headerSettings("Dacosys | 404","","","GPLv3 2019 - General Public License","#8E2DE2","pt-br")
+        //---------------------------------------------------------------//
+        //---------------------------[IMPORTS]---------------------------//
+        include modules/settings/_link-imports.pug
+        //---------------------------------------------------------------//
+    body(page="dashboard")
+        //header
+            include modules/components/_header.pug
+        main
+            .container
+                .row
+                    .dashboard__subDashboard_1(style="height: 100vh")
+                        .row.d-flex.flex-column.justify-content-center.align-items-center.h-100
+                            p.mb-5.white-color Aonde está indo? Por aqui não encontramos nada!
+                            h1.mb-5 404
+                            a(href="/")
+                                button() retornar a página inicial
+                            
+        //footer
+            include modules/components/_footer.pug
+    include modules/settings/_js-imports.pug

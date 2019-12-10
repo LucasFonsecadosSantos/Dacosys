@@ -15,7 +15,40 @@ html
             include modules/components/_header.pug
         main
             .container
-                +title_page("Pesquisadores", "Home > Pesquisadores")
+                .row
+                    .container.mt-5.pb-5
+                        .body__title
+                            |   <?php
+                            |       echo '<h3 class="m-0 p-0">Pesquisadores</h3>';
+                            |   ?>
+                            .body__titleNavigation
+                                |   <?php
+                                |       $last = end($this->view->navigationRoute);
+                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                |       }
+                                |   ?>
+                .row
+                    .dashboard__subDashboard_1
+                        +box("ações", false, "/questionarios/registrar", "/questionarios")
+                            .row.d-flex.align-items-center
+                                .col-12.col-sm-12.col-md-3.col-lg-2.col-xl-2
+                                    a(href="/pesquisador/registrar", target="_self")
+                                        button.btn-purple-alternative()
+                                            | cadastrar
+                                            i.material-icons add
+                                .col-12.col-sm-12.col-md-3.col-lg-2.col-xl-2
+                                    a(href="", target="_self")
+                                        button.btn-purple-alternative()
+                                            | excluir
+                                            i.material-icons delete_forever
+                                .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-8
+                                    form.d-flex.justify-content-between(action="/pesquisador/buscar", target="_self")
+                                        input.flex-grow-1(type="text", placeholder="Nome ou ID do pesquisador")
+                                        button.flex-grow-0.ml-3(type="submit")
+                                            | buscar pesquisador
+                                            i.material-icons search
                 .row
                     .dashboard__subDashboard_1
                         +box("lista de pesquisadores registrados", false, "/questionarios/registrar", "/questionarios")

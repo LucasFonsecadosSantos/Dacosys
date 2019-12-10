@@ -31,6 +31,19 @@ html
                                 |   ?>
                 .row
                     .dashboard__subDashboard_1
+                        +box("ações", false, "/questionarios/registrar", "/questionarios")
+                            .row.d-flex.align-items-center
+                                .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.flex-row
+                                    a(href="/questionario//atualizar", target="_self")
+                                        button.btn-purple-alternative()
+                                            | editar
+                                            i.material-icons edit
+                                    a.ml-3(href="/questionario//deletar", target="_self")
+                                        button.btn-purple-alternative()
+                                            | excluir
+                                            i.material-icons delete_forever
+                .row
+                    .dashboard__subDashboard_1
                         +box("lista de perguntas", false, "/questionarios/registrar", "/questionarios")
                             table.data-table(column-amount="3")
                                 tbody

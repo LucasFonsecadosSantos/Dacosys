@@ -30,6 +30,26 @@ html
                                 |       }
                                 |   ?>
                 .row
+                    .dashboard__subDashboard_1
+                        +box("ações", false, "/questionarios/registrar", "/questionarios")
+                            .row.d-flex.align-items-center
+                                .col-12.col-sm-12.col-md-3.col-lg-2.col-xl-2
+                                    a(href="", target="_self")
+                                        button.btn-purple-alternative()
+                                            | cadastrar
+                                            i.material-icons add
+                                .col-12.col-sm-12.col-md-3.col-lg-2.col-xl-2
+                                    a(href="", target="_self")
+                                        button.btn-purple-alternative()
+                                            | excluir
+                                            i.material-icons delete_forever
+                                .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-8
+                                    form.d-flex.justify-content-between(action="", target="_self")
+                                        input.flex-grow-1(type="text", placeholder="Nome ou ID do cadastro")
+                                        button.flex-grow-0.ml-3(type="submit")
+                                            | buscar cadastro
+                                            i.material-icons search
+                .row
                     .dashboard__subDashboard_2
                         +box("dados informados", false, "/questionarios/registrar", "/questionarios")
                             |   <?php
@@ -84,9 +104,47 @@ html
                 .row
                     .dashboard__subDashboard_1
                         +box("relatório", false, "/questionarios/registrar", "/questionarios")
-                            
-                                    
-                                    
+                            canvas#myChart()
+
         footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug
+    script()
+        |   
+        |   var ctx = document.getElementById('myChart');
+        |   var myChart = new Chart(ctx, {
+        |       type: 'pie',
+        |       data: {
+        |           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        |           datasets: [{
+        |               label: '# of Votes',
+        |               data: [12, 19, 3, 5, 2, 3],
+        |               backgroundColor: [
+        |                   '#FF1744',
+        |                   '#AAFFA9',
+        |                   '#786BF9',
+        |                   '#4A00E0',
+        |                   '#11ffbd',
+        |                   '#8E2DE2'
+        |               ],
+        |               borderColor: [
+        |                   'rgba(255, 99, 132, 1)',
+        |                   'rgba(54, 162, 235, 1)',
+        |                   'rgba(255, 206, 86, 1)',
+        |                   'rgba(75, 192, 192, 1)',
+        |                   'rgba(153, 102, 255, 1)',
+        |                   'rgba(255, 159, 64, 1)'
+        |               ],
+        |               borderWidth: 1
+        |           }]
+        |       },
+        |       options: {
+        |           scales: {
+        |               yAxes: [{
+        |                   ticks: {
+        |                       beginAtZero: true
+        |                   }
+        |               }]
+        |           }
+        |       }
+        |   });
