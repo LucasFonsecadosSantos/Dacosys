@@ -22,13 +22,13 @@ html
                             |       echo '<h3 class="m-0 p-0">Cadastrar novo pesquisador</h3>';
                             |   ?>
                             .body__titleNavigation
-                                |   <?php
-                                |       $last = end($this->view->navigationRoute);
-                                |       foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
-                                |           echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
-                                |           if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
-                                |       }
-                                |   ?>
+                                <?php
+                                    $last = end($this->view->navigationRoute);
+                                    foreach ($this->view->navigationRoute as $routeKey => $routeValue) {
+                                        echo '<a href="' . $routeValue . '"><p>' . $routeKey . '</p></a>';
+                                        if ($routeValue != $last) echo '<p>&nbsp > &nbsp </p>';
+                                    }
+                                ?>
                 |   <?php
                 |       if ($this->errors) {
                 |           foreach ($this->errors as $error) {
@@ -142,7 +142,9 @@ html
                                         input(type="password", name="password2",maxlength=40,  placeholder="Reescreva sua senha", title="Acesse sua conta, informe sua senha.", alt="Campo para inserir a senha da conta.")
                                 .row.mt-3
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
-                                        button(type="submit", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.") Finalizar cadastro
-        footer
+                                        button(type="submit", title="Clique para efetuar o cadastro.", alt="Botão para efetuar o cadastro.")
+                                            | Finalizar cadastro
+                                            i.material-icons navigate_next
+        //footer
             include modules/components/_footer.pug
     include modules/settings/_js-imports.pug

@@ -14,11 +14,6 @@ trait Authenticate
     public function authenticateAuth($model,$request)
     {
         
-        print_r($model);
-        print_r($request);
-        //$model = Container::getModelInstance('ResearcherModel', DataBase::getInstance());
-        
-        // $ob = new $modelName(DataBase::getInstance());
         $result = $model->getFilteredByColumn('email',$request->post->email)[0];
         
         
@@ -33,7 +28,7 @@ trait Authenticate
             Session::set('user', $user);
         
             return Redirect::route('/', [
-                'informations' => ['']
+                'informations' => ['Lembre-se de verificar sempre as submissões.']
             ]);
 
         } else {

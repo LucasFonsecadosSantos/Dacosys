@@ -35,7 +35,7 @@ abstract class Controller
 
         if (Session::get('errors')) {
             $this->errors = Session::get('errors');
-            Session::destroy('error');
+            Session::destroy('errors');
         }
 
         if (Session::get('informations')) {

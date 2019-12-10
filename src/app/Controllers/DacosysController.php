@@ -6,6 +6,7 @@ use Core\Controller;
 use Core\Container;
 use Core\Redirect;
 use Core\DataBase;
+use Core\Session;
 use Util\Logger;
 
 class DacosysController extends Controller 
@@ -36,7 +37,7 @@ class DacosysController extends Controller
             $this->view->navigationRoute = [
                 'Dashboard de controle' => '/',
             ];
-            
+            $this->view->user = Session::get('user');
             $this->loadView("home/index");
         
         } catch (\Exception $e) {
