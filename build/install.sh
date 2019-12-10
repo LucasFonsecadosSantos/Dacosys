@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
 ######################################################
-##              ___   __________________            ##
-##             /   | / ____/_  __/ ____/            ##
-##            / /| |/ /     / / / __/               ##
-##           / ___ / /___  / / / /___               ##
-##          /_/  |_\____/ /_/ /_____/               ##
-##                                                  ##
-##       Academic Conference Template Engine        ##
-##                                                  ##
-######################################################
-##                                                  ##
-## Written by Lucas Fonseca dos Santos.             ##
-## GPLv3 - General Public License.                  ##
-## 2019                                             ##
-##                                                  ##
-## A simple build bash script for linux users.      ##
-##                                                  ##
-######################################################
-## CONTACT: lucas@lcfcompany.com.br                 ##
-######################################################
 
 declare -A osInfo;
 osInfo[/etc/redhat-release]=yum
@@ -41,13 +22,42 @@ if [ -f "$HOST_FILE" ]; then
 	echo "$HOST_FILE" exists.
 else
 	echo [..] Creating "$HOST_FILE" config
-	cp -avr config/hosts /etc/hosts
+	cp -avr installation/hosts /etc/hosts
 fi
 
 for f in ${!osInfo[@]}
 do
     if [[ -f $f ]]; then
         echo Package manager: ${osInfo[$f]}
+        if ! [ -x "$(command -v mariadb)" ]; then
+        else
+            echo '[ERROR] You do not have PHP package installed.'
+            if [ $f == "/etc/arch-release" ]; then
+                echo '[..] THE MARIADB INSTALLATION PROCESS WILL BE STARTED'
+                sudo pacman -Sy mariadb
+                echo '[OK] PHP PACKAGE DEPENDENCIE HAS BEEN INSTALLED'
+            elif [ $f == "/etc/redhat-release" ]; then
+                echo '[..] THE PHP INSTALLATION PROCESS WILL BE STARTED'
+                sudo yum update
+                sudo yum install mariadb-server
+                echo '[OK] PHP PACKAGE DEPENDENCIE HAS BEEN INSTALLED'
+            elif [ $f == "/etc/gentoo-release" ]; then
+                echo '[..] THE MARIADB INSTALLATION PROCESS WILL BE STARTED'
+                sudo emerge --sync
+                sudo emerge --update world
+                sudo emerge --ask dev-db/mariadb
+                echo '[OK] MARIADB PACKAGE DEPENDENCIE HAS BEEN INSTALLED'
+            elif [ $f == "/etc/SuSE-release" ]; then
+                echo '[..] THE MARIADB INSTALLATION PROCESS WILL BE STARTED'
+                sudo sudo zypper install php7 php7-mysql
+                echo '[OK] MARIADB PACKAGE DEPENDENCIE HAS BEEN INSTALLED'
+            elif [ $f == "/etc/debian-release" ]; then
+                echo '[..] THE MARIADB INSTALLATION PROCESS WILL BE STARTED'
+                sudo apt update && apt upgrade
+                sudo apt install mariadb-server
+                echo '[OK] MARIADB PACKAGE DEPENDENCIE HAS BEEN INSTALLED'
+            fi
+        fi
         if ! [ -x "$(command -v php)" ]; then
             echo '[ERROR] You do not have PHP package installed.'
             if [ $f == "/etc/arch-release" ]; then
@@ -82,11 +92,10 @@ do
         else
             echo '[OK] PHP checked.'
             echo '[OK] NOW, WE CAN LAUNCH THE ACTE'
-            if which xdg-open > /dev/null; then
-                sudo php -S 0.0.0.0:8050 -t ../src & sudo xdg-open "http://localhost:8050/local-src/pre-index.html"
-            elif which gnome-open > /dev/null; then
-                sudo php -S 0.0.0.0:8050 -t ../src & sudo gnome-open "http://localhost:8050/local-src/pre-index.html"
-            fi
+            sudo php -S 0.0.0.0:8080 &>/dev/null
+            sudo systemctl enable mariadb
+            sudo systemctl start mariadb
+            mysql -u root -p < ./../src/storage/database/dacosys_dbv1.sql
         fi
     fi
 done
