@@ -82,16 +82,143 @@ export class QuizRegisterController {
         this._buttons['addItemModalAddBtn'].addEventListener('click', event => {
             this._modals['item-modal'].classList.add('d-none');
             this._modals['item-modal'].classList.remove('d-block');
-            this._tables['item-table'].appendChild(this._getModalItems());
+            
+            let importedImagesCells = document.getElementById('continuos_options').childNodes;
+            importedImagesCells.forEach(element => {
+                alert(element);
+                (element as HTMLDivElement).classList.add('d-none');
+                (element as HTMLDivElement).classList.remove('d-flex');
+            });
+            this._itemNumber++;
+        });
+
+        document.getElementsByName('answer_discret_amount')[0].addEventListener('change', event => {
+            
+            if (document.getElementById('discret_options').getAttribute('used') == 'false') {
+                document.getElementById('discret_options').childNodes.forEach(element => {
+                    if ((element as HTMLDivElement).classList.contains('d-flex')) {
+                        
+                        (element as HTMLDivElement).classList.add('d-none');
+                        (element as HTMLDivElement).classList.remove('d-flex');
+                    }
+                });
+                document.getElementById('discret_options').classList.remove('d-none');
+                document.getElementById('discret_options').classList.add('d-flex');
+                document.getElementById('discret_options').classList.add('flex-row');
+                document.getElementById('discret_options').classList.add('align-items-center');
+                document.getElementById('discret_options').classList.add('justify-content-center');
+                
+                let amount = parseInt((document.getElementsByName('answer_discret_amount')[0] as HTMLInputElement).value);
+
+                for (let i=0; i < amount; ++i) {
+                    let discret_options_row   = document.createElement('DIV');
+                    let fileInput               = document.createElement('INPUT');
+                    let inputLabel              = document.createElement('LABEL');
+                    let labelContent            = document.createElement('I');
+                    
+                    let bootstrapClass;
+                    switch (amount) {
+                        case 3:
+                            bootstrapClass = '4';
+                            break;
+                        case 4:
+                            bootstrapClass = '3';
+                            break;
+                        case 5:
+                            bootstrapClass = '2';
+                            break;
+                        case 6:
+                            bootstrapClass = '2';
+                            break;
+                        case 7:
+                            bootstrapClass = '1';
+                            break;
+                        case 8:
+                            bootstrapClass = '1';
+                            break;
+                        case 9:
+                            bootstrapClass = '1';
+                            break;
+                    }
+
+                    discret_options_row.classList.add('col-12', 'col-sm-12', 'col-md-' + bootstrapClass, 'col-lg-'  + bootstrapClass, 'col-xl-'  + bootstrapClass, 'd-flex');
+                    fileInput.setAttribute('type', 'file');
+                    fileInput.setAttribute('name', 'item_image[]');
+                    fileInput.setAttribute('item-number', this._itemNumber + "");
+                    fileInput.setAttribute('alt', 'Campo para inserir a imagem da opção.');
+                    fileInput.setAttribute('title', 'Selecione uma imagem.');
+                    fileInput.setAttribute('id', 'image_option');
+                    inputLabel.classList.add('add-image-button');
+                    inputLabel.setAttribute('for','image_option');
+                    labelContent.classList.add('material-icons');
+                    labelContent.textContent = "add_a_photo";
+                    inputLabel.appendChild(labelContent);
+                    inputLabel.innerHTML += "adicionar imagem";
+
+                    discret_options_row.appendChild(inputLabel);
+                    discret_options_row.appendChild(fileInput);
+
+                    fileInput.addEventListener('change', event => {
+                        document.getElementById('discret_options').setAttribute('used', 'true');
+                    })
+
+                    document.getElementById('discret_options').appendChild(discret_options_row);
+                }
+            } else {
+                alert('voce precisa antes terminar de preencher');
+            }
+
         });
 
         this._fields['answer_type'].addEventListener('change', event => {
             
-            if ((this._fields['answer_type'].value == '_DISCRET_') || (this._fields['answer_type'].value == '_CONTINUOS_')) {
+            if (this._fields['answer_type'].value == '_DISCRET_') {
                 
-                document.getElementById('add-image-row').classList.remove('d-none');
-                document.getElementById('add-image-button-container').classList.remove('d-none');
+                document.getElementById('options_amount').classList.remove('d-none');
+                document.getElementById('options_amount').classList.add('d-flex');
+                document.getElementById('continuos_options').classList.add('d-none');
+                document.getElementById('continuos_options').classList.remove('d-flex');
             
+            } else if (this._fields['answer_type'].value == '_CONTINUOS_') {
+                
+                document.getElementById('options_amount').classList.add('d-none');
+                document.getElementById('options_amount').classList.remove('d-flex');
+                document.getElementById('continuos_options').classList.remove('d-none');
+                document.getElementById('continuos_options').classList.add('d-flex');
+                document.getElementById('continuos_options').classList.add('flex-row');
+                document.getElementById('continuos_options').classList.add('align-items-center');
+                document.getElementById('continuos_options').classList.add('justify-content-center');
+                
+
+                for (let i=0; i<3; ++i) {
+                    let continuos_options_row   = document.createElement('DIV');
+                    let fileInput               = document.createElement('INPUT');
+                    let inputLabel              = document.createElement('LABEL');
+                    let labelContent            = document.createElement('I');
+                    
+                    continuos_options_row.classList.add('col-12', 'col-sm-12', 'col-md-4', 'col-lg-4', 'col-xl-4', 'd-flex');
+                    fileInput.setAttribute('type', 'file');
+                    fileInput.setAttribute('name', 'item_image[]');
+                    fileInput.setAttribute('item-number', this._itemNumber + "");
+                    fileInput.setAttribute('alt', 'Campo para inserir a imagem da opção.');
+                    fileInput.setAttribute('title', 'Selecione uma imagem.');
+                    fileInput.setAttribute('id', 'image_option');
+                    inputLabel.classList.add('add-image-button');
+                    inputLabel.setAttribute('for','image_option');
+                    labelContent.classList.add('material-icons');
+                    labelContent.textContent = "add_a_photo";
+                    inputLabel.appendChild(labelContent);
+                    inputLabel.innerHTML += "adicionar imagem";
+
+                    continuos_options_row.appendChild(inputLabel);
+                    continuos_options_row.appendChild(fileInput);
+
+
+
+                    document.getElementById('continuos_options').appendChild(continuos_options_row);
+                }
+
+
             } else {
             
                 document.getElementById('add-image-row').classList.add('d-none');
@@ -101,66 +228,66 @@ export class QuizRegisterController {
 
         });
 
-        this._fields['answer_image'].addEventListener('change', event => {
-            let files = this._fields['answer_image'].files;
-            let containerDiv;
-            let inputOptionValue;
-            let hiddenInputOptionValue;
-            let hiddenInputFile;
-            let img;
+        // this._fields['answer_image'].addEventListener('change', event => {
+        //     let files = this._fields['answer_image'].files;
+        //     let containerDiv;
+        //     let inputOptionValue;
+        //     let hiddenInputOptionValue;
+        //     let hiddenInputFile;
+        //     let img;
 
-            if (this._verifyImageLimit(files)) {
-                let count = 0;
-                let clone = this._fields['answer_image'].cloneNode(true);
-                clone.setAttribute('item',this._itemNumber);
-                clone.setAttribute('id',"");
-                clone.setAttribute('name', 'item_answerImages'+this._itemNumber);
-                this._sharedFields.push(clone);
+        //     if (this._verifyImageLimit(files)) {
+        //         let count = 0;
+        //         let clone = this._fields['answer_image'].cloneNode(true);
+        //         clone.setAttribute('item',this._itemNumber);
+        //         clone.setAttribute('id',"");
+        //         clone.setAttribute('name', 'item_answerImages'+this._itemNumber);
+        //         this._sharedFields.push(clone);
                 
-                Array.from(files).forEach(element => {
+        //         Array.from(files).forEach(element => {
 
-                    img = document.createElement("IMG");
+        //             img = document.createElement("IMG");
                     
-                    //itemFileInput.setAttribute('optionValue', )
-                    hiddenInputFile = document.createElement('INPUT');
-                    hiddenInputOptionValue = document.createElement('INPUT');
-                    hiddenInputFile.setAttribute('type', 'hidden');
-                    hiddenInputFile.setAttribute('value', this._fields['answer_image'].files[count]);
-                    hiddenInputOptionValue.setAttribute('type','hidden');
-                    hiddenInputOptionValue.setAttribute('name','option-' + count + '-path');
-                    img.classList.add("mt-3");
-                    img.setAttribute('src', URL.createObjectURL(this._fields['answer_image'].files[count]));
-                    img.setAttribute('uploadValue', this._fields['answer_image'].files[count]);
-                    containerDiv = document.createElement("DIV");
-                    containerDiv.classList.add("col-12", "col-sm-6", "col-md-3", "col-lg-3", "col-xl-3", "item-image-container", "d-flex", "flex-column", "justify-content-center");
-                    inputOptionValue = document.createElement('INPUT');
-                    inputOptionValue.setAttribute('placeholder','Valor da opção');
-                    inputOptionValue.setAttribute('width','90%');
-                    inputOptionValue.setAttribute('name','option-value-' + count);
-                    inputOptionValue.classList.add('mt-1');
-                    containerDiv.appendChild(hiddenInputFile);
-                    containerDiv.appendChild(img);
-                    containerDiv.appendChild(hiddenInputOptionValue);
+        //             //itemFileInput.setAttribute('optionValue', )
+        //             hiddenInputFile = document.createElement('INPUT');
+        //             hiddenInputOptionValue = document.createElement('INPUT');
+        //             hiddenInputFile.setAttribute('type', 'hidden');
+        //             hiddenInputFile.setAttribute('value', this._fields['answer_image'].files[count]);
+        //             hiddenInputOptionValue.setAttribute('type','hidden');
+        //             hiddenInputOptionValue.setAttribute('name','option-' + count + '-path');
+        //             img.classList.add("mt-3");
+        //             img.setAttribute('src', URL.createObjectURL(this._fields['answer_image'].files[count]));
+        //             img.setAttribute('uploadValue', this._fields['answer_image'].files[count]);
+        //             containerDiv = document.createElement("DIV");
+        //             containerDiv.classList.add("col-12", "col-sm-6", "col-md-3", "col-lg-3", "col-xl-3", "item-image-container", "d-flex", "flex-column", "justify-content-center");
+        //             inputOptionValue = document.createElement('INPUT');
+        //             inputOptionValue.setAttribute('placeholder','Valor da opção');
+        //             inputOptionValue.setAttribute('width','90%');
+        //             inputOptionValue.setAttribute('name','option-value-' + count);
+        //             inputOptionValue.classList.add('mt-1');
+        //             containerDiv.appendChild(hiddenInputFile);
+        //             containerDiv.appendChild(img);
+        //             containerDiv.appendChild(hiddenInputOptionValue);
                     
                     
-                    document.getElementById('add-image-row').appendChild(containerDiv);
-                    count++;
+        //             document.getElementById('add-image-row').appendChild(containerDiv);
+        //             count++;
                 
-                });
+        //         });
 
-            } else {
+        //     } else {
                 
-                alert("implementar aqui");
+        //         alert("implementar aqui");
             
-            }
+        //     }
     
-        });
+        // });
 
-        this._fields['answer_image'].addEventListener('click', event => {
+        // this._fields['answer_image'].addEventListener('click', event => {
             
-            this._fields['answer_image'].value = "";
+        //     this._fields['answer_image'].value = "";
     
-        });
+        // });
     }
 
     private _getModalItems() {

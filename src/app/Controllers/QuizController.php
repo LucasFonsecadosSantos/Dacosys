@@ -154,7 +154,7 @@ class QuizController extends Controller
             ]);
         
         }
-
+        
         try {
 
             $amount = (int) $request->post->token_amount;
@@ -192,6 +192,7 @@ class QuizController extends Controller
             ]);
 
         }
+
 
         // try {
 
@@ -325,34 +326,34 @@ class QuizController extends Controller
     {
         
         Logger::log_message(Logger::LOG_INFORMATION, "QuizController, action store.");
+        print_r($request->post->item_image);
+        // try {
         
-        try {
+        //     $this->quizModel->create(
+        //         [
+        //             'id_item'               => Identificator::generateID('item_'),
+        //             'enunciation'           => $request->post->enunciation,
+        //             'quiz_idQuiz'           => $request->post->quiz_idQuiz,
+        //             'answer_type'           => $request->post->answer_type,
+        //             'answer_discret_amount' => $request->post->answer_discret_amount
+        //         ]
+        //     );
         
-            $this->quizModel->create(
-                [
-                    'id_item'               => Identificator::generateID('item_'),
-                    'enunciation'           => $request->post->enunciation,
-                    'quiz_idQuiz'           => $request->post->quiz_idQuiz,
-                    'answer_type'           => $request->post->answer_type,
-                    'answer_discret_amount' => $request->post->answer_discret_amount
-                ]
-            );
+        //     Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
         
-            Logger::log_message(Logger::LOG_INFORMATION, "QuizController, new quiz object stored.");
+        //     return Redirect::route("/questionario/" . $request->post->quiz_idQuiz . "/visualizar",
+        //         [
+        //             "success" => ["Questionário registrado com sucesso."]
+        //         ]
+        //     );
         
-            return Redirect::route("/questionario/" . $request->post->quiz_idQuiz . "/visualizar",
-                [
-                    "success" => ["Questionário registrado com sucesso."]
-                ]
-            );
+        // } catch (\Exception $e) {
         
-        } catch (\Exception $e) {
+        //     return Redirect::route('/questionario/' . $request->post->quiz_idQuiz . '/visualizar', [
+        //         'errors' => ['Erro ao buscar perguntas do presente questionário. (' . $e->getMessage() . ')']
+        //     ]);
         
-            return Redirect::route('/questionario/' . $request->post->quiz_idQuiz . '/visualizar', [
-                'errors' => ['Erro ao buscar perguntas do presente questionário. (' . $e->getMessage() . ')']
-            ]);
-        
-        }
+        // }
     }
 
     public function show($id)

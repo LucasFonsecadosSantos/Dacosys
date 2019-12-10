@@ -95,9 +95,6 @@ html
                                     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
                                         label descrição da pesquisa
                                         textarea(type="date", name="description", placeholder="Ex.: Essa pesquisa objetiva o levantamento de requisitos para o desenvolvimento de um sistema responsável ...", title="Descreva os objetivos e metodos de sua pesquisa.", alt="Campo para descrever objetivos e métodos da pesquisa.")
-                                //- .row.mt-3
-                                //-     .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
-                                //-         button() próxima
                 
                     .row
                         .dashboard__subDashboard_1
@@ -122,13 +119,14 @@ html
                                                     option(value="default", selected) -- SELECIONE --
                                                     option(value="_DISCRET_") Discreto
                                                     option(value="_CONTINUOS_") Continua
-                                        .row.mt-3
-                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-none#add-image-button-container
-                                                input#image_01(name="answer_image", type="file", alt="Campo para inserir uma image.", title="Clique para inserir uma nova imagem.")
-                                                label.add-image-button(for="image_01")
-                                                    i.material-icons add_a_photo
-                                                    | adicionar imagem
-                                        .row.mt-3.mb-10.d-none#add-image-row
+                                        .row.mt-3.d-none#options_amount
+                                            .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12
+                                                label quantidade de opções
+                                                input(name="answer_discret_amount",type="number",min="5",max="9", title="Selecione a quantiade de opções", alt="Campo para selecionar a quantidade de opções.",placeholder="- SELECIONE -")
+                                                    
+                                        .row.mt-3.d-none#discret_options(used='false')
+                                        .row.mt-3.d-none#continuos_options(used='false')
+                                        
                                             
                                         .row.mt-3
                                             .col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.d-flex.justify-content-end
