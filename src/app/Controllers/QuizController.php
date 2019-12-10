@@ -183,6 +183,7 @@ class QuizController extends Controller
 
             }
 
+            $this->itemStore($request);
         } catch (\Exception $e) {
             
             return Redirect::route('/questionarios',[+
@@ -191,110 +192,117 @@ class QuizController extends Controller
 
         }
 
-        try {
+        // try {
 
-            $items = [];
-            $itemsImage = [];
-            $size = count($request->post->item_answerEnunciation);
-
-            for ($i = 0; $i < $size; ++$i) {
-                $idItem = Identificator::generateID('item_');
+        //     $items = [];
+        //     $itemsImage = [];
+        //     $size = count($request->post->item_answerEnunciation);
+        //     print_r($request->post);
+        //     foreach ($request->post->item_answerImages as $image) {
+        //         print_r($image);
+        //     }
+        //     // for ($i = 0; $i < $size; ++$i) {
+        //     //     $idItem = Identificator::generateID('item_');
                 
-                $items[$i] = [
-                    'id_item' => $idItem,
-                    'enunciation' => $request->post->item_answerEnunciation[$i],
-                    'quiz_idQuiz' => $quizId,
-                    'answer_type' => $request->post->item_answerType[$i],
-                    'answer_discret_amount' => null
-                ];
+        //     //     $items[$i] = [
+        //     //         'id_item' => $idItem,
+        //     //         'enunciation' => $request->post->item_answerEnunciation[$i],
+        //     //         'quiz_idQuiz' => $quizId,
+        //     //         'answer_type' => $request->post->item_answerType[$i],
+        //     //         'answer_discret_amount' => null
+        //     //     ];
 
-                $count = 0;
+        //     //     $count = 0;
                 
-                while(true) {
-                    if ($_FILES["item_answerImages_itemNumber".$count]) {
-                        $idImage = Identificator::generateID('item_picture_');
+        //     //     foreach ($request->post->item_answerImages as $image) {
+        //     //         print_r($image);
+        //     //     }
+        //     //     //print_r($request->post->item_answerImages);
+        //     //     // while(true) {
+        //     //     //     if ($_FILES["item_answerImages_itemNumber".$count]) {
+        //     //     //         $idImage = Identificator::generateID('item_picture_');
 
-                        $itemsImage[$count] = [
-                            'id_item_picture'   => $idImage,
-                            'title'             => '',
-                            'path'              => Uploader::makeUpload("item_answerImages_itemNumber".$count)
-                        ];
+        //     //     //         $itemsImage[$count] = [
+        //     //     //             'id_item_picture'   => $idImage,
+        //     //     //             'title'             => '',
+        //     //     //             'path'              => Uploader::makeUpload("item_answerImages_itemNumber".$count)
+        //     //     //         ];
 
-                        unset($_FILES["item_answerImages_itemNumber".$count]);
-                        $count++;
-                    } else {
-                        break;
-                    }
-                }
+        //     //     //         unset($_FILES["item_answerImages_itemNumber".$count]);
+        //     //     //         $count++;
+        //     //     //     } else {
+        //     //     //         break;
+        //     //     //     }
+        //     //     // }
                 
-                // do {
+        //     //     // do {
 
-                //     if (isset($_FILES["item_answerImages_itemNumber0"])) {
+        //     //     //     if (isset($_FILES["item_answerImages_itemNumber0"])) {
                         
-                //         $idImage = Identificator::generateID('item_picture_');
+        //     //     //         $idImage = Identificator::generateID('item_picture_');
 
-                //         $itemsImage[$i] = [
-                //             'id_item_picture'   => $idImage,
-                //             'title'             => '',
-                //             'path'              => Uploader::makeUpload("item_answerImages_itemNumber".$count)
-                //         ];
-                //     }
-                //     ++$count;
-                //     unset($_FILES['item_answerImages_itemNumber'.$count]);
-                // } while (isset($_FILES["item_answerImages_itemNumber".$count]));
+        //     //     //         $itemsImage[$i] = [
+        //     //     //             'id_item_picture'   => $idImage,
+        //     //     //             'title'             => '',
+        //     //     //             'path'              => Uploader::makeUpload("item_answerImages_itemNumber".$count)
+        //     //     //         ];
+        //     //     //     }
+        //     //     //     ++$count;
+        //     //     //     unset($_FILES['item_answerImages_itemNumber'.$count]);
+        //     //     // } while (isset($_FILES["item_answerImages_itemNumber".$count]));
 
-                print_r($itemsImage[0]['path']);
-                //$images = Parser::getItemImage($request->post->item_answerImages[$i]);
+        //     //     //print_r($itemsImage[0]['path']);
+        //     //     //$images = Parser::getItemImage($request->post->item_answerImages[$i]);
             
-                // $imageAmount = count($images);
+        //     //     // $imageAmount = count($images);
 
-                // for ($j = 0; $j < $imageAmount; ++$j) {
+        //     //     // for ($j = 0; $j < $imageAmount; ++$j) {
                     
-                //     $idImage = Identificator::generateID('item_picture_');
+        //     //     //     $idImage = Identificator::generateID('item_picture_');
 
-                //     $itemsImage[$i] = [
-                //         'id_item_picture'   => $idImage,
-                //         'title'             => '',
-                //         'path'              => Uploader::makeUpload($images[$j])
-                //     ];
+        //     //     //     $itemsImage[$i] = [
+        //     //     //         'id_item_picture'   => $idImage,
+        //     //     //         'title'             => '',
+        //     //     //         'path'              => Uploader::makeUpload($images[$j])
+        //     //     //     ];
 
-                // }
+        //     //     // }
 
-            }
+        //     // }
 
             
             
-            //print_r($_POST);
-            // foreach ($request->post->item_row as $item) {
+        //     //print_r($_POST);
+        //     // foreach ($request->post->item_row as $item) {
 
-            //     $idItem = Identificator::generateID('item_');
+        //     //     $idItem = Identificator::generateID('item_');
 
-            //     $this->itemModel->create([
+        //     //     $this->itemModel->create([
 
-            //         'id_item'               => $idItem,
-            //         'enunciation'           => $request->post->enunciation,
-            //         'quiz_idQuiz'           => $quizId,
-            //         'answer_type'           => $request->post->answer_type,
-            //         'answer_discret_amount' => null
+        //     //         'id_item'               => $idItem,
+        //     //         'enunciation'           => $request->post->enunciation,
+        //     //         'quiz_idQuiz'           => $quizId,
+        //     //         'answer_type'           => $request->post->answer_type,
+        //     //         'answer_discret_amount' => null
                 
-            //     ]);
+        //     //     ]);
 
-            //     //TODO create image and item_+has_image
+        //     //     //TODO create image and item_+has_image
 
-            // }
+        //     // }
             
 
-            // return Redirect::route('/questionarios', [
-            //     'success' => ['Tudo ok! Seu questionário foi registrado.']
-            // ]);
+        //     // return Redirect::route('/questionarios', [
+        //     //     'success' => ['Tudo ok! Seu questionário foi registrado.']
+        //     // ]);
 
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return Redirect::route('/questionarios', [
-                'errors' => ['Ops: Parece que houve um problema ao salvar o questionário.']
-            ]);
+        //     return Redirect::route('/questionarios', [
+        //         'errors' => ['Ops: Parece que houve um problema ao salvar o questionário.']
+        //     ]);
 
-        }
+        // }
         // try {
 
         //     return Redirect::route("/questionarios",
@@ -321,7 +329,7 @@ class QuizController extends Controller
         
             $this->quizModel->create(
                 [
-                    'id_item'               => Indentificator::generateID('item_'),
+                    'id_item'               => Identificator::generateID('item_'),
                     'enunciation'           => $request->post->enunciation,
                     'quiz_idQuiz'           => $request->post->quiz_idQuiz,
                     'answer_type'           => $request->post->answer_type,

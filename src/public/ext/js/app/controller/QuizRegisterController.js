@@ -79,7 +79,7 @@ export class QuizRegisterController {
                 let clone = this._fields['answer_image'].cloneNode(true);
                 clone.setAttribute('item', this._itemNumber);
                 clone.setAttribute('id', "");
-                clone.setAttribute('name', 'item_answerImages_itemNumber' + this._itemNumber);
+                clone.setAttribute('name', 'item_answerImages');
                 this._sharedFields.push(clone);
                 Array.from(files).forEach(element => {
                     img = document.createElement("IMG");

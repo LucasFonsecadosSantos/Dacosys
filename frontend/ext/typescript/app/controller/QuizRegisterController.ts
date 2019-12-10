@@ -47,7 +47,7 @@ export class QuizRegisterController {
             
             this._modals['item-modal'].classList.remove('d-none');
             this._modals['item-modal'].classList.add('d-block');
-        
+
         });
 
         this._buttons['generate-access-key'].addEventListener('click', event => {
@@ -108,14 +108,13 @@ export class QuizRegisterController {
             let hiddenInputOptionValue;
             let hiddenInputFile;
             let img;
-            
 
             if (this._verifyImageLimit(files)) {
                 let count = 0;
                 let clone = this._fields['answer_image'].cloneNode(true);
                 clone.setAttribute('item',this._itemNumber);
                 clone.setAttribute('id',"");
-                clone.setAttribute('name', 'item_answerImages_itemNumber'+this._itemNumber);
+                clone.setAttribute('name', 'item_answerImages'+this._itemNumber);
                 this._sharedFields.push(clone);
                 
                 Array.from(files).forEach(element => {
